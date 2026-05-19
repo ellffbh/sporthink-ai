@@ -78,7 +78,30 @@
       "Bash(/c/Program Files/PostgreSQL/16/bin/psql *)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(git commit *)",
+      "Bash(git config *)",
+      "Bash(git branch *)",
+      "Bash(dir)",
+      "Bash(dir \"C:UsersPcDesktopai-projebackendappcore\")",
+      "Bash(dir \"C:UsersPcDesktopai-projebackendappmodels\")",
+      "Bash(dir \"C:UsersPcDesktopai-projebackendapprouters\")",
+      "Bash(dir \"C:UsersPcDesktopai-projebackendappschemas\")",
+      "Bash(dir \"C:UsersPcDesktopai-projefrontend\")",
+      "Bash(C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe *)",
+      "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" -U postgres -d ai_proje_db -c \"SELECT version\\(\\);\")",
+      "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" -U postgres -d ai_proje_db -c \"SELECT version\\(\\);\" 2>&1)",
+      "PowerShell($env:PGPASSWORD = \"postgres\"; & \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" -U postgres -d ai_proje_db -c \"SELECT version\\(\\);\")",
+      "PowerShell(& \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\.venv\\\\Scripts\\\\python.exe\" -c \"import alembic; print\\(alembic.__version__\\)\" 2>&1)",
+      "PowerShell(& \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\.venv\\\\Scripts\\\\python.exe\" -c \"import alembic; print\\(alembic.__file__\\)\" 2>&1)",
+      "PowerShell(& \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\.venv\\\\Scripts\\\\python.exe\" -m pip install alembic 2>&1)",
+      "PowerShell($env:PGPASSWORD = \"postgres\"; & \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\pg_dump.exe\" -U postgres -d ai_proje_db -F p -f \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\local_db_dump.sql\" --no-owner --no-acl 2>&1)",
+      "PowerShell(Get-Item \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\local_db_dump.sql\" | Select-Object Name, @{Name=\"Size_MB\";Expression={[math]::Round\\($_.Length/1MB,2\\)}}, LastWriteTime)",
+      "PowerShell(Test-Path *)",
+      "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" \"postgresql://ai_proje_db_user:cXr2i96sZsR8GCLG63Qsj6iq4TJM3CYJ@dpg-d869gdn7f7vs73f6vpmg-a.frankfurt-postgres.render.com/ai_proje_db\" -c \"DROP SCHEMA public CASCADE; CREATE SCHEMA public;\" 2>&1)",
+      "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" -c \"DROP SCHEMA public CASCADE; CREATE SCHEMA public;\" \"postgresql://ai_proje_db_user:cXr2i96sZsR8GCLG63Qsj6iq4TJM3CYJ@dpg-d869gdn7f7vs73f6vpmg-a.frankfurt-postgres.render.com/ai_proje_db\" 2>&1)",
+      "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" \"postgresql://ai_proje_db_user:cXr2i96sZsR8GCLG63Qsj6iq4TJM3CYJ@dpg-d869gdn7f7vs73f6vpmg-a.frankfurt-postgres.render.com/ai_proje_db\" -f \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\local_db_dump.sql\" 2>&1)",
+      "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" -f \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\local_db_dump.sql\" \"postgresql://ai_proje_db_user:cXr2i96sZsR8GCLG63Qsj6iq4TJM3CYJ@dpg-d869gdn7f7vs73f6vpmg-a.frankfurt-postgres.render.com/ai_proje_db\" 2>&1)"
     ]
   }
 }
