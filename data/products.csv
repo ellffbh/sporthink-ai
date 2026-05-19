@@ -1,0 +1,403 @@
+﻿sku,product_name,category,sub_category,brand,gender,price,cost_price,stock_quantity,is_active,created_at,color,size_range
+SP-AYK-KS-001,New Balance Air Zoom Pegasus 41 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,New Balance,Erkek,2939.0,1257.62,284,True,2024-02-19,Beyaz,36-46
+SP-AYK-KS-002,New Balance Air Zoom Pegasus 41 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,New Balance,Kadın,2549.0,1131.06,18,True,2024-09-07,Turuncu,36-46
+SP-AYK-KS-003,Nike Air Zoom Pegasus 41 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Nike,Erkek,3759.0,1819.0,147,True,2024-01-25,Yeşil,36-46
+SP-AYK-KS-004,Nike Air Zoom Pegasus 41 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Nike,Kadın,3759.0,1759.4,115,True,2024-06-04,Siyah/Beyaz,36-46
+SP-AYK-KS-005,Columbia Air Zoom Pegasus 41 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Columbia,Erkek,2669.0,1519.99,140,True,2024-01-24,Pembe,36-46
+SP-AYK-KS-006,Columbia Air Zoom Pegasus 41 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Columbia,Kadın,2719.0,1589.14,287,True,2024-05-27,Beyaz,36-46
+SP-AYK-KS-007,Skechers Air Zoom Pegasus 41 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Skechers,Erkek,4089.0,1931.35,40,True,2024-01-22,Gri,36-46
+SP-AYK-KS-008,Skechers Air Zoom Pegasus 41 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Skechers,Kadın,3019.0,1255.78,56,True,2024-07-09,Gri,36-46
+SP-AYK-KS-009,Converse Ultraboost Light Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Converse,Erkek,3759.0,1704.31,41,True,2024-03-18,Bordo,36-46
+SP-AYK-KS-010,Converse Ultraboost Light Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Converse,Kadın,3659.0,1741.29,290,True,2024-04-22,Bordo,36-46
+SP-AYK-KS-011,Columbia Ultraboost Light Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Columbia,Erkek,4989.0,2051.41,166,True,2024-07-09,Siyah,36-46
+SP-AYK-KS-012,Columbia Ultraboost Light Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Columbia,Kadın,5309.0,2725.83,166,True,2024-04-21,Haki,36-46
+SP-AYK-KS-013,Asics Ultraboost Light Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Asics,Erkek,5249.0,2774.47,140,True,2024-03-08,Siyah/Beyaz,36-46
+SP-AYK-KS-014,Asics Ultraboost Light Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Asics,Kadın,4479.0,2460.77,209,True,2024-06-08,Mavi,36-46
+SP-AYK-KS-015,Asics Gel-Nimbus 26 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Asics,Erkek,2999.0,1227.86,83,True,2024-03-26,Beyaz,36-46
+SP-AYK-KS-016,Asics Gel-Nimbus 26 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Asics,Kadın,4109.0,1959.8,244,True,2024-09-09,Pembe,36-46
+SP-AYK-KS-017,Salomon Gel-Nimbus 26 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Salomon,Erkek,4689.0,1886.37,63,True,2024-09-25,Haki,36-46
+SP-AYK-KS-018,Salomon Gel-Nimbus 26 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Salomon,Kadın,4209.0,1777.5,85,True,2024-08-01,Mavi,36-46
+SP-AYK-KS-019,Under Armour Fresh Foam X 1080v13 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Under Armour,Erkek,4569.0,2100.32,264,True,2024-04-05,Bordo,36-46
+SP-AYK-KS-020,Under Armour Fresh Foam X 1080v13 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Under Armour,Kadın,3289.0,1942.81,5,False,2024-06-16,Turuncu,36-46
+SP-AYK-KS-021,Converse Fresh Foam X 1080v13 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Converse,Erkek,4669.0,2688.15,127,True,2024-01-08,Lacivert,36-46
+SP-AYK-KS-022,Converse Fresh Foam X 1080v13 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Converse,Kadın,4699.0,1960.1,40,True,2024-09-25,Yeşil,36-46
+SP-AYK-KS-023,Asics Fresh Foam X 1080v13 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Asics,Erkek,4189.0,2468.87,140,True,2024-09-28,Siyah/Beyaz,36-46
+SP-AYK-KS-024,Asics Fresh Foam X 1080v13 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Asics,Kadın,4729.0,2770.17,107,True,2024-05-13,Haki,36-46
+SP-AYK-KS-025,Adidas Fresh Foam X 1080v13 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Adidas,Erkek,4169.0,2032.89,236,True,2024-02-08,Turuncu,36-46
+SP-AYK-KS-026,Adidas Fresh Foam X 1080v13 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Adidas,Kadın,3609.0,1868.24,117,True,2024-01-03,Gri,36-46
+SP-AYK-KS-027,Hummel Nitro Elite 2 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Hummel,Erkek,3829.0,2189.91,268,True,2024-04-09,Beyaz,36-46
+SP-AYK-KS-028,Hummel Nitro Elite 2 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Hummel,Kadın,2579.0,1099.85,300,True,2024-08-08,Pembe,36-46
+SP-AYK-KS-029,Puma Nitro Elite 2 Erkek Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Puma,Erkek,3649.0,1598.56,225,True,2024-06-14,Beyaz,36-46
+SP-AYK-KS-030,Puma Nitro Elite 2 Kadın Koşu Ayakkabısı,Ayakkabı,Koşu Ayakkabısı,Puma,Kadın,3749.0,1540.22,55,True,2024-01-13,Bordo,36-46
+SP-AYK-SN-031,Hummel Air Force 1 '07 Erkek Sneaker,Ayakkabı,Sneaker,Hummel,Erkek,2279.0,1116.08,98,True,2024-05-15,Mavi,36-46
+SP-AYK-SN-032,Hummel Air Force 1 '07 Kadın Sneaker,Ayakkabı,Sneaker,Hummel,Kadın,3379.0,1651.07,55,True,2024-01-21,Turuncu,36-46
+SP-AYK-SN-033,Vans Air Force 1 '07 Erkek Sneaker,Ayakkabı,Sneaker,Vans,Erkek,3249.0,1929.25,90,True,2024-07-16,Gri,36-46
+SP-AYK-SN-034,Vans Air Force 1 '07 Kadın Sneaker,Ayakkabı,Sneaker,Vans,Kadın,3299.0,1915.03,199,True,2024-01-13,Siyah/Beyaz,36-46
+SP-AYK-SN-035,Reebok Stan Smith Erkek Sneaker,Ayakkabı,Sneaker,Reebok,Erkek,2949.0,1766.7,254,True,2024-03-07,Turuncu,36-46
+SP-AYK-SN-036,Reebok Stan Smith Kadın Sneaker,Ayakkabı,Sneaker,Reebok,Kadın,2959.0,1526.36,36,True,2024-06-02,Turuncu,36-46
+SP-AYK-SN-037,Reebok Stan Smith Unisex Sneaker,Ayakkabı,Sneaker,Reebok,Unisex,2369.0,1383.21,85,True,2024-01-17,Turuncu,36-46
+SP-AYK-SN-038,Birkenstock Stan Smith Erkek Sneaker,Ayakkabı,Sneaker,Birkenstock,Erkek,2019.0,1047.88,125,True,2024-07-04,Bordo,36-46
+SP-AYK-SN-039,Birkenstock Stan Smith Kadın Sneaker,Ayakkabı,Sneaker,Birkenstock,Kadın,2479.0,1278.63,46,True,2024-07-22,Siyah,36-46
+SP-AYK-SN-040,Birkenstock Stan Smith Unisex Sneaker,Ayakkabı,Sneaker,Birkenstock,Unisex,2429.0,1425.68,165,True,2024-04-09,Gri,36-46
+SP-AYK-SN-041,Columbia Stan Smith Erkek Sneaker,Ayakkabı,Sneaker,Columbia,Erkek,2609.0,1200.14,42,True,2024-01-15,Kırmızı,36-46
+SP-AYK-SN-042,Columbia Stan Smith Kadın Sneaker,Ayakkabı,Sneaker,Columbia,Kadın,2469.0,1036.97,114,True,2024-09-09,Turuncu,36-46
+SP-AYK-SN-043,Columbia Stan Smith Unisex Sneaker,Ayakkabı,Sneaker,Columbia,Unisex,2219.0,918.13,194,True,2024-05-06,Gri,36-46
+SP-AYK-SN-044,Reebok Old Skool Erkek Sneaker,Ayakkabı,Sneaker,Reebok,Erkek,2049.0,1201.43,73,True,2024-05-04,Beyaz,36-46
+SP-AYK-SN-045,Reebok Old Skool Kadın Sneaker,Ayakkabı,Sneaker,Reebok,Kadın,2239.0,965.21,112,True,2024-06-07,Lacivert,36-46
+SP-AYK-SN-046,Reebok Old Skool Unisex Sneaker,Ayakkabı,Sneaker,Reebok,Unisex,2349.0,1177.04,31,True,2024-02-21,Lacivert,36-46
+SP-AYK-SN-047,Nike Old Skool Erkek Sneaker,Ayakkabı,Sneaker,Nike,Erkek,1779.0,712.86,139,True,2024-03-24,Siyah/Beyaz,36-46
+SP-AYK-SN-048,Nike Old Skool Kadın Sneaker,Ayakkabı,Sneaker,Nike,Kadın,2199.0,1126.29,43,False,2024-03-18,Beyaz,36-46
+SP-AYK-SN-049,Nike Old Skool Unisex Sneaker,Ayakkabı,Sneaker,Nike,Unisex,1869.0,954.13,70,True,2024-01-10,Mavi,36-46
+SP-AYK-SN-050,The North Face Old Skool Erkek Sneaker,Ayakkabı,Sneaker,The North Face,Erkek,2429.0,1443.89,188,True,2024-04-22,Siyah,36-46
+SP-AYK-SN-051,The North Face Old Skool Kadın Sneaker,Ayakkabı,Sneaker,The North Face,Kadın,1599.0,889.08,84,True,2024-04-28,Mavi,36-46
+SP-AYK-SN-052,The North Face Old Skool Unisex Sneaker,Ayakkabı,Sneaker,The North Face,Unisex,2299.0,1001.01,17,True,2024-03-24,Mavi,36-46
+SP-AYK-SN-053,Birkenstock Old Skool Erkek Sneaker,Ayakkabı,Sneaker,Birkenstock,Erkek,2279.0,1099.26,132,True,2024-05-06,Bordo,36-46
+SP-AYK-SN-054,Birkenstock Old Skool Kadın Sneaker,Ayakkabı,Sneaker,Birkenstock,Kadın,1609.0,924.26,118,True,2024-04-27,Yeşil,36-46
+SP-AYK-SN-055,Birkenstock Old Skool Unisex Sneaker,Ayakkabı,Sneaker,Birkenstock,Unisex,1849.0,1043.03,119,True,2024-01-22,Gri,36-46
+SP-AYK-SN-056,Under Armour Chuck Taylor All Star Erkek Sneaker,Ayakkabı,Sneaker,Under Armour,Erkek,1549.0,818.33,279,True,2024-06-01,Mavi,36-46
+SP-AYK-SN-057,Under Armour Chuck Taylor All Star Kadın Sneaker,Ayakkabı,Sneaker,Under Armour,Kadın,2169.0,945.06,24,True,2024-02-20,Lacivert,36-46
+SP-AYK-SN-058,Under Armour Chuck Taylor All Star Unisex Sneaker,Ayakkabı,Sneaker,Under Armour,Unisex,1949.0,901.87,266,True,2024-02-13,Pembe,36-46
+SP-AYK-SN-059,Puma Chuck Taylor All Star Erkek Sneaker,Ayakkabı,Sneaker,Puma,Erkek,1469.0,600.64,5,True,2024-09-26,Mavi,36-46
+SP-AYK-SN-060,Puma Chuck Taylor All Star Kadın Sneaker,Ayakkabı,Sneaker,Puma,Kadın,1949.0,1068.81,105,True,2024-06-14,Bordo,36-46
+SP-AYK-SN-061,Puma Chuck Taylor All Star Unisex Sneaker,Ayakkabı,Sneaker,Puma,Unisex,1899.0,885.01,68,True,2024-05-17,Kırmızı,36-46
+SP-AYK-SN-062,Lacoste Chuck Taylor All Star Erkek Sneaker,Ayakkabı,Sneaker,Lacoste,Erkek,1669.0,801.92,288,True,2024-03-07,Lacivert,36-46
+SP-AYK-SN-063,Lacoste Chuck Taylor All Star Kadın Sneaker,Ayakkabı,Sneaker,Lacoste,Kadın,2149.0,1150.71,296,True,2024-05-13,Siyah/Beyaz,36-46
+SP-AYK-SN-064,Lacoste Chuck Taylor All Star Unisex Sneaker,Ayakkabı,Sneaker,Lacoste,Unisex,1299.0,594.14,169,True,2024-08-15,Mavi,36-46
+SP-AYK-SN-065,Asics Suede Classic XXI Erkek Sneaker,Ayakkabı,Sneaker,Asics,Erkek,2549.0,1508.92,91,True,2024-02-10,Haki,36-46
+SP-AYK-SN-066,Asics Suede Classic XXI Kadın Sneaker,Ayakkabı,Sneaker,Asics,Kadın,2359.0,1101.74,163,True,2024-04-26,Gri,36-46
+SP-AYK-SN-067,Salomon Suede Classic XXI Erkek Sneaker,Ayakkabı,Sneaker,Salomon,Erkek,1629.0,731.37,42,True,2024-08-14,Yeşil,36-46
+SP-AYK-SN-068,Salomon Suede Classic XXI Kadın Sneaker,Ayakkabı,Sneaker,Salomon,Kadın,2289.0,1244.46,258,True,2024-07-08,Mavi,36-46
+SP-AYK-SN-069,Nike Club C 85 Erkek Sneaker,Ayakkabı,Sneaker,Nike,Erkek,1619.0,907.97,270,True,2024-08-02,Haki,36-46
+SP-AYK-SN-070,Nike Club C 85 Kadın Sneaker,Ayakkabı,Sneaker,Nike,Kadın,2319.0,983.89,242,True,2024-09-18,Siyah/Beyaz,36-46
+SP-AYK-SN-071,New Balance Club C 85 Erkek Sneaker,Ayakkabı,Sneaker,New Balance,Erkek,2349.0,1358.39,263,True,2024-07-27,Pembe,36-46
+SP-AYK-SN-072,New Balance Club C 85 Kadın Sneaker,Ayakkabı,Sneaker,New Balance,Kadın,1839.0,794.14,235,True,2024-05-25,Yeşil,36-46
+SP-AYK-SN-073,Lacoste Club C 85 Erkek Sneaker,Ayakkabı,Sneaker,Lacoste,Erkek,2039.0,1127.9,253,True,2024-04-09,Turuncu,36-46
+SP-AYK-SN-074,Lacoste Club C 85 Kadın Sneaker,Ayakkabı,Sneaker,Lacoste,Kadın,2109.0,942.51,168,True,2024-09-03,Kırmızı,36-46
+SP-AYK-SN-075,Vans Club C 85 Erkek Sneaker,Ayakkabı,Sneaker,Vans,Erkek,1629.0,877.69,114,True,2024-02-14,Haki,36-46
+SP-AYK-SN-076,Vans Club C 85 Kadın Sneaker,Ayakkabı,Sneaker,Vans,Kadın,1939.0,936.84,220,True,2024-07-25,Gri,36-46
+SP-AYK-GN-077,Nike Tanjun Erkek Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Nike,Erkek,2149.0,987.94,219,True,2024-09-24,Mavi,36-46
+SP-AYK-GN-078,Nike Tanjun Kadın Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Nike,Kadın,2019.0,1170.14,117,True,2024-05-14,Yeşil,36-46
+SP-AYK-GN-079,Lacoste Tanjun Erkek Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Lacoste,Erkek,1649.0,880.19,89,True,2024-08-05,Mavi,36-46
+SP-AYK-GN-080,Lacoste Tanjun Kadın Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Lacoste,Kadın,1779.0,1034.29,293,True,2024-01-03,Pembe,36-46
+SP-AYK-GN-081,Hummel Tanjun Erkek Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Hummel,Erkek,1419.0,698.63,138,True,2024-07-11,Siyah,36-46
+SP-AYK-GN-082,Hummel Tanjun Kadın Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Hummel,Kadın,1589.0,877.52,147,True,2024-07-09,Mavi,36-46
+SP-AYK-GN-083,Asics Tanjun Erkek Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Asics,Erkek,1719.0,945.11,184,True,2024-04-21,Siyah,36-46
+SP-AYK-GN-084,Asics Tanjun Kadın Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Asics,Kadın,2159.0,880.98,131,False,2024-04-27,Siyah,36-46
+SP-AYK-GN-085,Hummel Lite Racer Adapt 6.0 Erkek Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Hummel,Erkek,1579.0,667.72,243,True,2024-05-25,Gri,36-46
+SP-AYK-GN-086,Hummel Lite Racer Adapt 6.0 Kadın Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Hummel,Kadın,1679.0,995.22,63,True,2024-03-10,Haki,36-46
+SP-AYK-GN-087,Skechers Lite Racer Adapt 6.0 Erkek Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Skechers,Erkek,1219.0,563.66,197,True,2024-07-23,Bordo,36-46
+SP-AYK-GN-088,Skechers Lite Racer Adapt 6.0 Kadın Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Skechers,Kadın,1669.0,944.84,57,True,2024-05-28,Gri,36-46
+SP-AYK-GN-089,Adidas Go Walk 7 Erkek Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Adidas,Erkek,2029.0,1080.05,264,True,2024-06-01,Beyaz,36-46
+SP-AYK-GN-090,Adidas Go Walk 7 Kadın Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Adidas,Kadın,2319.0,976.55,240,True,2024-03-14,Kırmızı,36-46
+SP-AYK-GN-091,Columbia Go Walk 7 Erkek Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Columbia,Erkek,2019.0,1070.25,280,True,2024-08-15,Pembe,36-46
+SP-AYK-GN-092,Columbia Go Walk 7 Kadın Günlük Ayakkabı,Ayakkabı,Günlük Ayakkabı,Columbia,Kadın,2229.0,1011.25,49,True,2024-05-15,Gri,36-46
+SP-AYK-HS-093,Lacoste Mercurial Vapor 15 Club TF Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,Lacoste,Erkek,1939.0,901.64,113,True,2024-06-26,Yeşil,38-46
+SP-AYK-HS-094,The North Face Mercurial Vapor 15 Club TF Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,The North Face,Erkek,1709.0,887.37,289,True,2024-01-17,Lacivert,38-46
+SP-AYK-HS-095,Nike Mercurial Vapor 15 Club TF Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,Nike,Erkek,1489.0,810.04,289,True,2024-04-23,Yeşil,38-46
+SP-AYK-HS-096,Salomon Predator Accuracy.3 TF Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,Salomon,Erkek,1389.0,617.16,129,True,2024-05-22,Haki,38-46
+SP-AYK-HS-097,Crocs Predator Accuracy.3 TF Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,Crocs,Erkek,1769.0,895.44,286,True,2024-06-12,Mavi,38-46
+SP-AYK-HS-098,Lacoste Predator Accuracy.3 TF Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,Lacoste,Erkek,1569.0,706.49,103,True,2024-06-04,Beyaz,38-46
+SP-AYK-HS-099,Nike Predator Accuracy.3 TF Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,Nike,Erkek,2249.0,1210.04,115,True,2024-08-09,Gri,38-46
+SP-AYK-HS-100,Reebok Future 7 Play TT Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,Reebok,Erkek,1439.0,679.46,12,True,2024-09-05,Lacivert,38-46
+SP-AYK-HS-101,New Balance Future 7 Play TT Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,New Balance,Erkek,1979.0,1010.62,69,True,2024-08-04,Haki,38-46
+SP-AYK-HS-102,Birkenstock Future 7 Play TT Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,Birkenstock,Erkek,1659.0,819.35,179,True,2024-03-02,Yeşil,38-46
+SP-AYK-HS-103,Salomon Future 7 Play TT Erkek Halı Saha,Ayakkabı,Halı Saha Ayakkabısı,Salomon,Erkek,1889.0,798.7,210,True,2024-08-03,Beyaz,38-46
+SP-AYK-KR-104,Adidas Mercurial Superfly 9 Elite FG Erkek Krampon,Ayakkabı,Krampon,Adidas,Erkek,4689.0,2160.54,65,True,2024-09-25,Gri,38-46
+SP-AYK-KR-105,Skechers Mercurial Superfly 9 Elite FG Erkek Krampon,Ayakkabı,Krampon,Skechers,Erkek,4789.0,2507.92,199,True,2024-08-15,Turuncu,38-46
+SP-AYK-KR-106,Puma Mercurial Superfly 9 Elite FG Erkek Krampon,Ayakkabı,Krampon,Puma,Erkek,4759.0,2311.76,35,True,2024-02-25,Pembe,38-46
+SP-AYK-KR-107,Lacoste Mercurial Superfly 9 Elite FG Erkek Krampon,Ayakkabı,Krampon,Lacoste,Erkek,3629.0,1930.94,127,True,2024-03-18,Siyah/Beyaz,38-46
+SP-AYK-KR-108,Birkenstock Predator Elite FG Erkek Krampon,Ayakkabı,Krampon,Birkenstock,Erkek,4659.0,2301.46,123,True,2024-05-23,Siyah,38-46
+SP-AYK-KR-109,Crocs Predator Elite FG Erkek Krampon,Ayakkabı,Krampon,Crocs,Erkek,5119.0,2120.47,140,True,2024-04-14,Gri,38-46
+SP-AYK-KR-110,Skechers Copa Pure II Elite FG Erkek Krampon,Ayakkabı,Krampon,Skechers,Erkek,4569.0,1892.85,162,True,2024-05-15,Siyah/Beyaz,38-46
+SP-AYK-KR-111,Under Armour Copa Pure II Elite FG Erkek Krampon,Ayakkabı,Krampon,Under Armour,Erkek,4219.0,2278.04,261,True,2024-09-16,Lacivert,38-46
+SP-AYK-BK-112,Adidas LeBron XXI Erkek Basketbol Ayakkabısı,Ayakkabı,Basketbol Ayakkabısı,Adidas,Erkek,5009.0,2029.51,299,True,2024-01-25,Gri,40-47
+SP-AYK-BK-113,Birkenstock LeBron XXI Erkek Basketbol Ayakkabısı,Ayakkabı,Basketbol Ayakkabısı,Birkenstock,Erkek,4169.0,1701.15,245,True,2024-09-21,Siyah/Beyaz,40-47
+SP-AYK-BK-114,Columbia LeBron XXI Erkek Basketbol Ayakkabısı,Ayakkabı,Basketbol Ayakkabısı,Columbia,Erkek,4189.0,2510.84,256,True,2024-02-16,Mavi,40-47
+SP-AYK-BK-115,Converse LeBron XXI Erkek Basketbol Ayakkabısı,Ayakkabı,Basketbol Ayakkabısı,Converse,Erkek,4329.0,2311.8,173,True,2024-07-23,Siyah/Beyaz,40-47
+SP-AYK-BK-116,Lacoste Air Jordan 1 Mid Erkek Basketbol Ayakkabısı,Ayakkabı,Basketbol Ayakkabısı,Lacoste,Erkek,3469.0,1611.89,268,True,2024-01-22,Mavi,40-47
+SP-AYK-BK-117,Adidas Air Jordan 1 Mid Erkek Basketbol Ayakkabısı,Ayakkabı,Basketbol Ayakkabısı,Adidas,Erkek,3689.0,1515.59,190,True,2024-08-21,Turuncu,40-47
+SP-AYK-BK-118,Hummel Air Jordan 1 Mid Erkek Basketbol Ayakkabısı,Ayakkabı,Basketbol Ayakkabısı,Hummel,Erkek,3079.0,1396.05,152,True,2024-08-23,Siyah/Beyaz,40-47
+SP-AYK-BK-119,Salomon Air Jordan 1 Mid Erkek Basketbol Ayakkabısı,Ayakkabı,Basketbol Ayakkabısı,Salomon,Erkek,3039.0,1598.53,86,False,2024-05-18,Gri,40-47
+SP-AYK-OD-120,Puma X Ultra 4 GTX Erkek Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Puma,Erkek,5279.0,2598.8,83,True,2024-08-23,Beyaz,36-46
+SP-AYK-OD-121,Puma X Ultra 4 GTX Kadın Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Puma,Kadın,4759.0,2299.06,246,True,2024-04-15,Yeşil,36-46
+SP-AYK-OD-122,Hummel X Ultra 4 GTX Erkek Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Hummel,Erkek,3959.0,2313.54,74,True,2024-02-09,Turuncu,36-46
+SP-AYK-OD-123,Hummel X Ultra 4 GTX Kadın Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Hummel,Kadın,5139.0,2404.92,141,True,2024-01-10,Turuncu,36-46
+SP-AYK-OD-124,Birkenstock X Ultra 4 GTX Erkek Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Birkenstock,Erkek,5089.0,2625.85,255,True,2024-03-15,Bordo,36-46
+SP-AYK-OD-125,Birkenstock X Ultra 4 GTX Kadın Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Birkenstock,Kadın,3859.0,1969.57,198,True,2024-08-11,Turuncu,36-46
+SP-AYK-OD-126,Hummel Terrex AX4 Erkek Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Hummel,Erkek,3659.0,1495.54,247,True,2024-07-13,Haki,36-46
+SP-AYK-OD-127,Hummel Terrex AX4 Kadın Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Hummel,Kadın,3689.0,1956.66,258,True,2024-01-05,Siyah/Beyaz,36-46
+SP-AYK-OD-128,Lacoste Terrex AX4 Erkek Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Lacoste,Erkek,3379.0,1939.34,56,False,2024-09-15,Yeşil,36-46
+SP-AYK-OD-129,Lacoste Terrex AX4 Kadın Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Lacoste,Kadın,2719.0,1561.21,43,True,2024-08-26,Siyah/Beyaz,36-46
+SP-AYK-OD-130,New Balance Terrex AX4 Erkek Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,New Balance,Erkek,3009.0,1620.47,46,True,2024-06-28,Bordo,36-46
+SP-AYK-OD-131,New Balance Terrex AX4 Kadın Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,New Balance,Kadın,3299.0,1949.14,254,True,2024-09-02,Bordo,36-46
+SP-AYK-OD-132,Birkenstock Terrex AX4 Erkek Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Birkenstock,Erkek,2849.0,1529.57,121,True,2024-02-14,Lacivert,36-46
+SP-AYK-OD-133,Birkenstock Terrex AX4 Kadın Outdoor Ayakkabı,Ayakkabı,Outdoor Ayakkabı,Birkenstock,Kadın,3639.0,1967.89,232,True,2024-03-23,Beyaz,36-46
+SP-AYK-OD-134,Adidas Facet 75 Mid Erkek Outdoor Bot,Ayakkabı,Outdoor Ayakkabı,Adidas,Erkek,4149.0,1903.04,225,True,2024-03-08,Kırmızı,36-46
+SP-AYK-OD-135,Adidas Facet 75 Mid Kadın Outdoor Bot,Ayakkabı,Outdoor Ayakkabı,Adidas,Kadın,3759.0,2099.42,94,True,2024-02-20,Siyah/Beyaz,36-46
+SP-AYK-OD-136,The North Face Facet 75 Mid Erkek Outdoor Bot,Ayakkabı,Outdoor Ayakkabı,The North Face,Erkek,3849.0,1724.99,78,True,2024-04-15,Pembe,36-46
+SP-AYK-OD-137,The North Face Facet 75 Mid Kadın Outdoor Bot,Ayakkabı,Outdoor Ayakkabı,The North Face,Kadın,3579.0,1908.92,152,True,2024-09-06,Yeşil,36-46
+SP-AYK-TR-138,Reebok Victori One Slide Erkek Terlik,Ayakkabı,Terlik,Reebok,Erkek,749.0,426.23,201,True,2024-08-04,Gri,36-46
+SP-AYK-TR-139,Reebok Victori One Slide Kadın Terlik,Ayakkabı,Terlik,Reebok,Kadın,939.0,483.55,156,True,2024-01-27,Haki,36-46
+SP-AYK-TR-140,Reebok Victori One Slide Unisex Terlik,Ayakkabı,Terlik,Reebok,Unisex,759.0,389.51,30,True,2024-08-27,Bordo,36-46
+SP-AYK-TR-141,Birkenstock Victori One Slide Erkek Terlik,Ayakkabı,Terlik,Birkenstock,Erkek,769.0,430.46,185,True,2024-04-21,Pembe,36-46
+SP-AYK-TR-142,Birkenstock Victori One Slide Kadın Terlik,Ayakkabı,Terlik,Birkenstock,Kadın,749.0,412.79,75,True,2024-02-21,Bordo,36-46
+SP-AYK-TR-143,Birkenstock Victori One Slide Unisex Terlik,Ayakkabı,Terlik,Birkenstock,Unisex,779.0,380.28,191,True,2024-03-03,Pembe,36-46
+SP-AYK-TR-144,Columbia Victori One Slide Erkek Terlik,Ayakkabı,Terlik,Columbia,Erkek,799.0,386.0,72,True,2024-09-12,Gri,36-46
+SP-AYK-TR-145,Columbia Victori One Slide Kadın Terlik,Ayakkabı,Terlik,Columbia,Kadın,1149.0,650.44,251,True,2024-05-24,Lacivert,36-46
+SP-AYK-TR-146,Columbia Victori One Slide Unisex Terlik,Ayakkabı,Terlik,Columbia,Unisex,1079.0,532.67,77,True,2024-04-28,Beyaz,36-46
+SP-AYK-TR-147,Lacoste Adilette Comfort Erkek Terlik,Ayakkabı,Terlik,Lacoste,Erkek,909.0,411.68,237,True,2024-06-22,Beyaz,36-46
+SP-AYK-TR-148,Lacoste Adilette Comfort Kadın Terlik,Ayakkabı,Terlik,Lacoste,Kadın,819.0,390.01,195,True,2024-02-22,Bordo,36-46
+SP-AYK-TR-149,Lacoste Adilette Comfort Unisex Terlik,Ayakkabı,Terlik,Lacoste,Unisex,669.0,385.91,172,True,2024-04-21,Turuncu,36-46
+SP-AYK-TR-150,Columbia Adilette Comfort Erkek Terlik,Ayakkabı,Terlik,Columbia,Erkek,1179.0,686.03,214,False,2024-02-05,Lacivert,36-46
+SP-AYK-TR-151,Columbia Adilette Comfort Kadın Terlik,Ayakkabı,Terlik,Columbia,Kadın,669.0,400.86,54,True,2024-04-18,Beyaz,36-46
+SP-AYK-TR-152,Columbia Adilette Comfort Unisex Terlik,Ayakkabı,Terlik,Columbia,Unisex,939.0,501.52,281,True,2024-07-19,Haki,36-46
+SP-AYK-TR-153,Adidas Adilette Comfort Erkek Terlik,Ayakkabı,Terlik,Adidas,Erkek,749.0,361.75,255,False,2024-07-09,Beyaz,36-46
+SP-AYK-TR-154,Adidas Adilette Comfort Kadın Terlik,Ayakkabı,Terlik,Adidas,Kadın,889.0,434.43,190,True,2024-02-22,Gri,36-46
+SP-AYK-TR-155,Adidas Adilette Comfort Unisex Terlik,Ayakkabı,Terlik,Adidas,Unisex,1239.0,655.39,208,True,2024-05-07,Siyah,36-46
+SP-AYK-TR-156,Asics Adilette Comfort Erkek Terlik,Ayakkabı,Terlik,Asics,Erkek,1269.0,716.78,113,True,2024-01-02,Beyaz,36-46
+SP-AYK-TR-157,Asics Adilette Comfort Kadın Terlik,Ayakkabı,Terlik,Asics,Kadın,809.0,343.97,110,True,2024-02-27,Pembe,36-46
+SP-AYK-TR-158,Asics Adilette Comfort Unisex Terlik,Ayakkabı,Terlik,Asics,Unisex,779.0,345.25,173,True,2024-03-26,Gri,36-46
+SP-AYK-TR-159,Under Armour Classic Clog Erkek Terlik,Ayakkabı,Terlik,Under Armour,Erkek,1789.0,908.89,61,False,2024-01-05,Siyah/Beyaz,36-46
+SP-AYK-TR-160,Under Armour Classic Clog Kadın Terlik,Ayakkabı,Terlik,Under Armour,Kadın,1609.0,720.17,13,True,2024-03-09,Kırmızı,36-46
+SP-AYK-TR-161,Under Armour Classic Clog Unisex Terlik,Ayakkabı,Terlik,Under Armour,Unisex,1569.0,792.69,37,True,2024-08-15,Haki,36-46
+SP-AYK-TR-162,Skechers Classic Clog Erkek Terlik,Ayakkabı,Terlik,Skechers,Erkek,1359.0,573.24,118,True,2024-01-24,Turuncu,36-46
+SP-AYK-TR-163,Skechers Classic Clog Kadın Terlik,Ayakkabı,Terlik,Skechers,Kadın,1679.0,846.7,20,True,2024-01-16,Yeşil,36-46
+SP-AYK-TR-164,Skechers Classic Clog Unisex Terlik,Ayakkabı,Terlik,Skechers,Unisex,1279.0,539.22,232,True,2024-02-03,Haki,36-46
+SP-AYK-TR-165,Puma Arizona Erkek Sandalet,Ayakkabı,Terlik,Puma,Erkek,1909.0,1005.31,171,True,2024-07-20,Turuncu,36-46
+SP-AYK-TR-166,Puma Arizona Kadın Sandalet,Ayakkabı,Terlik,Puma,Kadın,2179.0,1135.44,63,True,2024-09-24,Beyaz,36-46
+SP-AYK-TR-167,Puma Arizona Unisex Sandalet,Ayakkabı,Terlik,Puma,Unisex,2139.0,1235.53,178,True,2024-08-13,Mavi,36-46
+SP-AYK-TR-168,Skechers Arizona Erkek Sandalet,Ayakkabı,Terlik,Skechers,Erkek,1639.0,795.49,135,True,2024-06-05,Bordo,36-46
+SP-AYK-TR-169,Skechers Arizona Kadın Sandalet,Ayakkabı,Terlik,Skechers,Kadın,2209.0,923.9,52,True,2024-07-04,Beyaz,36-46
+SP-AYK-TR-170,Skechers Arizona Unisex Sandalet,Ayakkabı,Terlik,Skechers,Unisex,2059.0,877.18,292,True,2024-09-11,Siyah,36-46
+SP-AYK-VL-171,Columbia Gel-Task MT 3 Erkek Voleybol Ayakkabısı,Ayakkabı,Voleybol Ayakkabısı,Columbia,Erkek,2409.0,988.39,164,True,2024-06-04,Lacivert,36-46
+SP-AYK-VL-172,Columbia Gel-Task MT 3 Kadın Voleybol Ayakkabısı,Ayakkabı,Voleybol Ayakkabısı,Columbia,Kadın,1709.0,908.07,60,True,2024-06-28,Gri,36-46
+SP-AYK-VL-173,Birkenstock Gel-Task MT 3 Erkek Voleybol Ayakkabısı,Ayakkabı,Voleybol Ayakkabısı,Birkenstock,Erkek,1609.0,733.24,224,True,2024-09-25,Gri,36-46
+SP-AYK-VL-174,Birkenstock Gel-Task MT 3 Kadın Voleybol Ayakkabısı,Ayakkabı,Voleybol Ayakkabısı,Birkenstock,Kadın,2109.0,1114.69,141,True,2024-01-06,Siyah,36-46
+SP-AYK-VL-175,Salomon Gel-Task MT 3 Erkek Voleybol Ayakkabısı,Ayakkabı,Voleybol Ayakkabısı,Salomon,Erkek,2259.0,1319.95,8,True,2024-03-28,Kırmızı,36-46
+SP-AYK-VL-176,Salomon Gel-Task MT 3 Kadın Voleybol Ayakkabısı,Ayakkabı,Voleybol Ayakkabısı,Salomon,Kadın,2159.0,893.65,20,True,2024-02-24,Haki,36-46
+SP-AYK-BT-177,Birkenstock Manoa Leather Erkek Bot,Ayakkabı,Bot ve Çizme,Birkenstock,Erkek,2239.0,1035.15,295,True,2024-02-02,Kırmızı,40-46
+SP-AYK-BT-178,Crocs Manoa Leather Erkek Bot,Ayakkabı,Bot ve Çizme,Crocs,Erkek,3129.0,1282.74,144,True,2024-08-22,Beyaz,40-46
+SP-AYK-BT-179,Converse Manoa Leather Erkek Bot,Ayakkabı,Bot ve Çizme,Converse,Erkek,2909.0,1404.57,267,True,2024-02-12,Gri,40-46
+SP-AYK-BT-180,Salomon Nuptse II Erkek Bot,Ayakkabı,Bot ve Çizme,Salomon,Erkek,4549.0,2715.25,8,True,2024-04-10,Siyah,36-46
+SP-AYK-BT-181,Salomon Nuptse II Kadın Bot,Ayakkabı,Bot ve Çizme,Salomon,Kadın,5919.0,3272.21,172,True,2024-02-01,Lacivert,36-46
+SP-AYK-BT-182,Reebok Nuptse II Erkek Bot,Ayakkabı,Bot ve Çizme,Reebok,Erkek,5079.0,2162.83,122,True,2024-09-18,Turuncu,36-46
+SP-AYK-BT-183,Reebok Nuptse II Kadın Bot,Ayakkabı,Bot ve Çizme,Reebok,Kadın,6009.0,2490.22,26,True,2024-07-01,Haki,36-46
+SP-AYK-BT-184,Nike Nuptse II Erkek Bot,Ayakkabı,Bot ve Çizme,Nike,Erkek,4189.0,1937.88,298,True,2024-07-23,Mavi,36-46
+SP-AYK-BT-185,Nike Nuptse II Kadın Bot,Ayakkabı,Bot ve Çizme,Nike,Kadın,4719.0,2269.87,92,True,2024-08-27,Kırmızı,36-46
+SP-GYM-TS-001,Adidas Sportswear Essential Erkek Tişört,Giyim,Tişört,Adidas,Erkek,669.0,346.39,45,True,2024-07-28,Haki,S-XXL
+SP-GYM-TS-002,Adidas Sportswear Essential Kadın Tişört,Giyim,Tişört,Adidas,Kadın,739.0,344.83,44,True,2024-09-21,Gri,S-XXL
+SP-GYM-TS-003,Hummel Sportswear Essential Erkek Tişört,Giyim,Tişört,Hummel,Erkek,859.0,499.24,184,True,2024-03-08,Mavi,S-XXL
+SP-GYM-TS-004,Hummel Sportswear Essential Kadın Tişört,Giyim,Tişört,Hummel,Kadın,679.0,295.16,43,True,2024-03-25,Gri,S-XXL
+SP-GYM-TS-005,Jack & Jones Sportswear Essential Erkek Tişört,Giyim,Tişört,Jack & Jones,Erkek,819.0,419.94,234,True,2024-06-28,Bej,S-XXL
+SP-GYM-TS-006,Jack & Jones Sportswear Essential Kadın Tişört,Giyim,Tişört,Jack & Jones,Kadın,719.0,350.84,231,True,2024-05-26,Bordo,S-XXL
+SP-GYM-TS-007,Vans Trefoil Essentials Erkek Tişört,Giyim,Tişört,Vans,Erkek,589.0,289.99,34,True,2024-06-27,Siyah,S-XXL
+SP-GYM-TS-008,Vans Trefoil Essentials Kadın Tişört,Giyim,Tişört,Vans,Kadın,899.0,535.33,264,True,2024-07-15,Beyaz,S-XXL
+SP-GYM-TS-009,Reebok Trefoil Essentials Erkek Tişört,Giyim,Tişört,Reebok,Erkek,1069.0,585.58,235,True,2024-04-11,Siyah,S-XXL
+SP-GYM-TS-010,Reebok Trefoil Essentials Kadın Tişört,Giyim,Tişört,Reebok,Kadın,819.0,484.47,57,True,2024-06-23,Bordo,S-XXL
+SP-GYM-TS-011,Puma Cotton Logo Erkek Tişört,Giyim,Tişört,Puma,Erkek,619.0,302.0,86,True,2024-06-12,Haki,S-XXL
+SP-GYM-TS-012,Puma Cotton Logo Kadın Tişört,Giyim,Tişört,Puma,Kadın,589.0,326.83,31,True,2024-06-03,Antrasit,S-XXL
+SP-GYM-TS-013,Nike Cotton Logo Erkek Tişört,Giyim,Tişört,Nike,Erkek,679.0,324.1,81,True,2024-06-03,Kırmızı,S-XXL
+SP-GYM-TS-014,Nike Cotton Logo Kadın Tişört,Giyim,Tişört,Nike,Kadın,469.0,220.41,205,True,2024-03-20,Antrasit,S-XXL
+SP-GYM-TS-015,New Balance Cotton Logo Erkek Tişört,Giyim,Tişört,New Balance,Erkek,439.0,224.67,173,True,2024-03-22,Antrasit,S-XXL
+SP-GYM-TS-016,New Balance Cotton Logo Kadın Tişört,Giyim,Tişört,New Balance,Kadın,869.0,520.91,52,True,2024-07-17,Haki,S-XXL
+SP-GYM-TS-017,Lacoste Cotton Logo Erkek Tişört,Giyim,Tişört,Lacoste,Erkek,579.0,252.47,179,True,2024-08-07,Lacivert,S-XXL
+SP-GYM-TS-018,Lacoste Cotton Logo Kadın Tişört,Giyim,Tişört,Lacoste,Kadın,469.0,194.84,264,True,2024-09-27,Beyaz,S-XXL
+SP-GYM-TS-019,Nike Tech Erkek Antrenman Tişört,Giyim,Tişört,Nike,Erkek,799.0,379.8,97,True,2024-03-24,Gri,S-XXL
+SP-GYM-TS-020,Nike Tech Kadın Antrenman Tişört,Giyim,Tişört,Nike,Kadın,1029.0,550.8,232,True,2024-05-25,Lacivert,S-XXL
+SP-GYM-TS-021,Columbia Tech Erkek Antrenman Tişört,Giyim,Tişört,Columbia,Erkek,1059.0,536.7,245,True,2024-04-12,Kırmızı,S-XXL
+SP-GYM-TS-022,Columbia Tech Kadın Antrenman Tişört,Giyim,Tişört,Columbia,Kadın,1159.0,565.73,200,True,2024-09-17,Kırmızı,S-XXL
+SP-GYM-TS-023,Vans Tech Erkek Antrenman Tişört,Giyim,Tişört,Vans,Erkek,829.0,364.71,75,True,2024-05-02,Bej,S-XXL
+SP-GYM-TS-024,Vans Tech Kadın Antrenman Tişört,Giyim,Tişört,Vans,Kadın,1399.0,714.76,269,True,2024-02-10,Beyaz,S-XXL
+SP-GYM-TS-025,The North Face Tech Erkek Antrenman Tişört,Giyim,Tişört,The North Face,Erkek,829.0,406.1,80,True,2024-07-03,Haki,S-XXL
+SP-GYM-TS-026,The North Face Tech Kadın Antrenman Tişört,Giyim,Tişört,The North Face,Kadın,879.0,430.91,18,True,2024-07-02,Mavi,S-XXL
+SP-GYM-SW-027,New Balance Club Fleece Crew Erkek Sweatshirt,Giyim,Sweatshirt,New Balance,Erkek,1309.0,530.98,176,False,2024-03-05,Beyaz,S-XXL
+SP-GYM-SW-028,New Balance Club Fleece Crew Kadın Sweatshirt,Giyim,Sweatshirt,New Balance,Kadın,1909.0,943.98,245,False,2024-08-20,Gri,S-XXL
+SP-GYM-SW-029,Hummel Club Fleece Crew Erkek Sweatshirt,Giyim,Sweatshirt,Hummel,Erkek,989.0,446.22,285,True,2024-09-14,Gri,S-XXL
+SP-GYM-SW-030,Hummel Club Fleece Crew Kadın Sweatshirt,Giyim,Sweatshirt,Hummel,Kadın,1219.0,561.02,127,True,2024-07-21,Siyah,S-XXL
+SP-GYM-SW-031,Adidas Club Fleece Crew Erkek Sweatshirt,Giyim,Sweatshirt,Adidas,Erkek,1399.0,590.62,279,True,2024-01-21,Bordo,S-XXL
+SP-GYM-SW-032,Adidas Club Fleece Crew Kadın Sweatshirt,Giyim,Sweatshirt,Adidas,Kadın,1169.0,501.17,5,True,2024-06-08,Yeşil,S-XXL
+SP-GYM-SW-033,Columbia Essentials 3-Stripes Erkek Sweatshirt,Giyim,Sweatshirt,Columbia,Erkek,1099.0,653.83,274,True,2024-09-17,Beyaz,S-XXL
+SP-GYM-SW-034,Columbia Essentials 3-Stripes Kadın Sweatshirt,Giyim,Sweatshirt,Columbia,Kadın,1609.0,650.14,27,True,2024-07-12,Bordo,S-XXL
+SP-GYM-SW-035,Jack & Jones Essentials 3-Stripes Erkek Sweatshirt,Giyim,Sweatshirt,Jack & Jones,Erkek,1019.0,568.3,128,True,2024-02-25,Mavi,S-XXL
+SP-GYM-SW-036,Jack & Jones Essentials 3-Stripes Kadın Sweatshirt,Giyim,Sweatshirt,Jack & Jones,Kadın,1909.0,814.54,284,True,2024-06-27,Mavi,S-XXL
+SP-GYM-SW-037,Under Armour Core Logo Erkek Hoodie,Giyim,Sweatshirt,Under Armour,Erkek,979.0,418.0,239,True,2024-01-10,Mor,S-XXL
+SP-GYM-SW-038,Under Armour Core Logo Kadın Hoodie,Giyim,Sweatshirt,Under Armour,Kadın,1589.0,917.1,163,True,2024-09-13,Mavi,S-XXL
+SP-GYM-SW-039,Lacoste Core Logo Erkek Hoodie,Giyim,Sweatshirt,Lacoste,Erkek,1339.0,603.44,102,True,2024-05-12,Antrasit,S-XXL
+SP-GYM-SW-040,Lacoste Core Logo Kadın Hoodie,Giyim,Sweatshirt,Lacoste,Kadın,849.0,450.94,68,True,2024-06-14,Kırmızı,S-XXL
+SP-GYM-SW-041,Jack & Jones Core Logo Erkek Hoodie,Giyim,Sweatshirt,Jack & Jones,Erkek,1539.0,890.97,178,True,2024-03-16,Yeşil,S-XXL
+SP-GYM-SW-042,Jack & Jones Core Logo Kadın Hoodie,Giyim,Sweatshirt,Jack & Jones,Kadın,1169.0,654.01,47,True,2024-07-03,Kırmızı,S-XXL
+SP-GYM-SW-043,Columbia Core Logo Erkek Hoodie,Giyim,Sweatshirt,Columbia,Erkek,1789.0,780.17,169,True,2024-02-03,Kırmızı,S-XXL
+SP-GYM-SW-044,Columbia Core Logo Kadın Hoodie,Giyim,Sweatshirt,Columbia,Kadın,1089.0,532.72,223,True,2024-03-23,Mor,S-XXL
+SP-GYM-EA-045,Nike Sportswear Club Erkek Eşofman Altı,Giyim,Eşofman Altı,Nike,Erkek,1289.0,627.73,34,True,2024-02-22,Antrasit,S-XXL
+SP-GYM-EA-046,Nike Sportswear Club Kadın Eşofman Altı,Giyim,Eşofman Altı,Nike,Kadın,1089.0,610.08,86,True,2024-01-05,Antrasit,S-XXL
+SP-GYM-EA-047,Lacoste Sportswear Club Erkek Eşofman Altı,Giyim,Eşofman Altı,Lacoste,Erkek,1339.0,652.94,39,True,2024-04-25,Gri,S-XXL
+SP-GYM-EA-048,Lacoste Sportswear Club Kadın Eşofman Altı,Giyim,Eşofman Altı,Lacoste,Kadın,1089.0,642.39,83,True,2024-08-12,Siyah,S-XXL
+SP-GYM-EA-049,Vans Sportswear Club Erkek Eşofman Altı,Giyim,Eşofman Altı,Vans,Erkek,1409.0,725.33,192,True,2024-07-11,Haki,S-XXL
+SP-GYM-EA-050,Vans Sportswear Club Kadın Eşofman Altı,Giyim,Eşofman Altı,Vans,Kadın,999.0,422.27,100,True,2024-08-17,Mor,S-XXL
+SP-GYM-EA-051,Adidas Essentials Fleece Erkek Eşofman Altı,Giyim,Eşofman Altı,Adidas,Erkek,1259.0,557.63,151,True,2024-08-07,Bej,S-XXL
+SP-GYM-EA-052,Adidas Essentials Fleece Kadın Eşofman Altı,Giyim,Eşofman Altı,Adidas,Kadın,1379.0,676.27,232,True,2024-02-26,Mor,S-XXL
+SP-GYM-EA-053,Converse Essentials Fleece Erkek Eşofman Altı,Giyim,Eşofman Altı,Converse,Erkek,1379.0,639.74,38,True,2024-09-18,Mavi,S-XXL
+SP-GYM-EA-054,Converse Essentials Fleece Kadın Eşofman Altı,Giyim,Eşofman Altı,Converse,Kadın,939.0,405.18,94,True,2024-06-17,Mor,S-XXL
+SP-GYM-EA-055,Levi's Essentials Fleece Erkek Eşofman Altı,Giyim,Eşofman Altı,Levi's,Erkek,1489.0,831.48,257,True,2024-01-12,Lacivert,S-XXL
+SP-GYM-EA-056,Levi's Essentials Fleece Kadın Eşofman Altı,Giyim,Eşofman Altı,Levi's,Kadın,989.0,554.56,71,True,2024-02-03,Haki,S-XXL
+SP-GYM-EA-057,U.S. Polo Assn. Essentials Fleece Erkek Eşofman Altı,Giyim,Eşofman Altı,U.S. Polo Assn.,Erkek,1499.0,815.12,215,True,2024-07-27,Haki,S-XXL
+SP-GYM-EA-058,U.S. Polo Assn. Essentials Fleece Kadın Eşofman Altı,Giyim,Eşofman Altı,U.S. Polo Assn.,Kadın,799.0,370.26,235,True,2024-08-22,Beyaz,S-XXL
+SP-GYM-EA-059,Jack & Jones Cotton Go Erkek Eşofman Altı,Giyim,Eşofman Altı,Jack & Jones,Erkek,1149.0,606.62,71,True,2024-07-17,Gri,S-XXL
+SP-GYM-EA-060,Jack & Jones Cotton Go Kadın Eşofman Altı,Giyim,Eşofman Altı,Jack & Jones,Kadın,639.0,271.47,160,True,2024-03-06,Gri,S-XXL
+SP-GYM-EA-061,U.S. Polo Assn. Cotton Go Erkek Eşofman Altı,Giyim,Eşofman Altı,U.S. Polo Assn.,Erkek,1099.0,515.66,150,True,2024-02-09,Haki,S-XXL
+SP-GYM-EA-062,U.S. Polo Assn. Cotton Go Kadın Eşofman Altı,Giyim,Eşofman Altı,U.S. Polo Assn.,Kadın,1269.0,577.26,160,True,2024-09-03,Antrasit,S-XXL
+SP-GYM-ET-063,The North Face Sportswear Sport Essentials Erkek Eşofman Takımı,Giyim,Eşofman Takımı,The North Face,Erkek,1889.0,1004.47,177,True,2024-01-27,Mor,S-XXL
+SP-GYM-ET-064,The North Face Sportswear Sport Essentials Kadın Eşofman Takımı,Giyim,Eşofman Takımı,The North Face,Kadın,1749.0,1031.4,140,True,2024-04-25,Bej,S-XXL
+SP-GYM-ET-065,Jack & Jones Sportswear Sport Essentials Erkek Eşofman Takımı,Giyim,Eşofman Takımı,Jack & Jones,Erkek,2769.0,1124.37,284,True,2024-05-21,Antrasit,S-XXL
+SP-GYM-ET-066,Jack & Jones Sportswear Sport Essentials Kadın Eşofman Takımı,Giyim,Eşofman Takımı,Jack & Jones,Kadın,2519.0,1413.0,212,True,2024-05-15,Antrasit,S-XXL
+SP-GYM-ET-067,Puma Basic 3-Stripes Erkek Eşofman Takımı,Giyim,Eşofman Takımı,Puma,Erkek,2119.0,1044.43,78,True,2024-06-28,Mavi,S-XXL
+SP-GYM-ET-068,Puma Basic 3-Stripes Kadın Eşofman Takımı,Giyim,Eşofman Takımı,Puma,Kadın,2599.0,1487.03,71,True,2024-06-17,Yeşil,S-XXL
+SP-GYM-ET-069,Under Armour Basic 3-Stripes Erkek Eşofman Takımı,Giyim,Eşofman Takımı,Under Armour,Erkek,1979.0,976.23,235,True,2024-04-05,Kırmızı,S-XXL
+SP-GYM-ET-070,Under Armour Basic 3-Stripes Kadın Eşofman Takımı,Giyim,Eşofman Takımı,Under Armour,Kadın,1929.0,919.81,219,True,2024-04-28,Bej,S-XXL
+SP-GYM-MN-071,Jack & Jones Sportswear Windrunner Erkek Mont,Giyim,Mont,Jack & Jones,Erkek,2619.0,1447.32,268,True,2024-08-16,Bordo,S-XXL
+SP-GYM-MN-072,Jack & Jones Sportswear Windrunner Kadın Mont,Giyim,Mont,Jack & Jones,Kadın,2989.0,1249.43,263,True,2024-08-08,Yeşil,S-XXL
+SP-GYM-MN-073,The North Face Sportswear Windrunner Erkek Mont,Giyim,Mont,The North Face,Erkek,2699.0,1106.88,245,False,2024-05-18,Bordo,S-XXL
+SP-GYM-MN-074,The North Face Sportswear Windrunner Kadın Mont,Giyim,Mont,The North Face,Kadın,2209.0,942.77,192,False,2024-07-12,Kırmızı,S-XXL
+SP-GYM-MN-075,Lacoste Sportswear Windrunner Erkek Mont,Giyim,Mont,Lacoste,Erkek,2099.0,1075.45,288,True,2024-05-03,Mavi,S-XXL
+SP-GYM-MN-076,Lacoste Sportswear Windrunner Kadın Mont,Giyim,Mont,Lacoste,Kadın,2899.0,1478.41,65,True,2024-03-04,Bej,S-XXL
+SP-GYM-MN-077,Reebok Thermoball Eco 2.0 Erkek Mont,Giyim,Mont,Reebok,Erkek,3999.0,2081.45,261,False,2024-01-02,Yeşil,S-XXL
+SP-GYM-MN-078,Reebok Thermoball Eco 2.0 Kadın Mont,Giyim,Mont,Reebok,Kadın,5999.0,3364.2,238,True,2024-03-20,Haki,S-XXL
+SP-GYM-MN-079,Vans Thermoball Eco 2.0 Erkek Mont,Giyim,Mont,Vans,Erkek,3989.0,2338.65,88,True,2024-07-20,Mavi,S-XXL
+SP-GYM-MN-080,Vans Thermoball Eco 2.0 Kadın Mont,Giyim,Mont,Vans,Kadın,4549.0,2125.63,277,True,2024-08-23,Haki,S-XXL
+SP-GYM-MN-081,Levi's Thermoball Eco 2.0 Erkek Mont,Giyim,Mont,Levi's,Erkek,5159.0,2080.77,61,True,2024-07-19,Mavi,S-XXL
+SP-GYM-MN-082,Levi's Thermoball Eco 2.0 Kadın Mont,Giyim,Mont,Levi's,Kadın,6639.0,3813.57,18,True,2024-08-09,Antrasit,S-XXL
+SP-GYM-MN-083,The North Face Silver Ridge Erkek Yağmurluk,Giyim,Mont,The North Face,Erkek,2869.0,1245.44,199,True,2024-03-27,Antrasit,S-XXL
+SP-GYM-MN-084,The North Face Silver Ridge Kadın Yağmurluk,Giyim,Mont,The North Face,Kadın,2049.0,1208.17,102,True,2024-01-15,Beyaz,S-XXL
+SP-GYM-MN-085,New Balance Silver Ridge Erkek Yağmurluk,Giyim,Mont,New Balance,Erkek,2229.0,1199.43,261,True,2024-08-28,Yeşil,S-XXL
+SP-GYM-MN-086,New Balance Silver Ridge Kadın Yağmurluk,Giyim,Mont,New Balance,Kadın,3089.0,1671.63,111,True,2024-09-11,Haki,S-XXL
+SP-GYM-MN-087,Lacoste Silver Ridge Erkek Yağmurluk,Giyim,Mont,Lacoste,Erkek,2719.0,1292.52,240,True,2024-09-11,Gri,S-XXL
+SP-GYM-MN-088,Lacoste Silver Ridge Kadın Yağmurluk,Giyim,Mont,Lacoste,Kadın,3009.0,1725.75,140,True,2024-08-07,Antrasit,S-XXL
+SP-GYM-MN-089,Nike Silver Ridge Erkek Yağmurluk,Giyim,Mont,Nike,Erkek,2419.0,1112.01,152,True,2024-04-23,Kırmızı,S-XXL
+SP-GYM-MN-090,Nike Silver Ridge Kadın Yağmurluk,Giyim,Mont,Nike,Kadın,2469.0,1159.84,145,True,2024-05-04,Mor,S-XXL
+SP-GYM-CK-091,Hummel Sportswear Windrunner Erkek Rüzgarlık,Giyim,Ceket,Hummel,Erkek,1649.0,754.46,45,True,2024-06-15,Mor,S-XXL
+SP-GYM-CK-092,Hummel Sportswear Windrunner Kadın Rüzgarlık,Giyim,Ceket,Hummel,Kadın,2199.0,973.71,143,True,2024-09-23,Haki,S-XXL
+SP-GYM-CK-093,Jack & Jones Sportswear Windrunner Erkek Rüzgarlık,Giyim,Ceket,Jack & Jones,Erkek,1429.0,783.35,129,True,2024-01-22,Lacivert,S-XXL
+SP-GYM-CK-094,Jack & Jones Sportswear Windrunner Kadın Rüzgarlık,Giyim,Ceket,Jack & Jones,Kadın,1569.0,700.66,216,True,2024-06-23,Beyaz,S-XXL
+SP-GYM-CK-095,Vans Sportswear Windrunner Erkek Rüzgarlık,Giyim,Ceket,Vans,Erkek,2119.0,905.86,85,True,2024-07-21,Haki,S-XXL
+SP-GYM-CK-096,Vans Sportswear Windrunner Kadın Rüzgarlık,Giyim,Ceket,Vans,Kadın,2349.0,1163.91,152,True,2024-06-10,Lacivert,S-XXL
+SP-GYM-CK-097,Puma Sportswear Windrunner Erkek Rüzgarlık,Giyim,Ceket,Puma,Erkek,2389.0,998.34,123,True,2024-09-24,Bej,S-XXL
+SP-GYM-CK-098,Puma Sportswear Windrunner Kadın Rüzgarlık,Giyim,Ceket,Puma,Kadın,2419.0,1409.42,218,True,2024-03-02,Gri,S-XXL
+SP-GYM-CK-099,Levi's Run Favorite Erkek Ceket,Giyim,Ceket,Levi's,Erkek,2229.0,1320.52,24,True,2024-01-10,Kırmızı,S-XXL
+SP-GYM-CK-100,Levi's Run Favorite Kadın Ceket,Giyim,Ceket,Levi's,Kadın,1319.0,786.91,237,True,2024-09-17,Kırmızı,S-XXL
+SP-GYM-CK-101,Under Armour Run Favorite Erkek Ceket,Giyim,Ceket,Under Armour,Erkek,2229.0,1271.0,144,True,2024-04-26,Bordo,S-XXL
+SP-GYM-CK-102,Under Armour Run Favorite Kadın Ceket,Giyim,Ceket,Under Armour,Kadın,1379.0,678.17,100,True,2024-01-24,Kırmızı,S-XXL
+SP-GYM-CK-103,Puma Run Favorite Erkek Ceket,Giyim,Ceket,Puma,Erkek,1519.0,812.48,94,True,2024-07-27,Lacivert,S-XXL
+SP-GYM-CK-104,Puma Run Favorite Kadın Ceket,Giyim,Ceket,Puma,Kadın,1559.0,748.58,99,True,2024-03-16,Beyaz,S-XXL
+SP-GYM-SR-105,Nike Dri-FIT Challenger Erkek Koşu Şort,Giyim,Şort,Nike,Erkek,829.0,405.67,173,True,2024-05-19,Kırmızı,S-XXL
+SP-GYM-SR-106,Converse Dri-FIT Challenger Erkek Koşu Şort,Giyim,Şort,Converse,Erkek,609.0,323.22,125,True,2024-01-22,Mor,S-XXL
+SP-GYM-SR-107,Puma Aeroready Erkek Şort,Giyim,Şort,Puma,Erkek,749.0,433.69,164,True,2024-02-21,Mor,S-XXL
+SP-GYM-SR-108,Puma Aeroready Kadın Şort,Giyim,Şort,Puma,Kadın,649.0,339.38,73,True,2024-08-05,Lacivert,S-XXL
+SP-GYM-SR-109,Hummel Aeroready Erkek Şort,Giyim,Şort,Hummel,Erkek,989.0,469.5,286,True,2024-08-25,Mor,S-XXL
+SP-GYM-SR-110,Hummel Aeroready Kadın Şort,Giyim,Şort,Hummel,Kadın,829.0,367.81,46,True,2024-09-15,Lacivert,S-XXL
+SP-GYM-SR-111,Columbia Aeroready Erkek Şort,Giyim,Şort,Columbia,Erkek,679.0,396.16,36,True,2024-09-17,Beyaz,S-XXL
+SP-GYM-SR-112,Columbia Aeroready Kadın Şort,Giyim,Şort,Columbia,Kadın,769.0,332.91,231,True,2024-02-22,Haki,S-XXL
+SP-GYM-JN-113,Under Armour 501 Original Fit Erkek Jean,Giyim,Jean,Under Armour,Erkek,2269.0,1113.37,217,True,2024-08-19,Haki,28-38
+SP-GYM-JN-114,Under Armour 501 Original Fit Kadın Jean,Giyim,Jean,Under Armour,Kadın,1849.0,1038.0,16,True,2024-07-09,Mor,28-38
+SP-GYM-JN-115,Adidas 501 Original Fit Erkek Jean,Giyim,Jean,Adidas,Erkek,2189.0,1128.78,221,True,2024-06-23,Siyah,28-38
+SP-GYM-JN-116,Adidas 501 Original Fit Kadın Jean,Giyim,Jean,Adidas,Kadın,2489.0,1460.84,246,True,2024-01-10,Beyaz,28-38
+SP-GYM-JN-117,Reebok 501 Original Fit Erkek Jean,Giyim,Jean,Reebok,Erkek,2219.0,1227.47,220,True,2024-06-13,Mor,28-38
+SP-GYM-JN-118,Reebok 501 Original Fit Kadın Jean,Giyim,Jean,Reebok,Kadın,2399.0,1140.72,281,True,2024-03-21,Beyaz,28-38
+SP-GYM-JN-119,Jack & Jones 501 Original Fit Erkek Jean,Giyim,Jean,Jack & Jones,Erkek,1439.0,861.34,275,True,2024-03-24,Yeşil,28-38
+SP-GYM-JN-120,Jack & Jones 501 Original Fit Kadın Jean,Giyim,Jean,Jack & Jones,Kadın,2299.0,1267.29,242,True,2024-09-14,Kırmızı,28-38
+SP-GYM-JN-121,New Balance 511 Slim Fit Erkek Jean,Giyim,Jean,New Balance,Erkek,1579.0,718.65,62,True,2024-01-26,Mor,28-38
+SP-GYM-JN-122,Under Armour 511 Slim Fit Erkek Jean,Giyim,Jean,Under Armour,Erkek,1879.0,1103.44,128,True,2024-04-03,Siyah,28-38
+SP-GYM-FR-123,Under Armour Galatasaray 2024/25 İç Saha Forması,Giyim,Forma,Under Armour,Erkek,1769.0,1016.19,27,True,2024-07-15,Lacivert,S-XXL
+SP-GYM-FR-124,The North Face Galatasaray 2024/25 İç Saha Forması,Giyim,Forma,The North Face,Erkek,1449.0,829.91,76,True,2024-09-10,Siyah,S-XXL
+SP-GYM-FR-125,The North Face Fenerbahçe 2024/25 İç Saha Forması,Giyim,Forma,The North Face,Erkek,1839.0,1036.6,159,True,2024-03-22,Lacivert,S-XXL
+SP-GYM-FR-126,Vans Fenerbahçe 2024/25 İç Saha Forması,Giyim,Forma,Vans,Erkek,1589.0,723.04,94,True,2024-07-18,Haki,S-XXL
+SP-GYM-FR-127,Jack & Jones Fenerbahçe 2024/25 İç Saha Forması,Giyim,Forma,Jack & Jones,Erkek,1979.0,1164.28,200,True,2024-09-11,Antrasit,S-XXL
+SP-GYM-FR-128,Levi's Fenerbahçe 2024/25 İç Saha Forması,Giyim,Forma,Levi's,Erkek,1579.0,726.3,280,True,2024-08-08,Gri,S-XXL
+SP-GYM-FR-129,U.S. Polo Assn. Beşiktaş 2024/25 İç Saha Forması,Giyim,Forma,U.S. Polo Assn.,Erkek,1859.0,1083.7,216,True,2024-07-18,Haki,S-XXL
+SP-GYM-FR-130,Lacoste Beşiktaş 2024/25 İç Saha Forması,Giyim,Forma,Lacoste,Erkek,1569.0,707.62,45,True,2024-08-28,Mavi,S-XXL
+SP-GYM-FR-131,Puma Beşiktaş 2024/25 İç Saha Forması,Giyim,Forma,Puma,Erkek,1669.0,944.46,142,True,2024-07-22,Siyah,S-XXL
+SP-GYM-FR-132,U.S. Polo Assn. Trabzonspor 2024/25 İç Saha Forması,Giyim,Forma,U.S. Polo Assn.,Erkek,1309.0,723.01,291,True,2024-04-16,Mor,S-XXL
+SP-GYM-FR-133,Adidas Trabzonspor 2024/25 İç Saha Forması,Giyim,Forma,Adidas,Erkek,1739.0,801.05,113,True,2024-04-24,Siyah,S-XXL
+SP-GYM-TY-134,Jack & Jones Pro Dri-FIT Erkek Tayt,Giyim,Tayt,Jack & Jones,Erkek,1279.0,563.91,287,True,2024-06-25,Lacivert,S-XXL
+SP-GYM-TY-135,Jack & Jones Pro Dri-FIT Kadın Tayt,Giyim,Tayt,Jack & Jones,Kadın,1169.0,619.27,138,True,2024-06-17,Kırmızı,S-XXL
+SP-GYM-TY-136,New Balance Pro Dri-FIT Erkek Tayt,Giyim,Tayt,New Balance,Erkek,1169.0,655.3,245,True,2024-06-07,Mor,S-XXL
+SP-GYM-TY-137,New Balance Pro Dri-FIT Kadın Tayt,Giyim,Tayt,New Balance,Kadın,1129.0,578.62,79,True,2024-01-09,Lacivert,S-XXL
+SP-GYM-TY-138,Lacoste Pro Dri-FIT Erkek Tayt,Giyim,Tayt,Lacoste,Erkek,1269.0,690.34,83,True,2024-04-11,Kırmızı,S-XXL
+SP-GYM-TY-139,Lacoste Pro Dri-FIT Kadın Tayt,Giyim,Tayt,Lacoste,Kadın,1249.0,560.98,177,True,2024-05-25,Haki,S-XXL
+SP-AKS-CR-001,The North Face Everyday Cushioned 3'lü Erkek Çorap,Aksesuar,Çorap,The North Face,Erkek,239.0,130.03,99,True,2024-09-21,Beyaz,S-XL
+SP-AKS-CR-002,The North Face Everyday Cushioned 3'lü Kadın Çorap,Aksesuar,Çorap,The North Face,Kadın,329.0,186.81,29,True,2024-01-14,Siyah,S-XL
+SP-AKS-CR-003,The North Face Everyday Cushioned 3'lü Unisex Çorap,Aksesuar,Çorap,The North Face,Unisex,359.0,148.48,9,True,2024-04-17,Lacivert,S-XL
+SP-AKS-CR-004,U.S. Polo Assn. Everyday Cushioned 3'lü Erkek Çorap,Aksesuar,Çorap,U.S. Polo Assn.,Erkek,209.0,110.26,252,False,2024-08-01,Kırmızı,S-XL
+SP-AKS-CR-005,U.S. Polo Assn. Everyday Cushioned 3'lü Kadın Çorap,Aksesuar,Çorap,U.S. Polo Assn.,Kadın,339.0,136.4,145,False,2024-09-10,Kırmızı,S-XL
+SP-AKS-CR-006,U.S. Polo Assn. Everyday Cushioned 3'lü Unisex Çorap,Aksesuar,Çorap,U.S. Polo Assn.,Unisex,399.0,213.39,59,True,2024-02-17,Lacivert,S-XL
+SP-AKS-CR-007,Nike Everyday Cushioned 3'lü Erkek Çorap,Aksesuar,Çorap,Nike,Erkek,249.0,125.82,141,True,2024-07-03,Gri,S-XL
+SP-AKS-CR-008,Nike Everyday Cushioned 3'lü Kadın Çorap,Aksesuar,Çorap,Nike,Kadın,299.0,153.39,158,True,2024-02-21,Lacivert,S-XL
+SP-AKS-CR-009,Nike Everyday Cushioned 3'lü Unisex Çorap,Aksesuar,Çorap,Nike,Unisex,359.0,145.87,199,True,2024-07-18,Beyaz,S-XL
+SP-AKS-CR-010,Adidas Everyday Cushioned 3'lü Erkek Çorap,Aksesuar,Çorap,Adidas,Erkek,359.0,194.06,260,True,2024-07-21,Siyah,S-XL
+SP-AKS-CR-011,Adidas Everyday Cushioned 3'lü Kadın Çorap,Aksesuar,Çorap,Adidas,Kadın,339.0,193.77,275,True,2024-01-08,Siyah,S-XL
+SP-AKS-CR-012,Adidas Everyday Cushioned 3'lü Unisex Çorap,Aksesuar,Çorap,Adidas,Unisex,419.0,241.98,143,True,2024-01-03,Beyaz,S-XL
+SP-AKS-CR-013,U.S. Polo Assn. Trefoil Liner 3'lü Erkek Çorap,Aksesuar,Çorap,U.S. Polo Assn.,Erkek,379.0,175.44,78,True,2024-07-03,Lacivert,S-XL
+SP-AKS-CR-014,U.S. Polo Assn. Trefoil Liner 3'lü Kadın Çorap,Aksesuar,Çorap,U.S. Polo Assn.,Kadın,299.0,153.49,281,True,2024-06-13,Beyaz,S-XL
+SP-AKS-CR-015,U.S. Polo Assn. Trefoil Liner 3'lü Unisex Çorap,Aksesuar,Çorap,U.S. Polo Assn.,Unisex,209.0,124.92,261,True,2024-06-02,Siyah,S-XL
+SP-AKS-CR-016,Nike Trefoil Liner 3'lü Erkek Çorap,Aksesuar,Çorap,Nike,Erkek,229.0,95.08,208,True,2024-06-01,Kırmızı,S-XL
+SP-AKS-CR-017,Nike Trefoil Liner 3'lü Kadın Çorap,Aksesuar,Çorap,Nike,Kadın,349.0,171.05,187,True,2024-09-13,Lacivert,S-XL
+SP-AKS-CR-018,Nike Trefoil Liner 3'lü Unisex Çorap,Aksesuar,Çorap,Nike,Unisex,329.0,175.07,156,True,2024-04-23,Siyah,S-XL
+SP-AKS-CR-019,The North Face Trefoil Liner 3'lü Erkek Çorap,Aksesuar,Çorap,The North Face,Erkek,239.0,113.76,204,True,2024-06-12,Lacivert,S-XL
+SP-AKS-CR-020,The North Face Trefoil Liner 3'lü Kadın Çorap,Aksesuar,Çorap,The North Face,Kadın,179.0,82.64,143,True,2024-02-05,Gri,S-XL
+SP-AKS-CR-021,The North Face Trefoil Liner 3'lü Unisex Çorap,Aksesuar,Çorap,The North Face,Unisex,269.0,137.57,213,True,2024-02-01,Kırmızı,S-XL
+SP-AKS-SP-022,Nike H86 Futura Washed Erkek Şapka,Aksesuar,Şapka,Nike,Erkek,449.0,214.42,291,True,2024-04-19,Siyah,Standart
+SP-AKS-SP-023,Nike H86 Futura Washed Kadın Şapka,Aksesuar,Şapka,Nike,Kadın,589.0,255.57,159,True,2024-05-16,Gri,Standart
+SP-AKS-SP-024,Nike H86 Futura Washed Unisex Şapka,Aksesuar,Şapka,Nike,Unisex,409.0,186.17,252,True,2024-02-12,Gri,Standart
+SP-AKS-SP-025,Puma H86 Futura Washed Erkek Şapka,Aksesuar,Şapka,Puma,Erkek,439.0,230.48,105,True,2024-08-04,Kırmızı,Standart
+SP-AKS-SP-026,Puma H86 Futura Washed Kadın Şapka,Aksesuar,Şapka,Puma,Kadın,349.0,167.22,199,True,2024-06-15,Kırmızı,Standart
+SP-AKS-SP-027,Puma H86 Futura Washed Unisex Şapka,Aksesuar,Şapka,Puma,Unisex,629.0,359.73,74,True,2024-05-11,Kırmızı,Standart
+SP-AKS-SP-028,Adidas H86 Futura Washed Erkek Şapka,Aksesuar,Şapka,Adidas,Erkek,589.0,292.03,208,True,2024-06-10,Lacivert,Standart
+SP-AKS-SP-029,Adidas H86 Futura Washed Kadın Şapka,Aksesuar,Şapka,Adidas,Kadın,569.0,337.73,171,True,2024-07-09,Lacivert,Standart
+SP-AKS-SP-030,Adidas H86 Futura Washed Unisex Şapka,Aksesuar,Şapka,Adidas,Unisex,489.0,206.74,107,True,2024-09-06,Kırmızı,Standart
+SP-AKS-SP-031,U.S. Polo Assn. H86 Futura Washed Erkek Şapka,Aksesuar,Şapka,U.S. Polo Assn.,Erkek,539.0,318.33,112,True,2024-08-26,Beyaz,Standart
+SP-AKS-SP-032,U.S. Polo Assn. H86 Futura Washed Kadın Şapka,Aksesuar,Şapka,U.S. Polo Assn.,Kadın,589.0,332.07,260,True,2024-03-21,Beyaz,Standart
+SP-AKS-SP-033,U.S. Polo Assn. H86 Futura Washed Unisex Şapka,Aksesuar,Şapka,U.S. Polo Assn.,Unisex,439.0,189.13,198,True,2024-02-15,Beyaz,Standart
+SP-AKS-SP-034,U.S. Polo Assn. Baseball Cap Erkek Şapka,Aksesuar,Şapka,U.S. Polo Assn.,Erkek,449.0,262.25,283,True,2024-01-26,Beyaz,Standart
+SP-AKS-SP-035,U.S. Polo Assn. Baseball Cap Kadın Şapka,Aksesuar,Şapka,U.S. Polo Assn.,Kadın,509.0,286.29,48,True,2024-02-25,Kırmızı,Standart
+SP-AKS-SP-036,U.S. Polo Assn. Baseball Cap Unisex Şapka,Aksesuar,Şapka,U.S. Polo Assn.,Unisex,499.0,216.2,27,True,2024-07-25,Kırmızı,Standart
+SP-AKS-SP-037,The North Face Baseball Cap Erkek Şapka,Aksesuar,Şapka,The North Face,Erkek,539.0,227.02,137,True,2024-04-17,Siyah,Standart
+SP-AKS-SP-038,The North Face Baseball Cap Kadın Şapka,Aksesuar,Şapka,The North Face,Kadın,469.0,252.1,233,True,2024-06-13,Lacivert,Standart
+SP-AKS-SP-039,The North Face Baseball Cap Unisex Şapka,Aksesuar,Şapka,The North Face,Unisex,499.0,268.51,181,True,2024-01-16,Lacivert,Standart
+SP-AKS-SP-040,Puma Baseball Cap Erkek Şapka,Aksesuar,Şapka,Puma,Erkek,419.0,248.19,77,True,2024-06-10,Siyah,Standart
+SP-AKS-SP-041,Puma Baseball Cap Kadın Şapka,Aksesuar,Şapka,Puma,Kadın,529.0,266.73,248,True,2024-02-15,Gri,Standart
+SP-AKS-SP-042,Puma Baseball Cap Unisex Şapka,Aksesuar,Şapka,Puma,Unisex,429.0,177.36,63,True,2024-01-28,Siyah,Standart
+SP-AKS-SC-043,Adidas Heritage Backpack Unisex Sırt Çantası,Aksesuar,Sırt Çantası,Adidas,Unisex,1109.0,566.01,291,True,2024-07-15,Gri,Standart
+SP-AKS-SC-044,U.S. Polo Assn. Heritage Backpack Unisex Sırt Çantası,Aksesuar,Sırt Çantası,U.S. Polo Assn.,Unisex,1019.0,445.19,207,True,2024-01-24,Beyaz,Standart
+SP-AKS-SC-045,The North Face Linear Backpack Unisex Sırt Çantası,Aksesuar,Sırt Çantası,The North Face,Unisex,869.0,470.08,147,True,2024-02-19,Lacivert,Standart
+SP-AKS-SC-046,U.S. Polo Assn. Linear Backpack Unisex Sırt Çantası,Aksesuar,Sırt Çantası,U.S. Polo Assn.,Unisex,1209.0,528.81,105,True,2024-08-04,Gri,Standart
+SP-AKS-SPC-047,U.S. Polo Assn. Brasilia M Duffel Unisex Spor Çantası,Aksesuar,Spor Çantası,U.S. Polo Assn.,Unisex,1109.0,530.67,183,True,2024-06-28,Siyah,M
+SP-AKS-SPC-048,Puma Brasilia M Duffel Unisex Spor Çantası,Aksesuar,Spor Çantası,Puma,Unisex,939.0,502.1,48,True,2024-03-11,Gri,M
+SP-AKS-SPC-049,The North Face Brasilia M Duffel Unisex Spor Çantası,Aksesuar,Spor Çantası,The North Face,Unisex,1039.0,453.64,266,True,2024-07-14,Lacivert,M
+SP-AKS-BC-050,The North Face Heritage Hip Pack Unisex Bel Çantası,Aksesuar,Bel Çantası,The North Face,Unisex,719.0,387.32,289,True,2024-03-16,Lacivert,Standart
+SP-AKS-BC-051,U.S. Polo Assn. Heritage Hip Pack Unisex Bel Çantası,Aksesuar,Bel Çantası,U.S. Polo Assn.,Unisex,489.0,277.95,32,True,2024-06-01,Kırmızı,Standart
+SP-AKS-BC-052,Nike Heritage Hip Pack Unisex Bel Çantası,Aksesuar,Bel Çantası,Nike,Unisex,499.0,237.92,263,True,2024-08-14,Kırmızı,Standart
+SP-AKS-BC-053,Adidas Heritage Hip Pack Unisex Bel Çantası,Aksesuar,Bel Çantası,Adidas,Unisex,609.0,345.9,90,False,2024-02-19,Beyaz,Standart
+SP-AKS-EB-054,Puma Fleece Bere ve Eldiven Seti,Aksesuar,Eldiven ve Bere,Puma,Erkek,469.0,238.03,239,True,2024-08-18,Lacivert,S-L
+SP-AKS-EB-055,Puma Fleece Bere ve Eldiven Seti,Aksesuar,Eldiven ve Bere,Puma,Kadın,609.0,276.23,192,True,2024-09-27,Kırmızı,S-L
+SP-AKS-EB-056,Puma Fleece Bere ve Eldiven Seti,Aksesuar,Eldiven ve Bere,Puma,Unisex,689.0,336.42,222,True,2024-02-24,Lacivert,S-L
+SP-AKS-EB-057,Nike Fleece Bere ve Eldiven Seti,Aksesuar,Eldiven ve Bere,Nike,Erkek,689.0,316.62,235,True,2024-05-12,Siyah,S-L
+SP-AKS-EB-058,Nike Fleece Bere ve Eldiven Seti,Aksesuar,Eldiven ve Bere,Nike,Kadın,389.0,222.92,126,True,2024-04-26,Siyah,S-L
+SP-AKS-EB-059,Nike Fleece Bere ve Eldiven Seti,Aksesuar,Eldiven ve Bere,Nike,Unisex,659.0,377.09,224,True,2024-03-20,Kırmızı,S-L
+SP-SML-FT-001,Adidas Flight Match Ball Futbol Topu,Spor Malzemeleri,Futbol Topu,Adidas,Unisex,2099.0,1063.05,280,True,2024-03-11,Çok Renkli,5
+SP-SML-FT-002,Nike Flight Match Ball Futbol Topu,Spor Malzemeleri,Futbol Topu,Nike,Unisex,1509.0,776.45,53,True,2024-03-25,Çok Renkli,5
+SP-SML-FT-003,Puma UCL League Futbol Topu,Spor Malzemeleri,Futbol Topu,Puma,Unisex,859.0,492.39,79,True,2024-06-27,Turuncu,5
+SP-SML-FT-004,Hummel UCL League Futbol Topu,Spor Malzemeleri,Futbol Topu,Hummel,Unisex,1799.0,860.89,300,True,2024-05-21,Turuncu,5
+SP-SML-BKT-005,Nike TF-1000 Legacy Basketbol Topu,Spor Malzemeleri,Basketbol Topu,Nike,Unisex,959.0,527.41,237,True,2024-08-11,Sarı,7
+SP-SML-BKT-006,Puma TF-1000 Legacy Basketbol Topu,Spor Malzemeleri,Basketbol Topu,Puma,Unisex,1379.0,785.25,239,True,2024-06-28,Beyaz,7
+SP-SML-BKT-007,Hummel TF-1000 Legacy Basketbol Topu,Spor Malzemeleri,Basketbol Topu,Hummel,Unisex,1079.0,478.61,113,True,2024-08-09,Siyah,7
+SP-SML-TK-008,Puma Mercurial Lite Tekmelik,Spor Malzemeleri,Tekmelik,Puma,Unisex,529.0,262.95,29,True,2024-01-04,Sarı,S-L
+SP-SML-TK-009,Hummel Mercurial Lite Tekmelik,Spor Malzemeleri,Tekmelik,Hummel,Unisex,629.0,253.65,230,True,2024-08-01,Turuncu,S-L
+SP-SML-TK-010,Nike Mercurial Lite Tekmelik,Spor Malzemeleri,Tekmelik,Nike,Unisex,469.0,281.0,159,True,2024-03-28,Turuncu,S-L
+SP-SML-KE-011,Nike Goalkeeper Match Kaleci Eldiveni,Spor Malzemeleri,Kaleci Eldiveni,Nike,Erkek,699.0,331.58,31,True,2024-07-21,Turuncu,7-11
+SP-SML-KE-012,Puma Goalkeeper Match Kaleci Eldiveni,Spor Malzemeleri,Kaleci Eldiveni,Puma,Erkek,1059.0,473.19,53,True,2024-01-07,Beyaz,7-11
+SP-SML-KE-013,Adidas Goalkeeper Match Kaleci Eldiveni,Spor Malzemeleri,Kaleci Eldiveni,Adidas,Erkek,609.0,271.15,9,True,2024-01-23,Siyah,7-11
+SP-SML-FE-014,Hummel Yoga Matı 4mm,Spor Malzemeleri,Fitness Ekipmanı,Hummel,Unisex,369.0,152.83,50,True,2024-02-04,Siyah,Standart
+SP-SML-FE-015,Puma Yoga Matı 4mm,Spor Malzemeleri,Fitness Ekipmanı,Puma,Unisex,739.0,315.87,78,True,2024-02-17,Turuncu,Standart
+SP-SML-FE-016,Adidas Direnç Bandı Seti 3'lü,Spor Malzemeleri,Fitness Ekipmanı,Adidas,Unisex,389.0,167.38,231,True,2024-04-03,Siyah,Standart
+SP-SML-FE-017,Hummel Direnç Bandı Seti 3'lü,Spor Malzemeleri,Fitness Ekipmanı,Hummel,Unisex,239.0,101.49,184,True,2024-07-11,Siyah,Standart
+SP-SML-FE-018,Puma Direnç Bandı Seti 3'lü,Spor Malzemeleri,Fitness Ekipmanı,Puma,Unisex,269.0,142.28,288,True,2024-05-25,Turuncu,Standart
+SP-SML-FE-019,Nike Direnç Bandı Seti 3'lü,Spor Malzemeleri,Fitness Ekipmanı,Nike,Unisex,209.0,119.01,110,True,2024-09-20,Sarı,Standart

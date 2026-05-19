@@ -1,0 +1,17 @@
+﻿source,medium,channel_group
+google,organic,Organic Search
+google,cpc,Paid Search
+bing,organic,Organic Search
+bing,cpc,Paid Search
+facebook,cpc,Paid Social
+facebook,social,Organic Social
+instagram,cpc,Paid Social
+instagram,social,Organic Social
+(direct),(none),Direct
+newsletter,email,Email
+blog.sporthink.com.tr,referral,Referral
+trendyol.com,referral,Referral
+youtube.com,cpc,Paid Video
+youtube.com,organic,Organic Video
+twitter.com,social,Organic Social
+whatsapp.com,referral,Referral

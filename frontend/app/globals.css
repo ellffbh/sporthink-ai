@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* slate-950 → slate-900 → blue-500 design system */
+    --background: 222 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 84% 4.9%;
+    --secondary: 217 33% 14%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 50%;
+    --accent: 217 33% 14%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+    --radius: 0.75rem;
+  }
+
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
+}
+
+@layer utilities {
+  /* AIReklam card */
+  .ar-card {
+    background: #0D1526;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+  }
+  .ar-card-hover {
+    @apply transition-all duration-200;
+  }
+  .ar-card-hover:hover {
+    border-color: rgba(255,255,255,0.12);
+    background: #111D35;
+  }
+
+  /* Badges */
+  .badge-success { @apply bg-emerald-500/10 text-emerald-400 border border-emerald-500/20; }
+  .badge-warning { @apply bg-amber-500/10  text-amber-400  border border-amber-500/20;  }
+  .badge-danger  { @apply bg-rose-500/10   text-rose-400   border border-rose-500/20;   }
+  .badge-info    { @apply bg-blue-500/10   text-blue-400   border border-blue-500/20;   }
+  .badge-muted   { @apply bg-slate-800     text-slate-400  border border-slate-700;     }
+
+  /* Mono numbers */
+  .num { font-family: 'JetBrains Mono', monospace; }
+
+  /* Skeleton */
+  .skeleton { @apply bg-[#111D35] animate-pulse rounded-lg; }
+
+  /* Page entry */
+  .page-enter { animation: page-in 0.22s ease-out both; }
+  @keyframes page-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0);   }
+  }
+
+  /* Pulse dot */
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.35; }
+  }
+  .pulse-dot { animation: pulse-dot 1.4s ease-in-out infinite; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar       { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 9999px; }
+}

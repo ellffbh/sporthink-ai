@@ -1,0 +1,116 @@
+from sqlalchemy.orm import Session
+from sqlalchemy import text
+from app.models.recommendation import Recommendation, RecommendationAction, RecommendationStatus
+import uuid
+from datetime import date
+
+
+def generate_recommendations(db: Session) -> list[dict]:
+    # Son 7 günlük kampanya metriklerini çek
+    results = db.execute(text("""
+        SELECT 
+            c.id as campaign_id,
+            c.campaign_name,
+            AVG(m.cost) as avg_cost,
+            SUM(m.cost) as total_cost,
+            AVG(m.conversions) as avg_conversions,
+            SUM(m.conversions) as total_conversions,
+            AVG(m.ctr) as avg_ctr,
+            AVG(m.cpc) as avg_cpc,
+            CASE WHEN SUM(m.cost) > 0 
+                 THEN SUM(m.conversion_value) / SUM(m.cost) 
+                 ELSE 0 END as roas,
+            -- Son 3 gün vs önceki 4 gün karşılaştırması
+            AVG(CASE WHEN m.metric_date >= CURRENT_DATE - INTERVAL '3 days' 
+                     THEN m.cost END) as recent_cost,
+            AVG(CASE WHEN m.metric_date < CURRENT_DATE - INTERVAL '3 days' 
+                     THEN m.cost END) as older_cost,
+            AVG(CASE WHEN m.metric_date >= CURRENT_DATE - INTERVAL '3 days' 
+                     THEN m.conversions END) as recent_conversions,
+            AVG(CASE WHEN m.metric_date < CURRENT_DATE - INTERVAL '3 days' 
+                     THEN m.conversions END) as older_conversions
+        FROM campaigns c
+        JOIN ad_metrics_daily m ON m.campaign_id = c.id
+        WHERE m.metric_date >= '2025-03-24'
+        GROUP BY c.id, c.campaign_name
+    """)).fetchall()
+
+    generated = []
+
+    for r in results:
+        action = None
+        reason = None
+        risk_score = 5.0
+        change_percent = None
+
+        roas = float(r.roas or 0)
+        recent_cost = float(r.recent_cost or 0)
+        older_cost = float(r.older_cost or 0)
+        recent_conv = float(r.recent_conversions or 0)
+        older_conv = float(r.older_conversions or 0)
+        avg_ctr = float(r.avg_ctr or 0)
+        avg_cpc = float(r.avg_cpc or 0)
+
+        cost_change = ((recent_cost - older_cost) / older_cost * 100) if older_cost > 0 else 0
+        conv_change = ((recent_conv - older_conv) / older_conv * 100) if older_conv > 0 else 0
+
+        # Kural 1: ROAS düşüyor + harcama artıyor → bütçeyi azalt
+        if roas < 2 and cost_change > 10:
+            action = RecommendationAction.decrease
+            reason = f"ROAS {roas:.2f} seviyesinde düşük, harcama %{cost_change:.1f} arttı. Bütçe azaltılması önerilir."
+            risk_score = 8.0
+            change_percent = -20
+
+        # Kural 2: CPA stabil + dönüşüm artıyor → bütçeyi artır
+        elif conv_change > 15 and roas > 3:
+            action = RecommendationAction.increase
+            reason = f"Dönüşümler %{conv_change:.1f} arttı, ROAS {roas:.2f} güçlü. Bütçe artışı önerilir."
+            risk_score = 3.0
+            change_percent = 20
+
+        # Kural 3: CTR < %1 → reklam metnini yenile
+        elif avg_ctr > 0 and avg_ctr < 0.01:
+            action = RecommendationAction.review
+            reason = f"CTR %{avg_ctr*100:.2f} çok düşük. Reklam metni ve görsellerin güncellenmesi önerilir."
+            risk_score = 6.0
+
+        # Kural 4: CPC anormal yüksek → teklifi düşür
+        elif avg_cpc > 50:
+            action = RecommendationAction.decrease
+            reason = f"CPC ${avg_cpc:.2f} anormal yüksek. Teklif stratejisi gözden geçirilmeli."
+            risk_score = 7.0
+            change_percent = -15
+
+        # Kural 5: Her şey iyi → hold
+        else:
+            action = RecommendationAction.hold
+            reason = f"Kampanya stabil görünüyor. ROAS {roas:.2f}, maliyet değişimi %{cost_change:.1f}."
+            risk_score = 2.0
+
+        # Mevcut pending öneriyi sil, yenisini ekle
+        db.execute(text("""
+            DELETE FROM recommendations 
+            WHERE campaign_id = :cid AND status = 'pending'
+        """), {"cid": str(r.campaign_id)})
+
+        rec = Recommendation(
+            id=uuid.uuid4(),
+            campaign_id=r.campaign_id,
+            action=action,
+            suggested_change_percent=change_percent,
+            reason=reason,
+            risk_score=risk_score,
+            status=RecommendationStatus.pending
+        )
+        db.add(rec)
+        generated.append({
+            "campaign_id": str(r.campaign_id),
+            "campaign_name": r.campaign_name,
+            "action": action.value,
+            "reason": reason,
+            "risk_score": risk_score,
+            "change_percent": change_percent
+        })
+
+    db.commit()
+    return generated

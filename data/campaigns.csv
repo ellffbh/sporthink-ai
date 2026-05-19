@@ -1,0 +1,20 @@
+﻿campaign_name,platform,campaign_type,objective,start_date,end_date,daily_budget,total_budget,target_audience,status
+SP_Meta_BrandAwareness_Q4_2024,meta,OUTCOME_AWARENESS,Awareness,2024-10-01,2024-12-31,300.0,27600,"18-55 Tüm, Spor İlgilenen, Türkiye Geneli",completed
+SP_Meta_Retargeting_Kasim,meta,OUTCOME_SALES,Retargeting,2024-11-01,2024-11-30,500.0,15000,"Site Ziyaretçileri, Sepet Terk Edenler",completed
+SP_Meta_BlackFriday_2024,meta,OUTCOME_SALES,Conversion,2024-11-20,2024-12-02,1200.0,15600,Lookalike Müşteriler + Retargeting,completed
+SP_Meta_YilbasiKampanya,meta,OUTCOME_SALES,Conversion,2024-12-10,2024-12-31,800.0,17600,"25-44 Erkek+Kadın, Hediye Arayanlar",completed
+SP_Meta_OkulAcilisi_Subat,meta,OUTCOME_TRAFFIC,Traffic,2025-01-20,2025-02-15,400.0,10800,"Ebeveynler, 25-45, Çocuk Ürünleri İlgilenen",completed
+SP_Meta_KisIndirimi_2025,meta,OUTCOME_SALES,Conversion,2025-01-05,2025-02-28,600.0,33000,"Tüm Site Ziyaretçileri, Kış Koleksiyonu",completed
+SP_Meta_BaharKoleksiyonu,meta,OUTCOME_AWARENESS,Awareness,2025-03-01,2025-03-31,450.0,13950,"18-35 Erkek+Kadın, Moda İlgilenen",active
+SP_Meta_DPA_Genel,meta,OUTCOME_SALES,Retargeting,2024-10-01,2025-03-31,350.0,63700,Dynamic Product Ads - Tüm Ürünler,active
+SP_Meta_Sneaker_Lansman,meta,OUTCOME_SALES,Conversion,2025-02-15,2025-03-31,700.0,31500,"18-30 Sneaker Tutkunları, Streetwear",active
+SP_Google_Search_Brand,google,SEARCH,Conversion,2024-10-01,2025-03-31,200.0,36400,Brand Keywords - Sporthink,active
+SP_Google_Search_KosuAyakkabi,google,SEARCH,Conversion,2024-10-01,2025-03-31,450.0,81900,Koşu Ayakkabı Keywords,active
+SP_Google_Search_SporAyakkabi,google,SEARCH,Conversion,2024-10-01,2025-03-31,500.0,91000,Spor Ayakkabı Genel Keywords,active
+SP_Google_Search_Krampon,google,SEARCH,Conversion,2024-10-01,2025-03-31,300.0,54600,Krampon + Halı Saha Keywords,active
+SP_Google_Shopping_Ayakkabi,google,SHOPPING,Conversion,2024-10-01,2025-03-31,600.0,109200,Shopping - Ayakkabı Feed,active
+SP_Google_Shopping_Giyim,google,SHOPPING,Conversion,2024-10-01,2025-03-31,350.0,63700,Shopping - Giyim Feed,active
+SP_Google_PMax_Genel,google,PERFORMANCE_MAX,Conversion,2024-10-01,2025-03-31,800.0,145600,Performance Max - Tüm Ürünler,active
+SP_Google_Display_Remarketing,google,DISPLAY,Retargeting,2024-10-01,2025-03-31,250.0,45500,Display Remarketing - Site Ziyaretçileri,active
+SP_Google_Search_SporGiyim,google,SEARCH,Conversion,2025-01-01,2025-03-31,350.0,31500,Eşofman + Sweatshirt + Mont Keywords,active
+SP_Google_BlackFriday_Search,google,SEARCH,Conversion,2024-11-20,2024-12-02,1000.0,13000,Black Friday + İndirim Keywords,completed

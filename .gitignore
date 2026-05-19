@@ -1,0 +1,27 @@
+# Environment
+.env
+.env.local
+.env*.local
+*.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Node
+node_modules/
+.next/
+.pnp.js
+
+# Logs & temp
+*.log
+import_output.log
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
