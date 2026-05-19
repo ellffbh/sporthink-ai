@@ -22,6 +22,11 @@ node_modules/
 import_output.log
 .DS_Store
 
+# Sensitive / large files
+.env.backup
+*.sql
+local_db_dump.sql
+
 # IDE
 .vscode/
 .idea/
