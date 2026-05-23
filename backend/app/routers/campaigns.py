@@ -29,6 +29,65 @@ def list_campaigns(
     return db.query(Campaign).filter(Campaign.ad_account_id.in_(account_ids)).limit(100).all()
 
 
+@router.get("/summary")
+def get_campaigns_summary(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    row = db.execute(text("""
+        WITH base AS (
+            SELECT MAX(metric_date) AS max_date FROM ad_metrics_daily
+        ),
+        current_period AS (
+            SELECT
+                COALESCE(SUM(cost), 0)             AS spend,
+                COALESCE(SUM(conversion_value), 0) AS revenue,
+                COALESCE(SUM(conversions), 0)      AS conversions,
+                CASE WHEN SUM(cost) > 0
+                     THEN ROUND(SUM(conversion_value) / SUM(cost), 2)
+                     ELSE 0 END                    AS roas
+            FROM ad_metrics_daily, base
+            WHERE metric_date > max_date - INTERVAL '7 days'
+              AND metric_date <= max_date
+        ),
+        prev_period AS (
+            SELECT
+                COALESCE(SUM(cost), 0)             AS spend,
+                COALESCE(SUM(conversion_value), 0) AS revenue,
+                COALESCE(SUM(conversions), 0)      AS conversions,
+                CASE WHEN SUM(cost) > 0
+                     THEN ROUND(SUM(conversion_value) / SUM(cost), 2)
+                     ELSE 0 END                    AS roas
+            FROM ad_metrics_daily, base
+            WHERE metric_date > max_date - INTERVAL '14 days'
+              AND metric_date <= max_date - INTERVAL '7 days'
+        )
+        SELECT
+            c.spend, c.revenue, c.conversions, c.roas,
+            p.spend  AS prev_spend,
+            p.revenue AS prev_revenue,
+            p.conversions AS prev_conversions,
+            p.roas   AS prev_roas
+        FROM current_period c, prev_period p
+    """)).fetchone()
+
+    def pct(cur: float, prev: float) -> float:
+        if prev == 0:
+            return 0.0
+        return round((cur - prev) / prev * 100, 2)
+
+    return {
+        "total_spend":        round(float(row.spend), 2),
+        "total_revenue":      round(float(row.revenue), 2),
+        "total_conversions":  round(float(row.conversions), 2),
+        "avg_roas":           round(float(row.roas), 2),
+        "spend_change":       pct(float(row.spend),       float(row.prev_spend)),
+        "revenue_change":     pct(float(row.revenue),     float(row.prev_revenue)),
+        "conversions_change": pct(float(row.conversions), float(row.prev_conversions)),
+        "roas_change":        pct(float(row.roas),        float(row.prev_roas)),
+    }
+
+
 @router.get("/{campaign_id}/metrics-summary")
 def get_campaign_metrics_summary(
     campaign_id: uuid.UUID,
@@ -40,30 +99,60 @@ def get_campaign_metrics_summary(
             SELECT MAX(metric_date) AS max_date
             FROM ad_metrics_daily
             WHERE campaign_id = :cid
+        ),
+        main_metrics AS (
+            SELECT
+                COALESCE(SUM(cost), 0)             AS total_spend,
+                COALESCE(SUM(conversion_value), 0) AS total_revenue,
+                COALESCE(SUM(conversions), 0)      AS total_conversions,
+                COALESCE(SUM(impressions), 0)      AS total_impressions,
+                COALESCE(SUM(clicks), 0)           AS total_clicks,
+                CASE WHEN SUM(cost) > 0
+                     THEN ROUND(SUM(conversion_value) / SUM(cost), 2)    ELSE 0    END AS roas,
+                CASE WHEN SUM(conversions) > 0
+                     THEN ROUND(SUM(cost) / SUM(conversions), 2)          ELSE NULL END AS cpa,
+                CASE WHEN SUM(impressions) > 0
+                     THEN ROUND(SUM(clicks)::numeric / SUM(impressions) * 100, 2) ELSE 0 END AS ctr
+            FROM ad_metrics_daily, latest
+            WHERE campaign_id = :cid
+              AND metric_date >= latest.max_date - INTERVAL '90 days'
+        ),
+        roas_7d AS (
+            SELECT CASE WHEN SUM(cost) > 0
+                        THEN SUM(conversion_value) / SUM(cost)
+                        ELSE NULL END AS roas
+            FROM ad_metrics_daily, latest
+            WHERE campaign_id = :cid
+              AND metric_date >= latest.max_date - INTERVAL '6 days'
+        ),
+        roas_prev_7d AS (
+            SELECT CASE WHEN SUM(cost) > 0
+                        THEN SUM(conversion_value) / SUM(cost)
+                        ELSE NULL END AS roas
+            FROM ad_metrics_daily, latest
+            WHERE campaign_id = :cid
+              AND metric_date BETWEEN latest.max_date - INTERVAL '13 days'
+                                  AND latest.max_date - INTERVAL '7 days'
         )
         SELECT
-            COALESCE(SUM(cost), 0) as total_spend,
-            COALESCE(SUM(conversion_value), 0) as total_revenue,
-            COALESCE(SUM(conversions), 0) as total_conversions,
-            COALESCE(SUM(impressions), 0) as total_impressions,
-            COALESCE(SUM(clicks), 0) as total_clicks,
-            CASE WHEN SUM(cost) > 0 THEN ROUND(SUM(conversion_value) / SUM(cost), 2) ELSE 0 END as roas,
-            CASE WHEN SUM(conversions) > 0 THEN ROUND(SUM(cost) / SUM(conversions), 2) ELSE 0 END as cpa,
-            CASE WHEN SUM(impressions) > 0 THEN ROUND(SUM(clicks)::numeric / SUM(impressions) * 100, 2) ELSE 0 END as ctr
-        FROM ad_metrics_daily, latest
-        WHERE campaign_id = :cid
-          AND metric_date >= latest.max_date - INTERVAL '90 days'
+            m.*,
+            ROUND(
+                (r7.roas - rp.roas) / NULLIF(rp.roas, 0) * 100,
+                1
+            ) AS roas_change_7d
+        FROM main_metrics m, roas_7d r7, roas_prev_7d rp
     """), {"cid": str(campaign_id)}).fetchone()
 
     return {
-        "total_cost": float(result.total_spend),
-        "total_revenue": float(result.total_revenue),
+        "total_cost":        float(result.total_spend),
+        "total_revenue":     float(result.total_revenue),
         "total_conversions": float(result.total_conversions),
         "total_impressions": int(result.total_impressions),
-        "total_clicks": int(result.total_clicks),
-        "roas": float(result.roas),
-        "cpa": float(result.cpa),
-        "ctr": float(result.ctr),
+        "total_clicks":      int(result.total_clicks),
+        "roas":              float(result.roas),
+        "cpa":               float(result.cpa) if result.cpa is not None else None,
+        "ctr":               float(result.ctr),
+        "roas_change_7d":    float(result.roas_change_7d) if result.roas_change_7d is not None else None,
     }
 
 

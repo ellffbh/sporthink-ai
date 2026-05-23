@@ -188,9 +188,8 @@ def _apply_prediction_rules(
         return {
             "action": RecommendationAction.increase,
             "reason": (
-                f"Son 7 günde dönüşüm hacmi artış gösterdi. "
-                f"ROAS {roas_current:.2f}x ile güçlü performans devam ediyor, model önümüzdeki 7 gün için "
-                f"{pred_roas:.2f}x ROAS öngörüyor. Bütçe artışı geliri optimize edebilir."
+                f"Tahmin modeli önümüzdeki 7 gün için ROAS'ın {pred_roas:.2f}x seviyesine ulaşmasını öngörüyor "
+                f"(mevcut: {roas_current:.2f}x). Bütçe artışı bu büyüme potansiyelini değerlendirebilir."
             ),
             "confidence": 0.85,
             "change_pct": 15.0,
@@ -210,9 +209,8 @@ def _apply_prediction_rules(
         return {
             "action": RecommendationAction.decrease,
             "reason": (
-                f"Harcama artmasına rağmen model {name} kampanyası için önümüzdeki 7 günde "
-                f"ROAS'ın {roas_current:.2f}x'den {pred_roas:.2f}x'e gerileyeceğini öngörüyor. "
-                f"Bütçe kısılarak verimlilik yeniden test edilmeli."
+                f"Tahmin modeli önümüzdeki 7 gün için ROAS'ın {pred_roas:.2f}x seviyesine düşmesini öngörüyor "
+                f"(mevcut: {roas_current:.2f}x). Bütçe azaltımı riski sınırlayabilir."
             ),
             "confidence": 0.85,
             "change_pct": -15.0,

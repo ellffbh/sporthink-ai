@@ -101,7 +101,20 @@
       "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" \"postgresql://ai_proje_db_user:cXr2i96sZsR8GCLG63Qsj6iq4TJM3CYJ@dpg-d869gdn7f7vs73f6vpmg-a.frankfurt-postgres.render.com/ai_proje_db\" -c \"DROP SCHEMA public CASCADE; CREATE SCHEMA public;\" 2>&1)",
       "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" -c \"DROP SCHEMA public CASCADE; CREATE SCHEMA public;\" \"postgresql://ai_proje_db_user:cXr2i96sZsR8GCLG63Qsj6iq4TJM3CYJ@dpg-d869gdn7f7vs73f6vpmg-a.frankfurt-postgres.render.com/ai_proje_db\" 2>&1)",
       "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" \"postgresql://ai_proje_db_user:cXr2i96sZsR8GCLG63Qsj6iq4TJM3CYJ@dpg-d869gdn7f7vs73f6vpmg-a.frankfurt-postgres.render.com/ai_proje_db\" -f \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\local_db_dump.sql\" 2>&1)",
-      "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" -f \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\local_db_dump.sql\" \"postgresql://ai_proje_db_user:cXr2i96sZsR8GCLG63Qsj6iq4TJM3CYJ@dpg-d869gdn7f7vs73f6vpmg-a.frankfurt-postgres.render.com/ai_proje_db\" 2>&1)"
+      "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" -f \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\local_db_dump.sql\" \"postgresql://ai_proje_db_user:cXr2i96sZsR8GCLG63Qsj6iq4TJM3CYJ@dpg-d869gdn7f7vs73f6vpmg-a.frankfurt-postgres.render.com/ai_proje_db\" 2>&1)",
+      "Bash(Test-Path \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\backend\\\\app\\\\routers\\\\predictions.py\")",
+      "Bash(Test-Path \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\frontend\\\\app\\\\\\(protected\\)\\\\predictions\\\\page.tsx\")",
+      "PowerShell(& \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" \"postgresql://postgres:postgres@localhost:5432/ai_proje_db\" -c \"SELECT MIN\\(metric_date\\), MAX\\(metric_date\\) FROM ad_metrics_daily;\")",
+      "PowerShell($env:PGPASSWORD = \"postgres\"; & \"C:\\\\Program Files\\\\PostgreSQL\\\\16\\\\bin\\\\psql.exe\" -h localhost -U postgres -d ai_proje_db -c \"SELECT MIN\\(metric_date\\), MAX\\(metric_date\\) FROM ad_metrics_daily;\")",
+      "Bash(powershell -Command \"Get-Content 'C:\\\\Users\\\\elifb\\\\.claude\\\\projects\\\\C--Users-elifb-OneDrive-Belgeler-Masa-st--ai-proje\\\\12304482-c29b-49d5-9058-44f42e62cc7a.jsonl' | Select-Object -Last 200\")",
+      "Bash(powershell *)",
+      "Bash(git *)",
+      "Bash(Get-Content \"C:\\\\Users\\\\elifb\\\\.claude\\\\projects\\\\C--Users-elifb-OneDrive-Belgeler-Masa-st--ai-proje\\\\12304482-c29b-49d5-9058-44f42e62cc7a.jsonl\" -Tail 100)",
+      "Bash(Select-String -Pattern '\"content\"')",
+      "Bash(Select-Object -Last 30)",
+      "PowerShell($lines = Get-Content \"C:\\\\Users\\\\elifb\\\\.claude\\\\projects\\\\C--Users-elifb-OneDrive-Belgeler-Masa-st--ai-proje\\\\12304482-c29b-49d5-9058-44f42e62cc7a.jsonl\" -Tail 200; $lines | Where-Object { $_ -match '\"role\":\"user\"' } | Select-Object -Last 5)",
+      "PowerShell($content = Get-Content \"C:\\\\Users\\\\elifb\\\\.claude\\\\projects\\\\C--Users-elifb-OneDrive-Belgeler-Masa-st--ai-proje\\\\12304482-c29b-49d5-9058-44f42e62cc7a.jsonl\"; $userMsgs = $content | Where-Object { $_ -match '\"role\":\"user\"' -and $_ -notmatch '\"type\":\"tool_result\"' }; $userMsgs | Select-Object -Last 3 | ForEach-Object { $_ | ConvertFrom-Json | Select-Object -ExpandProperty message | ConvertTo-Json -Depth 5 })",
+      "Bash(python3 -c ' *)"
     ]
   }
 }

@@ -18,6 +18,10 @@ interface KPIs {
   total_impressions: number; total_clicks: number;
   avg_roas: number; avg_cpa: number; avg_ctr: number;
   active_campaigns: number;
+  spend_change?: number;
+  roas_change?: number;
+  conversions_change?: number;
+  cpa_change?: number;
 }
 interface DailyMetric { date: string; spend: number; conversions: number; impressions: number; clicks: number; }
 
@@ -27,37 +31,11 @@ function toDateInputValue(d: Date) { return d.toISOString().slice(0, 10); }
 
 const DATE_OPTIONS = [{ label: "7 Gün", days: 7 }, { label: "14 Gün", days: 14 }, { label: "30 Gün", days: 30 }];
 
-const DEVICE_DATA = [
-  { name: "Mobil",   value: 58, color: "#60a5fa" },
-  { name: "Desktop", value: 31, color: "#a78bfa" },
-  { name: "Tablet",  value: 11, color: "#34d399" },
-];
-
-const CHANNEL_DATA = [
-  { channel: "Organic",   sessions: 4820, conversions: 94  },
-  { channel: "Paid Srch", sessions: 3210, conversions: 148 },
-  { channel: "Direct",    sessions: 1890, conversions: 62  },
-  { channel: "Social",    sessions: 1240, conversions: 37  },
-  { channel: "Email",     sessions:  670, conversions: 28  },
-];
-
-const CAMPAIGN_TYPE_DATA = [
-  { name: "Search",    value: 35, color: "#60a5fa" },
-  { name: "PMax",      value: 25, color: "#a78bfa" },
-  { name: "Sales",     value: 18, color: "#34d399" },
-  { name: "Display",   value: 12, color: "#fbbf24" },
-  { name: "Awareness", value: 10, color: "#f87171" },
-];
 
 const HOURLY_DATA = Array.from({ length: 24 }, (_, h) => ({
   hour: `${String(h).padStart(2, "0")}:00`,
   sessions: Math.round(80 + Math.sin((h - 10) * 0.5) * 60 + Math.random() * 20),
 }));
-
-const TRENDS: Record<string, { pct: number }> = {
-  spend: { pct: 8.3 }, conversions: { pct: 12.4 },
-  roas:  { pct: -3.1 }, ctr: { pct: 5.7 },
-};
 
 function TrendBadge({ pct }: { pct: number }) {
   const up = pct >= 0;
@@ -104,6 +82,11 @@ export default function MetricsPage() {
   const [loading, setLoading] = useState(true);
   const [days, setDays] = useState(14);
 
+  const [deviceData, setDeviceData] = useState<{ name: string; value: number; color: string }[]>([]);
+  const [channelData, setChannelData] = useState<{ channel: string; sessions: number; conversions: number }[]>([]);
+  const [campaignTypeData, setCampaignTypeData] = useState<{ name: string; value: number; color: string }[]>([]);
+  const [chartsLoading, setChartsLoading] = useState(true);
+
   const today = new Date();
   const defaultStart = new Date(today);
   defaultStart.setDate(today.getDate() - 14);
@@ -126,14 +109,41 @@ export default function MetricsPage() {
     })();
   }, [days, startDate, endDate, useCustomRange]);
 
+  useEffect(() => {
+    const DEVICE_COLORS = ["#60a5fa", "#a78bfa", "#34d399"];
+    const TYPE_COLORS   = ["#60a5fa", "#a78bfa", "#34d399", "#fbbf24", "#f87171", "#e879f9"];
+    (async () => {
+      setChartsLoading(true);
+      try {
+        const [devRes, chanRes, typeRes] = await Promise.all([
+          api.get("/api/metrics/device-distribution"),
+          api.get("/api/metrics/channel-performance"),
+          api.get("/api/metrics/campaign-type-distribution"),
+        ]);
+        setDeviceData(
+          (devRes.data as { name: string; value: number }[]).map((d, i) => ({
+            ...d, color: DEVICE_COLORS[i] ?? "#94a3b8",
+          }))
+        );
+        setChannelData(chanRes.data);
+        setCampaignTypeData(
+          (typeRes.data as { name: string; value: number }[]).map((d, i) => ({
+            ...d, color: TYPE_COLORS[i] ?? "#94a3b8",
+          }))
+        );
+      } catch { /* boş liste kalır */ }
+      finally { setChartsLoading(false); }
+    })();
+  }, []);
+
   const kpiCards = [
-    { label: "Toplam Harcama", value: kpis ? `$${fmt(kpis.total_spend)}` : "—",   icon: DollarSign,        color: "text-blue-400",    trend: TRENDS.spend },
-    { label: "Dönüşüm",        value: kpis ? fmt(kpis.total_conversions, 0) : "—", icon: Target,            color: "text-emerald-400", trend: TRENDS.conversions },
-    { label: "ROAS",            value: kpis ? `${fmt(kpis.avg_roas)}x` : "—",      icon: TrendingUp,        color: "text-purple-400",  trend: TRENDS.roas },
-    { label: "CTR",             value: kpis ? `%${fmt(kpis.avg_ctr * 100)}` : "—", icon: MousePointerClick, color: "text-amber-400",   trend: TRENDS.ctr },
+    { label: "Toplam Harcama", value: kpis ? `$${fmt(kpis.total_spend)}` : "—",    icon: DollarSign,        color: "text-blue-400",    trend: kpis?.spend_change ?? null },
+    { label: "Dönüşüm",        value: kpis ? fmt(kpis.total_conversions, 0) : "—", icon: Target,            color: "text-emerald-400", trend: kpis?.conversions_change ?? null },
+    { label: "ROAS",            value: kpis ? `${fmt(kpis.avg_roas)}x` : "—",      icon: TrendingUp,        color: "text-purple-400",  trend: kpis?.roas_change ?? null },
+    { label: "CTR",             value: kpis ? `%${fmt(kpis.avg_ctr * 100)}` : "—", icon: MousePointerClick, color: "text-amber-400",   trend: null },
     { label: "Gösterim",        value: kpis ? fmt(kpis.total_impressions, 0) : "—", icon: Eye,               color: "text-cyan-400",    trend: null },
     { label: "Tıklama",         value: kpis ? fmt(kpis.total_clicks, 0) : "—",     icon: MousePointerClick, color: "text-pink-400",    trend: null },
-    { label: "CPA",             value: kpis ? `$${fmt(kpis.avg_cpa)}` : "—",       icon: BarChart2,         color: "text-orange-400",  trend: null },
+    { label: "CPA",             value: kpis ? `$${fmt(kpis.avg_cpa)}` : "—",       icon: BarChart2,         color: "text-orange-400",  trend: kpis?.cpa_change ?? null },
     { label: "Aktif Kampanya",  value: kpis ? fmt(kpis.active_campaigns, 0) : "—", icon: BarChart2,         color: "text-indigo-400",  trend: null },
   ];
 
@@ -202,7 +212,7 @@ export default function MetricsPage() {
                 : (
                   <div>
                     <p className="text-xl font-bold text-slate-100">{value}</p>
-                    {t && <TrendBadge pct={t.pct} />}
+                    {t != null && <TrendBadge pct={t} />}
                   </div>
                 )}
             </div>
@@ -236,51 +246,60 @@ export default function MetricsPage() {
         {/* Row 2: Pie + Bar */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           <ChartCard title="Cihaz Dağılımı" desc="Oturum ve dönüşümlerin cihaz kırılımı">
-            <div className="flex items-center gap-6">
-              <ResponsiveContainer width={160} height={160}>
-                <PieChart>
-                  <Pie data={DEVICE_DATA} cx="50%" cy="50%" innerRadius={45} outerRadius={72} dataKey="value" strokeWidth={0}>
-                    {DEVICE_DATA.map((d) => <Cell key={d.name} fill={d.color} />)}
-                  </Pie>
-                  <Tooltip contentStyle={tooltipStyle} />
-                </PieChart>
-              </ResponsiveContainer>
-              <div className="flex-1">
-                <CustomPieLegend data={DEVICE_DATA} />
-              </div>
-            </div>
+            {chartsLoading
+              ? <Skeleton className="h-[160px] w-full" />
+              : <div className="flex items-center gap-6">
+                  <ResponsiveContainer width={160} height={160}>
+                    <PieChart>
+                      <Pie data={deviceData} cx="50%" cy="50%" innerRadius={45} outerRadius={72} dataKey="value" strokeWidth={0}>
+                        {deviceData.map((d) => <Cell key={d.name} fill={d.color} />)}
+                      </Pie>
+                      <Tooltip contentStyle={tooltipStyle} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="flex-1">
+                    <CustomPieLegend data={deviceData} />
+                  </div>
+                </div>
+            }
           </ChartCard>
 
           <ChartCard title="Kanal Performansı" desc="Oturum kaynağına göre dönüşüm dağılımı">
-            <ResponsiveContainer width="100%" height={180}>
-              <BarChart data={CHANNEL_DATA} layout="vertical" margin={{ top: 0, right: 12, bottom: 0, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
-                <XAxis type="number" tick={axisStyle} tickLine={false} axisLine={false} />
-                <YAxis dataKey="channel" type="category" tick={axisStyle} tickLine={false} axisLine={false} width={68} />
-                <Tooltip contentStyle={tooltipStyle} />
-                <Bar dataKey="sessions" name="Oturum" fill="#60a5fa" radius={[0, 4, 4, 0]} />
-                <Bar dataKey="conversions" name="Dönüşüm" fill="#34d399" radius={[0, 4, 4, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
+            {chartsLoading
+              ? <Skeleton className="h-[180px] w-full" />
+              : <ResponsiveContainer width="100%" height={180}>
+                  <BarChart data={channelData} layout="vertical" margin={{ top: 0, right: 12, bottom: 0, left: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
+                    <XAxis type="number" tick={axisStyle} tickLine={false} axisLine={false} />
+                    <YAxis dataKey="channel" type="category" tick={axisStyle} tickLine={false} axisLine={false} width={68} />
+                    <Tooltip contentStyle={tooltipStyle} />
+                    <Bar dataKey="sessions" name="Oturum" fill="#60a5fa" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="conversions" name="Dönüşüm" fill="#34d399" radius={[0, 4, 4, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+            }
           </ChartCard>
         </div>
 
         {/* Row 3: Donut + Hourly Area */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           <ChartCard title="Kampanya Türü Dağılımı" desc="Harcamanın kampanya türlerine dağılımı">
-            <div className="flex items-center gap-6">
-              <ResponsiveContainer width={160} height={160}>
-                <PieChart>
-                  <Pie data={CAMPAIGN_TYPE_DATA} cx="50%" cy="50%" innerRadius={45} outerRadius={72} dataKey="value" strokeWidth={0}>
-                    {CAMPAIGN_TYPE_DATA.map((d) => <Cell key={d.name} fill={d.color} />)}
-                  </Pie>
-                  <Tooltip contentStyle={tooltipStyle} />
-                </PieChart>
-              </ResponsiveContainer>
-              <div className="flex-1">
-                <CustomPieLegend data={CAMPAIGN_TYPE_DATA} />
-              </div>
-            </div>
+            {chartsLoading
+              ? <Skeleton className="h-[160px] w-full" />
+              : <div className="flex items-center gap-6">
+                  <ResponsiveContainer width={160} height={160}>
+                    <PieChart>
+                      <Pie data={campaignTypeData} cx="50%" cy="50%" innerRadius={45} outerRadius={72} dataKey="value" strokeWidth={0}>
+                        {campaignTypeData.map((d) => <Cell key={d.name} fill={d.color} />)}
+                      </Pie>
+                      <Tooltip contentStyle={tooltipStyle} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="flex-1">
+                    <CustomPieLegend data={campaignTypeData} />
+                  </div>
+                </div>
+            }
           </ChartCard>
 
           <ChartCard title="Saat Bazlı Trafik" desc="Gün içi oturum yoğunluğu (24 saat)">

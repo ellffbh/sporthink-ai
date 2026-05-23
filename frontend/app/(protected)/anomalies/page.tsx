@@ -335,21 +335,16 @@ function AnomalyCard({
             )}
           </div>
 
-          {/* Metric change — (actual - expected) / expected * 100 */}
+          {/* Metric change */}
           {(() => {
-            const expVal = a.expected_value as number | null ?? null;
-            const actVal = a.actual_value  as number | null ?? null;
-            const calcPct = expVal && expVal !== 0 && actVal !== null
-              ? Math.round(((actVal - expVal) / expVal) * 1000) / 10
-              : a.change_percent;
-            const dispPos = calcPct >= 0;
+            const dispPos = a.change_percent >= 0;
             return (
               <div className="flex items-center gap-2">
                 <span className="text-xl font-black leading-none" style={{ color: dispPos ? "#f97316" : "#60a5fa" }}>
                   {dispPos ? "▲" : "▼"}
                 </span>
                 <span className="text-2xl font-black leading-none tabular-nums" style={{ color: dispPos ? "#f97316" : "#60a5fa" }}>
-                  {dispPos ? "+" : ""}{calcPct.toFixed(1)}%
+                  {dispPos ? "+" : ""}{a.change_percent.toFixed(1)}%
                 </span>
               </div>
             );
@@ -359,13 +354,15 @@ function AnomalyCard({
           {a.expected_value != null && a.actual_value != null && (() => {
             const expVal     = a.expected_value as number;
             const actVal     = a.actual_value   as number;
-            const hasHarcama = a.metric_name.includes("Harcama");
-            const hasDonusum = a.metric_name.includes("Dönüşüm");
-            // Backend CASE WHEN: Harcama alırsa cost, Dönüşüm-only alırsa conversions
-            // Kombine kayıtta sadece cost verisi var → Dönüşüm bloğu gösterilmez
+            const hasHarcama = a.metric_name?.includes("Harcama");
+            const hasDonusum = a.metric_name?.includes("Dönüşüm");
+            const hasRoas    = a.metric_name?.includes("ROAS");
+            const hasCtr     = a.metric_name?.includes("CTR");
             const blocks: { key: string; label: string; isCost: boolean }[] = [];
             if (hasHarcama) blocks.push({ key: "harcama", label: "Harcama", isCost: true });
             if (hasDonusum && !hasHarcama) blocks.push({ key: "donusum", label: "Dönüşüm", isCost: false });
+            if (hasRoas && !hasHarcama && !hasDonusum) blocks.push({ key: "roas", label: "ROAS", isCost: false });
+            if (hasCtr && !hasHarcama && !hasDonusum && !hasRoas) blocks.push({ key: "ctr", label: "CTR", isCost: false });
             const maxVal = Math.max(expVal, actVal, 0.01);
             const expPct = Math.min((expVal / maxVal) * 100, 100);
             const actPct = Math.min((actVal / maxVal) * 100, 100);

@@ -17,7 +17,7 @@ import {
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface TrendItem    { date: string; spend: number; conversions: number; impressions: number; clicks: number; conversion_value: number; }
 interface PlatformItem { platform: string; spend: number; conversions: number; roas: number; }
-interface TopCampaign  { campaign_name: string; spend: number; conversions: number; roas: number; cpa: number; }
+interface TopCampaign  { campaign_name: string; platform: string; spend: number; conversions: number; roas: number; cpa: number; }
 interface AnomalyItem  { id: string; campaign_name: string; metric_name: string; severity: string; change_percent: number; detected_at: string; is_resolved?: boolean; }
 interface RecItem      { id: string; campaign_name: string; action: string; reason: string; risk_score: number; status: string; }
 
@@ -205,6 +205,10 @@ export default function DashboardPage() {
   const clicks = kpis?.total_clicks      ?? 0;
   const ctr    = kpis ? kpis.avg_ctr * 100 : 0;
   const active = kpis?.active_campaigns  ?? 0;
+  const spendChange = kpis?.spend_change        ?? 0;
+  const roasChange  = kpis?.roas_change         ?? 0;
+  const convChange  = kpis?.conversions_change  ?? 0;
+  const cpaChange   = kpis?.cpa_change          ?? 0;
   const activeAnomalies = anomalies.filter((a) => !a.is_resolved).slice(0, 3);
   const anomCnt = anomalies.filter((a) => !a.is_resolved).length;
 
@@ -235,10 +239,10 @@ export default function DashboardPage() {
       <div className="p-6 space-y-6">
         {/* ── KPI cards ─────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <KpiCard label="Toplam Harcama"  value={`$${fmt(spend)}`}      sub="Son 7 gün"         icon={DollarSign}  iconColor="#2563EB" trend={{ value: +8.4,  label: "geçen hafta" }} />
-          <KpiCard label="ROAS"            value={`${fmt(roas, 2)}x`}    sub="Hedef: 12.0x"      icon={TrendingUp}  iconColor="#10B981" trend={{ value: +18.6, label: "geçen hafta" }} />
-          <KpiCard label="Dönüşüm"         value={fmt(conv)}              sub="328 işlem"         icon={Target}      iconColor="#7C3AED" trend={{ value: +5.2,  label: "geçen hafta" }} />
-          <KpiCard label="CPA"             value={`$${fmt(cpa, 2)}`}     sub="Hedef: $140"       icon={BarChart2}   iconColor="#F59E0B" trend={{ value: -11.2, label: "geçen hafta" }} />
+          <KpiCard label="Toplam Harcama"  value={`$${fmt(spend)}`}      sub="Son 7 gün"    icon={DollarSign}  iconColor="#2563EB" trend={{ value: spendChange, label: "geçen hafta" }} />
+          <KpiCard label="ROAS"            value={`${fmt(roas, 2)}x`}    sub="Hedef: 12.0x" icon={TrendingUp}  iconColor="#10B981" trend={{ value: roasChange,  label: "geçen hafta" }} />
+          <KpiCard label="Dönüşüm"         value={fmt(conv)}                                 icon={Target}      iconColor="#7C3AED" trend={{ value: convChange,  label: "geçen hafta" }} />
+          <KpiCard label="CPA"             value={`$${fmt(cpa, 2)}`}     sub="Hedef: $140"  icon={BarChart2}   iconColor="#F59E0B" trend={{ value: cpaChange,   label: "geçen hafta" }} />
         </div>
 
         {/* ── Mini stats ───────────────────────────────────────────── */}
@@ -433,7 +437,7 @@ export default function DashboardPage() {
               </thead>
               <tbody>
                 {topCampaigns.map((c, i) => {
-                  const platform = c.campaign_name.toLowerCase().includes("meta") ? "meta" : "google";
+                  const platform = c.platform === "google" ? "google" : "meta";
                   const revenue  = c.spend * c.roas;
                   return (
                     <tr key={i} className="group transition-colors"

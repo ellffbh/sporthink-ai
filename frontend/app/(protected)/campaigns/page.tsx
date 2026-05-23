@@ -20,9 +20,9 @@ interface Metrics {
   total_revenue?: number;
   total_conversions?: number;
   roas?: number;
-  cpa?: number;
+  cpa?: number | null;
   ctr?: number;
-  budget_pct?: number;
+  roas_change_7d?: number | null;
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -69,6 +69,10 @@ const STATUS_OPTIONS = [
 function fmt(n: number | null | undefined, dec = 0) {
   if (n == null || isNaN(n)) return "—";
   return n.toLocaleString("tr-TR", { maximumFractionDigits: dec, minimumFractionDigits: dec });
+}
+
+function fmtChange(v: number) {
+  return `${v >= 0 ? "+" : ""}${v.toFixed(1)}%`;
 }
 
 function rowBorderColor(c: Campaign, platform: string): string {
@@ -240,11 +244,12 @@ function CampaignCard({ c, m, platform, isRisky, onClick, onEdit }: {
         )}
       </div>
       {m ? (
-        <div className="grid grid-cols-3 gap-2 mb-3">
+        <div className="grid grid-cols-2 gap-2 mb-3">
           {[
             { label: "Harcama",  value: m.total_cost != null ? `$${fmt(m.total_cost)}` : "—" },
             { label: "ROAS",     value: `${fmt(m.roas, 1)}x` },
             { label: "Dönüşüm", value: fmt(m.total_conversions ?? 0) },
+            { label: "CPA",      value: m.cpa != null ? `$${fmt(m.cpa, 2)}` : "—" },
           ].map(({ label, value }) => (
             <div key={label} className="rounded-lg p-2 text-center" style={{ background: BG3 }}>
               <p className="num text-xs font-bold text-white">{value}</p>
@@ -254,18 +259,6 @@ function CampaignCard({ c, m, platform, isRisky, onClick, onEdit }: {
         </div>
       ) : (
         <div className="h-16 rounded-lg mb-3" style={{ background: BG3 }} />
-      )}
-      {m && (
-        <div>
-          <div className="flex justify-between text-[10px] text-slate-600 mb-1">
-            <span>Bütçe kullanımı</span>
-            <span className="num">{m.budget_pct ?? 0}%</span>
-          </div>
-          <div className="h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
-            <div className="h-full rounded-full transition-all"
-                 style={{ width: `${m.budget_pct ?? 0}%`, background: (m.budget_pct ?? 0) > 85 ? "#F59E0B" : "#2563EB" }} />
-          </div>
-        </div>
       )}
       <div className="flex items-center justify-between mt-3 pt-3" style={{ borderTop: BORDER }}>
         <span className="text-[10px] text-slate-600">
@@ -300,6 +293,7 @@ export default function CampaignsPage() {
   const [riskyOnly,       setRiskyOnly]       = useState(false);
   const [viewMode,        setViewMode]        = useState<"table"|"grid">("table");
   const [page,            setPage]            = useState(1);
+  const [changes, setChanges] = useState({ spend_change: 0, revenue_change: 0, conversions_change: 0, roas_change: 0 });
 
   useEffect(() => {
     (async () => {
@@ -333,6 +327,17 @@ export default function CampaignsPage() {
   }, []);
 
   useEffect(() => { setPage(1); }, [search, statusFilter, typeFilter, platformFilter, riskyOnly]);
+
+  useEffect(() => {
+    api.get("/campaigns/summary")
+      .then((res) => setChanges({
+        spend_change:       res.data.spend_change       ?? 0,
+        revenue_change:     res.data.revenue_change     ?? 0,
+        conversions_change: res.data.conversions_change ?? 0,
+        roas_change:        res.data.roas_change        ?? 0,
+      }))
+      .catch(() => {});
+  }, []);
 
   const types = useMemo(
     () => Array.from(new Set(campaigns.map((c) => c.campaign_type))).sort(),
@@ -434,10 +439,10 @@ export default function CampaignsPage() {
         {/* KPI Summary */}
         {!loading && Object.keys(metrics).length > 0 && (
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            <KpiCard label="Toplam Harcama"  value={`$${fmt(totals.spend)}`}                              sub={`${campaigns.length} kampanya`} icon={DollarSign}     color="#2563EB" change="+8.4%"  sparkData={KPI_SPARKLINES.spend}   />
-            <KpiCard label="Toplam Gelir"    value={`$${fmt(totals.revenue)}`}                            sub="tahmini"                        icon={TrendingUp}     color="#10B981" change="+12.1%" sparkData={KPI_SPARKLINES.revenue}  />
-            <KpiCard label="Toplam Dönüşüm" value={fmt(totals.conv)}                                      sub="son 7 gün"                      icon={Target}         color="#7C3AED" change="+5.2%"  sparkData={KPI_SPARKLINES.conv}    />
-            <KpiCard label="Ort. ROAS"       value={`${fmt(isNaN(totals.roas) ? 0 : totals.roas, 1)}x`}   sub="ağırlıklı ortalama"             icon={SlidersHorizontal} color="#F59E0B" change="-2.1%" sparkData={KPI_SPARKLINES.roas} />
+            <KpiCard label="Toplam Harcama"  value={`$${fmt(totals.spend)}`}                              sub={`${campaigns.length} kampanya`} icon={DollarSign}        color="#2563EB" change={fmtChange(changes.spend_change)}       sparkData={KPI_SPARKLINES.spend}   />
+            <KpiCard label="Toplam Gelir"    value={`$${fmt(totals.revenue)}`}                            sub="tahmini"                        icon={TrendingUp}        color="#10B981" change={fmtChange(changes.revenue_change)}     sparkData={KPI_SPARKLINES.revenue}  />
+            <KpiCard label="Toplam Dönüşüm" value={fmt(totals.conv)}                                      sub="son 7 gün"                      icon={Target}            color="#7C3AED" change={fmtChange(changes.conversions_change)} sparkData={KPI_SPARKLINES.conv}    />
+            <KpiCard label="Ort. ROAS"       value={`${fmt(isNaN(totals.roas) ? 0 : totals.roas, 1)}x`}   sub="ağırlıklı ortalama"             icon={SlidersHorizontal} color="#F59E0B" change={fmtChange(changes.roas_change)}       sparkData={KPI_SPARKLINES.roas} />
           </div>
         )}
 
@@ -534,12 +539,12 @@ export default function CampaignsPage() {
             <table className="w-full text-sm">
               <thead style={{ background: "linear-gradient(to right, #0f172a, rgba(30,41,59,0.5))" }}>
                 <tr style={{ borderBottom: BORDER }}>
-                  {["Kampanya", "Platform", "Tür", "Durum", "Harcama", "Gelir", "ROAS", "Dönüşüm", "Bütçe", ""].map((h) => (
+                  {["Kampanya", "Platform", "Tür", "Durum", "Harcama", "ROAS", "Dönüşüm", "CPA", "Son 7g ROAS", ""].map((h) => (
                     <th
                       key={h}
                       className={cn(
                         "text-[10px] font-semibold text-slate-600 uppercase tracking-wider py-3 px-4 whitespace-nowrap",
-                        ["Harcama", "Gelir", "ROAS", "Dönüşüm", "Bütçe"].includes(h) ? "text-right" : "text-left"
+                        ["Harcama", "ROAS", "Dönüşüm", "CPA", "Son 7g ROAS"].includes(h) ? "text-right" : "text-left"
                       )}
                     >
                       {h}
@@ -613,13 +618,6 @@ export default function CampaignsPage() {
                         {m?.total_cost != null ? `$${fmt(m.total_cost)}` : "—"}
                       </td>
 
-                      {/* Gelir */}
-                      <td className="px-4 py-3.5 text-right num text-xs text-emerald-400 font-medium">
-                        {m != null
-                          ? `$${fmt(m.total_revenue ?? (m.total_cost ?? 0) * (m.roas ?? 0))}`
-                          : "—"}
-                      </td>
-
                       {/* ROAS */}
                       <td className="px-4 py-3.5 text-right">
                         {m ? (
@@ -643,14 +641,33 @@ export default function CampaignsPage() {
                         {m ? fmt(m.total_conversions ?? 0) : "—"}
                       </td>
 
-                      {/* Bütçe */}
-                      <td className="px-4 py-3.5 text-right w-28">
-                        {m && (
-                          <div className="flex items-center justify-end gap-2">
-                            <BudgetBar pct={m.budget_pct ?? 0} />
-                            <span className="num text-[10px] text-slate-500 w-7 text-right">{m.budget_pct ?? 0}%</span>
+                      {/* CPA */}
+                      <td className="px-4 py-3.5 text-right">
+                        {m?.cpa != null ? (
+                          <span className={cn("num text-xs font-medium",
+                            m.cpa < 10 ? "text-emerald-400" : m.cpa < 25 ? "text-amber-400" : "text-rose-400"
+                          )}>
+                            ${fmt(m.cpa, 2)}
+                          </span>
+                        ) : <span className="text-slate-600 text-xs">—</span>}
+                      </td>
+
+                      {/* Son 7g ROAS */}
+                      <td className="px-4 py-3.5 text-right">
+                        {m?.roas_change_7d != null ? (
+                          <div className="flex items-center justify-end gap-1">
+                            {Math.abs(m.roas_change_7d) < 1
+                              ? <Minus        className="h-3.5 w-3.5 text-amber-400   shrink-0" />
+                              : m.roas_change_7d > 0
+                              ? <TrendingUp   className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                              : <TrendingDown className="h-3.5 w-3.5 text-rose-400    shrink-0" />}
+                            <span className={cn("num text-xs font-medium",
+                              Math.abs(m.roas_change_7d) < 1 ? "text-amber-400" : m.roas_change_7d > 0 ? "text-emerald-400" : "text-rose-400"
+                            )}>
+                              {m.roas_change_7d > 0 ? "+" : ""}{m.roas_change_7d.toFixed(1)}%
+                            </span>
                           </div>
-                        )}
+                        ) : <span className="text-slate-600 text-xs">—</span>}
                       </td>
 
                       {/* Düzenle */}

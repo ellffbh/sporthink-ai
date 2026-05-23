@@ -14,6 +14,7 @@ router = APIRouter(prefix="/api/anomalies", tags=["anomalies"])
 def detect_anomalies(db: Session = Depends(get_db)):
     max_date       = db.query(func.max(AdMetricDaily.metric_date)).scalar() or date.today()
     baseline_start = max_date - timedelta(days=90)
+    baseline_30d   = max_date - timedelta(days=30)
     latest_start   = max_date - timedelta(days=7)
 
     results = db.execute(text("""
@@ -30,6 +31,17 @@ def detect_anomalies(db: Session = Depends(get_db)):
                 STDDEV(CASE WHEN cost > 0 THEN conversion_value / cost ELSE NULL END) AS std_roas
             FROM ad_metrics_daily
             WHERE metric_date >= :baseline_start
+            GROUP BY campaign_id
+        ),
+        stats_30d AS (
+            SELECT
+                campaign_id,
+                AVG(cost)                                                              AS avg_cost_30d,
+                AVG(conversions)                                                       AS avg_conv_30d,
+                AVG(ctr)                                                               AS avg_ctr_30d,
+                AVG(CASE WHEN cost > 0 THEN conversion_value / cost ELSE NULL END)    AS avg_roas_30d
+            FROM ad_metrics_daily
+            WHERE metric_date >= :baseline_30d
             GROUP BY campaign_id
         ),
         latest_avg AS (
@@ -72,6 +84,10 @@ def detect_anomalies(db: Session = Depends(get_db)):
             la.avg_conv_7d,
             la.avg_ctr_7d,
             la.avg_roas_7d,
+            s30.avg_cost_30d,
+            s30.avg_conv_30d,
+            s30.avg_ctr_30d,
+            s30.avg_roas_30d,
             CASE WHEN s.std_cost > 0
                  THEN ABS(l.cost        - s.avg_cost) / s.std_cost ELSE 0 END AS cost_zscore,
             CASE WHEN s.std_conv > 0
@@ -81,8 +97,9 @@ def detect_anomalies(db: Session = Depends(get_db)):
             CASE WHEN s.std_roas > 0 AND l.roas IS NOT NULL
                  THEN ABS(l.roas       - s.avg_roas)  / s.std_roas ELSE 0 END AS roas_zscore
         FROM latest l
-        JOIN stats      s  ON s.campaign_id  = l.campaign_id
-        JOIN latest_avg la ON la.campaign_id = l.campaign_id
+        JOIN stats      s   ON s.campaign_id   = l.campaign_id
+        JOIN stats_30d  s30 ON s30.campaign_id = l.campaign_id
+        JOIN latest_avg la  ON la.campaign_id  = l.campaign_id
         WHERE
             (s.std_cost > 0 AND ABS(l.cost        - s.avg_cost) / s.std_cost > 1.5)
             OR (s.std_conv > 0 AND ABS(l.conversions - s.avg_conv) / s.std_conv > 1.5)
@@ -90,7 +107,7 @@ def detect_anomalies(db: Session = Depends(get_db)):
             OR (s.std_roas > 0 AND l.roas IS NOT NULL
                                AND ABS(l.roas       - s.avg_roas)  / s.std_roas > 1.5)
         ORDER BY l.metric_date DESC
-    """), {"baseline_start": baseline_start, "latest_start": latest_start}).fetchall()
+    """), {"baseline_start": baseline_start, "baseline_30d": baseline_30d, "latest_start": latest_start}).fetchall()
 
     def _pct(val_7d, val_90d) -> float:
         v7, v90 = float(val_7d or 0), float(val_90d or 0)
@@ -117,17 +134,17 @@ def detect_anomalies(db: Session = Depends(get_db)):
         dominant = max(z_by_type, key=z_by_type.get)
 
         pct_map = {
-            "Anormal Harcama":  _pct(r.avg_cost_7d,  r.avg_cost),
-            "Anormal Dönüşüm": _pct(r.avg_conv_7d,  r.avg_conv),
-            "Anormal CTR":      _pct(r.avg_ctr_7d,   r.avg_ctr),
-            "Anormal ROAS":     _pct(r.avg_roas_7d,  r.avg_roas),
+            "Anormal Harcama":  _pct(r.avg_cost_7d,  r.avg_cost_30d),
+            "Anormal Dönüşüm": _pct(r.avg_conv_7d,  r.avg_conv_30d),
+            "Anormal CTR":      _pct(r.avg_ctr_7d,   r.avg_ctr_30d),
+            "Anormal ROAS":     _pct(r.avg_roas_7d,  r.avg_roas_30d),
         }
         change_pct = pct_map.get(dominant, 0.0)
 
         note_parts: list[str] = []
         if "Anormal Harcama" in z_by_type:
             a_c = float(r.avg_cost_7d or 0)
-            e_c = float(r.avg_cost    or 0)
+            e_c = float(r.avg_cost_30d or 0)
             ratio = round(a_c / e_c, 1) if e_c > 0 else 0
             dir_  = "üzerinde" if a_c >= e_c else "altında"
             note_parts.append(
@@ -136,7 +153,7 @@ def detect_anomalies(db: Session = Depends(get_db)):
             )
         if "Anormal Dönüşüm" in z_by_type:
             a_v = float(r.avg_conv_7d or 0)
-            e_v = float(r.avg_conv    or 0)
+            e_v = float(r.avg_conv_30d or 0)
             ratio = round(a_v / e_v, 1) if e_v > 0 else 0
             dir_  = "üzerinde" if a_v >= e_v else "altında"
             note_parts.append(
@@ -145,13 +162,13 @@ def detect_anomalies(db: Session = Depends(get_db)):
             )
         if "Anormal CTR" in z_by_type:
             a_t = float(r.avg_ctr_7d or 0) * 100
-            e_t = float(r.avg_ctr    or 0) * 100
+            e_t = float(r.avg_ctr_30d or 0) * 100
             note_parts.append(
                 f"CTR son 7 günde %{a_t:.2f} — beklenen %{e_t:.2f}"
             )
         if "Anormal ROAS" in z_by_type:
             a_r = float(r.avg_roas_7d or 0)
-            e_r = float(r.avg_roas    or 0)
+            e_r = float(r.avg_roas_30d or 0)
             note_parts.append(
                 f"ROAS son 7 günde {a_r:.2f}x — beklenen {e_r:.2f}x"
             )

@@ -30,7 +30,7 @@ def get_overview(
         start, end, trend_start = get_date_range(db, days)
 
     kpi = db.execute(text("""
-        SELECT 
+        SELECT
             COALESCE(SUM(cost), 0) as total_spend,
             COALESCE(SUM(conversions), 0) as total_conversions,
             COALESCE(SUM(impressions), 0) as total_impressions,
@@ -41,6 +41,25 @@ def get_overview(
         FROM ad_metrics_daily
         WHERE metric_date BETWEEN :start AND :end
     """), {"start": start, "end": end}).fetchone()
+
+    period_length = (end - start).days
+    prev_end = start - timedelta(days=1)
+    prev_start = prev_end - timedelta(days=period_length)
+
+    prev_kpi = db.execute(text("""
+        SELECT
+            COALESCE(SUM(cost), 0) as total_spend,
+            COALESCE(SUM(conversions), 0) as total_conversions,
+            CASE WHEN SUM(cost) > 0 THEN ROUND(SUM(conversion_value) / SUM(cost), 2) ELSE 0 END as avg_roas,
+            CASE WHEN SUM(conversions) > 0 THEN ROUND(SUM(cost) / SUM(conversions), 2) ELSE 0 END as avg_cpa
+        FROM ad_metrics_daily
+        WHERE metric_date BETWEEN :start AND :end
+    """), {"start": prev_start, "end": prev_end}).fetchone()
+
+    def pct_change(current: float, previous: float) -> float:
+        if previous == 0:
+            return 0.0
+        return round((current - previous) / previous * 100, 2)
 
     active_campaigns = db.execute(text("""
         SELECT COUNT(*) FROM campaigns WHERE status = 'enabled'
@@ -58,32 +77,33 @@ def get_overview(
 
     # Google vs Meta karşılaştırma
     platform = db.execute(text("""
-        SELECT 
-            CASE WHEN c.campaign_name ILIKE '%google%' OR c.campaign_name ILIKE '%search%' 
-                      OR c.campaign_name ILIKE '%shopping%' OR c.campaign_name ILIKE '%display%'
-                 THEN 'Google' ELSE 'Meta' END as platform,
+        SELECT
+            aa.platform,
             SUM(m.cost) as spend,
             SUM(m.conversions) as conversions,
             SUM(m.impressions) as impressions,
             CASE WHEN SUM(m.cost) > 0 THEN ROUND(SUM(m.conversion_value) / SUM(m.cost), 2) ELSE 0 END as roas
         FROM ad_metrics_daily m
         JOIN campaigns c ON c.id = m.campaign_id
+        JOIN ad_accounts aa ON aa.id = c.ad_account_id
         WHERE m.metric_date BETWEEN :start AND :end
-        GROUP BY platform
+        GROUP BY aa.platform
     """), {"start": start, "end": end}).fetchall()
 
     # En iyi 5 kampanya (ROAS'a göre)
     top_campaigns = db.execute(text("""
-        SELECT 
+        SELECT
             c.campaign_name,
+            a.platform,
             SUM(m.cost) as spend,
             SUM(m.conversions) as conversions,
             CASE WHEN SUM(m.cost) > 0 THEN ROUND(SUM(m.conversion_value) / SUM(m.cost), 2) ELSE 0 END as roas,
             CASE WHEN SUM(m.conversions) > 0 THEN ROUND(SUM(m.cost) / SUM(m.conversions), 2) ELSE 0 END as cpa
         FROM ad_metrics_daily m
         JOIN campaigns c ON c.id = m.campaign_id
+        JOIN ad_accounts a ON a.id = c.ad_account_id
         WHERE m.metric_date BETWEEN :start AND :end
-        GROUP BY c.id, c.campaign_name
+        GROUP BY c.id, c.campaign_name, a.platform
         ORDER BY roas DESC
         LIMIT 5
     """), {"start": start, "end": end}).fetchall()
@@ -103,7 +123,11 @@ def get_overview(
             "avg_ctr": float(kpi.avg_ctr),
             "active_campaigns": active_campaigns,
             "anomaly_count": anomaly_count,
-            "pending_recommendations": pending_recs
+            "pending_recommendations": pending_recs,
+            "spend_change": pct_change(float(kpi.total_spend), float(prev_kpi.total_spend)),
+            "roas_change": pct_change(float(kpi.avg_roas), float(prev_kpi.avg_roas)),
+            "conversions_change": pct_change(float(kpi.total_conversions), float(prev_kpi.total_conversions)),
+            "cpa_change": pct_change(float(kpi.avg_cpa), float(prev_kpi.avg_cpa)),
         },
         "weekly_trend": [
             {
@@ -129,6 +153,7 @@ def get_overview(
         "top_campaigns": [
             {
                 "campaign_name": r.campaign_name,
+                "platform": r.platform,
                 "spend": float(r.spend),
                 "conversions": float(r.conversions),
                 "roas": float(r.roas),

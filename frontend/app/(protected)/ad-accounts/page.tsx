@@ -124,17 +124,23 @@ function PlatformCard({ platform, stats, metrics, router }: PlatformCardProps) {
   const grade     = roasGrade(stats.roas);
 
   function exportCsv() {
+    const statusMap: Record<string, string> = {
+      enabled:   "Aktif",
+      paused:    "Duraklıyor",
+      removed:   "Kaldırıldı",
+      completed: "Tamamlandı",
+    };
     const rows = [
-      ["Kampanya Adı", "Durum", "Harcama (TL)", "Dönüşüm", "ROAS", "CTR (%)"].join(","),
+      ["Kampanya Adı", "Durum", "Harcama (USD)", "Dönüşüm", "ROAS", "CTR (%)"].join(","),
       ...stats.campaignList.map((c) => {
         const m = metrics[c.id] ?? {};
         return [
           `"${c.campaign_name}"`,
-          c.status,
+          (statusMap[c.status] ?? c.status),
           (m.total_cost        ?? 0).toFixed(2),
           (m.total_conversions ?? 0).toString(),
           (m.roas              ?? 0).toFixed(2),
-          ((m.ctr              ?? 0) * 100).toFixed(2),
+          (m.ctr               ?? 0).toFixed(2),
         ].join(",");
       }),
     ];
@@ -149,7 +155,7 @@ function PlatformCard({ platform, stats, metrics, router }: PlatformCardProps) {
 
   const fmtNum = (n: number) =>
     n >= 1_000_000 ? `${(n / 1_000_000).toFixed(1)}M`
-    : n >= 1_000   ? `${(n / 1_000).toFixed(1)}B`
+    : n >= 1_000   ? `${(n / 1_000).toFixed(1)}K`
     : n.toString();
 
   const mini = [
