@@ -27,6 +27,7 @@ interface Recommendation {
   change_percent: number | null;
   status: string;
   generated_at: string;
+  campaign_type?: string;
 }
 
 const ACTION_MAP: Record<string, {
@@ -87,11 +88,13 @@ const ACTION_MAP: Record<string, {
 };
 
 const FILTERS = [
-  { key: "all",     label: "Tümü"       },
-  { key: "pending", label: "Bekleyen"   },
-  { key: "high",    label: "Yüksek Risk"},
-  { key: "applied", label: "Uygulandı"  },
-  { key: "ignored",   label: "Yoksayıldı" },
+  { key: "all",        label: "Tümü"         },
+  { key: "pending",    label: "Bekleyen"     },
+  { key: "high",       label: "Yüksek Risk"  },
+  { key: "low_risk",   label: "Yüksek Güven" },
+  { key: "pmax",       label: "PMax"         },
+  { key: "applied",    label: "Uygulandı"    },
+  { key: "ignored",    label: "Yoksayıldı"   },
 ];
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
@@ -267,9 +270,11 @@ export default function RecommendationsPage() {
   }, [showExportMenu]);
 
   const filtered = recs.filter((r) => {
-    if (filter === "all")     return true;
-    if (filter === "high")    return r.risk_score >= 7;
-    if (filter === "pending") return r.status === "pending";
+    if (filter === "all")      return true;
+    if (filter === "high")     return r.risk_score >= 7;
+    if (filter === "low_risk") return r.risk_score < 3;
+    if (filter === "pmax")     return r.campaign_type === "performance_max";
+    if (filter === "pending")  return r.status === "pending";
     return r.status === filter;
   });
 

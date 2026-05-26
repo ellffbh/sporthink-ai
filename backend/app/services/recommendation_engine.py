@@ -234,7 +234,7 @@ def generate_recommendations(db: Session) -> list[dict]:
     Mevcut 'pending' önerileri siler, yenilerini kaydeder.
     """
     campaign_ids = db.execute(text("""
-        SELECT DISTINCT c.id::text, c.campaign_name
+        SELECT DISTINCT c.id::text, c.campaign_name, c.campaign_type
         FROM campaigns c
         JOIN ad_metrics_daily m ON m.campaign_id = c.id
         WHERE c.status != 'removed'
@@ -244,8 +244,9 @@ def generate_recommendations(db: Session) -> list[dict]:
     generated = []
 
     for row in campaign_ids:
-        cid  = row[0]
-        name = row[1]
+        cid           = row[0]
+        name          = row[1]
+        campaign_type = row[2]
 
         try:
             features = compute_campaign_features(db, cid)
@@ -279,6 +280,7 @@ def generate_recommendations(db: Session) -> list[dict]:
             reason=rec_data["reason"],
             risk_score=risk_score,
             status=RecommendationStatus.pending,
+            campaign_type=campaign_type,
             metrics=rec_data["metrics"],
             action_steps=rec_data["action_steps"],
             expected_impact=rec_data["expected_impact"]

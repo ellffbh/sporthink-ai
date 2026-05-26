@@ -23,7 +23,7 @@ def list_recommendations(
     rows = db.execute(text(f"""
         SELECT r.id, r.campaign_id, c.campaign_name, r.action,
                r.reason, r.risk_score, r.suggested_change_percent,
-               r.status, r.generated_at
+               r.status, r.generated_at, r.campaign_type
         FROM recommendations r
         JOIN campaigns c ON c.id = r.campaign_id
         {where}
@@ -42,6 +42,7 @@ def list_recommendations(
             "change_percent": float(row.suggested_change_percent or 0) if row.suggested_change_percent else None,
             "status": "ignored" if row.status == "dismissed" else row.status,
             "generated_at": str(row.generated_at),
+            "campaign_type": row.campaign_type,
         }
         for row in rows
     ]

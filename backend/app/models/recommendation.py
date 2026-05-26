@@ -45,6 +45,7 @@ class Recommendation(Base):
     expected_impact: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     # -----------------------------------------------
 
+    campaign_type: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
     generated_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), server_default=func.now(), nullable=False)
 
     # İlişkiler
