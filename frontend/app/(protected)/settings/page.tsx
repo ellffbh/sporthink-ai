@@ -45,12 +45,6 @@ function Toggle({ checked, onChange, disabled = false }: { checked: boolean; onC
   );
 }
 
-const AUDIT_LOGS = [
-  { time: "Bugün 14:23", action: "Öneri uygulandı",                  user: "admin@sporthink.com" },
-  { time: "Bugün 11:05", action: "Anomali tarandı",                  user: "sistem"              },
-  { time: "Dün 18:42",   action: "Bütçe simülasyonu çalıştırıldı",  user: "admin@sporthink.com" },
-  { time: "Dün 09:15",   action: "Hesap bağlantısı güncellendi",     user: "admin@sporthink.com" },
-];
 
 const SYS_INFO = [
   { label: "Model Versiyonu", value: "v2.1.0",               icon: Cpu      },
@@ -89,6 +83,25 @@ export default function SettingsPage() {
     anomaly: true, daily: true, suggestion: true, budget: true,
   });
   const [isReadonly, setIsReadonly] = useState(false);
+
+  interface AuditLog {
+    id: string;
+    user_id: string | null;
+    action: string;
+    entity_type: string | null;
+    entity_id: string | null;
+    ip_address: string | null;
+    created_at: string;
+  }
+  const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
+  const [auditLoading, setAuditLoading] = useState(true);
+
+  useEffect(() => {
+    api.get("/api/audit-logs/")
+      .then(res => setAuditLogs(res.data))
+      .catch(() => {})
+      .finally(() => setAuditLoading(false));
+  }, []);
 
   useEffect(() => {
     api.get("/auth/me")
@@ -535,33 +548,60 @@ export default function SettingsPage() {
                 </tr>
               </thead>
               <tbody>
-                {AUDIT_LOGS.map((log, i) => (
-                  <tr
-                    key={i}
-                    style={{ borderBottom: i < AUDIT_LOGS.length - 1 ? BORDER : "none" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = BG3)}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-                    className="transition-colors"
-                  >
-                    <td className="px-5 py-3.5">
-                      <span className="font-mono text-[11px] text-slate-500">{log.time}</span>
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <span className="text-slate-200">{log.action}</span>
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <span
-                        className="text-[11px] px-2 py-0.5 rounded-full"
-                        style={{
-                          background: log.user === "sistem" ? "rgba(124,58,237,0.12)" : "rgba(37,99,235,0.12)",
-                          color: log.user === "sistem" ? "#a78bfa" : "#60a5fa",
-                        }}
-                      >
-                        {log.user}
-                      </span>
-                    </td>
+                {auditLoading ? (
+                  <tr>
+                    <td colSpan={3} className="px-5 py-6 text-center text-xs text-slate-500">Yükleniyor...</td>
                   </tr>
-                ))}
+                ) : auditLogs.length === 0 ? (
+                  <tr>
+                    <td colSpan={3} className="px-5 py-6 text-center text-xs text-slate-500">Kayıt bulunamadı</td>
+                  </tr>
+                ) : auditLogs.map((log, i) => {
+                  const user = log.user_id ?? log.ip_address ?? "sistem";
+                  const isSystem = !log.user_id;
+                  const entityType = log.entity_type ?? "";
+                  let actionLabel: string;
+                  if (entityType === "/auth/login" && log.action === "POST") actionLabel = "Giriş yapıldı";
+                  else if (entityType === "/api/anomalies/detect" && log.action === "POST") actionLabel = "Anomali tarandı";
+                  else if (entityType === "/api/recommendations/generate" && log.action === "POST") actionLabel = "Öneri üretildi";
+                  else if (log.action === "DELETE") actionLabel = "Silindi";
+                  else if (log.action === "PUT" || log.action === "PATCH") actionLabel = "Güncellendi";
+                  else actionLabel = `${log.action} ${entityType}`;
+                  const date = new Date(log.created_at).toLocaleString("tr-TR", {
+                    day: "2-digit", month: "2-digit", year: "numeric",
+                    hour: "2-digit", minute: "2-digit",
+                  });
+                  return (
+                    <tr
+                      key={log.id}
+                      style={{ borderBottom: i < auditLogs.length - 1 ? BORDER : "none" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = BG3)}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                      className="transition-colors"
+                    >
+                      <td className="px-5 py-3.5">
+                        <span className="font-mono text-[11px] text-slate-500">{date}</span>
+                      </td>
+                      <td className="px-5 py-3.5">
+                        <span className="text-slate-200">{actionLabel}</span>
+                        {log.entity_id && (
+                          <span className="ml-1.5 text-slate-600 text-[10px] font-mono">{log.entity_id.slice(0, 8)}</span>
+                        )}
+                      </td>
+                      <td className="px-5 py-3.5">
+                        <span
+                          className="text-[11px] px-2 py-0.5 rounded-full"
+                          style={{
+                            background: isSystem ? "rgba(124,58,237,0.12)" : "rgba(37,99,235,0.12)",
+                            color: isSystem ? "#a78bfa" : "#60a5fa",
+                          }}
+                        >
+                          {user}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
