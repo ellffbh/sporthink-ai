@@ -7,7 +7,7 @@ import { Campaign } from "@/lib/types";
 import Topbar from "@/components/Topbar";
 import {
   Link2, DollarSign, Target, TrendingUp, Megaphone,
-  Download, ExternalLink,
+  Download, ExternalLink, RefreshCw,
 } from "lucide-react";
 import {
   LineChart, Line, ResponsiveContainer, Tooltip,
@@ -39,6 +39,14 @@ interface PlatformStats {
   roas:           number;
   activeCampaigns: number;
   campaignList:   Campaign[];
+}
+
+interface AdAccount {
+  id: string;
+  platform: string;
+  account_name: string;
+  external_account_id: string;
+  is_active: boolean;
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
@@ -109,14 +117,31 @@ function MetaIcon() {
 // ── PlatformCard ───────────────────────────────────────────────────────────────
 
 interface PlatformCardProps {
-  platform: "google" | "meta";
-  stats:    PlatformStats;
-  metrics:  Record<string, MetricsSummary>;
-  router:   ReturnType<typeof useRouter>;
+  platform:   "google" | "meta";
+  stats:      PlatformStats;
+  metrics:    Record<string, MetricsSummary>;
+  router:     ReturnType<typeof useRouter>;
+  accountId?: string;
 }
 
-function PlatformCard({ platform, stats, metrics, router }: PlatformCardProps) {
+function PlatformCard({ platform, stats, metrics, router, accountId }: PlatformCardProps) {
   const isGoogle  = platform === "google";
+  const [syncing, setSyncing] = useState(false);
+  const [syncMsg, setSyncMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
+  async function handleSync() {
+    if (!accountId || syncing) return;
+    setSyncing(true);
+    setSyncMsg(null);
+    try {
+      await api.post(`/ad-accounts/${accountId}/sync`);
+      setSyncMsg({ ok: true, text: "Son sync: az önce" });
+    } catch {
+      setSyncMsg({ ok: false, text: "Sync başarısız" });
+    } finally {
+      setSyncing(false);
+    }
+  }
   const accent    = isGoogle ? "#10B981" : "#2563EB";
   const name      = isGoogle ? "Google Ads" : "Meta Ads";
   const seed      = isGoogle ? 1 : 3;
@@ -225,32 +250,50 @@ function PlatformCard({ platform, stats, metrics, router }: PlatformCardProps) {
       </div>
 
       {/* Buttons */}
-      <div className="px-5 pb-5 pt-3 flex gap-2 mt-auto">
-        <button
-          onClick={() => router.push(`/campaigns?platform=${platform}`)}
-          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all hover:opacity-90"
-          style={{ background: `${accent}18`, border: `1px solid ${accent}40`, color: accent }}
-        >
-          <ExternalLink className="h-3.5 w-3.5" />
-          Kampanyaları Gör
-        </button>
-        <button
-          onClick={exportCsv}
-          disabled={stats.campaigns === 0}
-          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all hover:opacity-90 disabled:opacity-40"
-          style={{ background: BG3, border: BORDER, color: "#94A3B8" }}
-        >
-          <Download className="h-3.5 w-3.5" />
-          Rapor İndir
-        </button>
-        <button
-          onClick={() => router.push("/recommendations")}
-          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold text-white transition-all hover:opacity-90"
-          style={{ background: "linear-gradient(135deg,#2563EB,#7C3AED)" }}
-        >
-          <TrendingUp className="h-3.5 w-3.5" />
-          Optimizasyon
-        </button>
+      <div className="px-5 pb-5 pt-3 mt-auto space-y-2">
+        <div className="flex gap-2">
+          <button
+            onClick={() => router.push(`/campaigns?platform=${platform}`)}
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all hover:opacity-90"
+            style={{ background: `${accent}18`, border: `1px solid ${accent}40`, color: accent }}
+          >
+            <ExternalLink className="h-3.5 w-3.5" />
+            Kampanyaları Gör
+          </button>
+          {isGoogle && accountId && (
+            <button
+              onClick={handleSync}
+              disabled={syncing}
+              className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all hover:opacity-90 disabled:opacity-60"
+              style={{ background: BG3, border: BORDER, color: "#94A3B8" }}
+            >
+              <RefreshCw className={`h-3.5 w-3.5 ${syncing ? "animate-spin" : ""}`} />
+              {syncing ? "Sync..." : "Sync Et"}
+            </button>
+          )}
+          <button
+            onClick={exportCsv}
+            disabled={stats.campaigns === 0}
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all hover:opacity-90 disabled:opacity-40"
+            style={{ background: BG3, border: BORDER, color: "#94A3B8" }}
+          >
+            <Download className="h-3.5 w-3.5" />
+            Rapor İndir
+          </button>
+          <button
+            onClick={() => router.push("/recommendations")}
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold text-white transition-all hover:opacity-90"
+            style={{ background: "linear-gradient(135deg,#2563EB,#7C3AED)" }}
+          >
+            <TrendingUp className="h-3.5 w-3.5" />
+            Optimizasyon
+          </button>
+        </div>
+        {syncMsg && (
+          <p className={`text-[11px] font-medium ${syncMsg.ok ? "text-emerald-400" : "text-red-400"}`}>
+            {syncMsg.text}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -262,17 +305,19 @@ export default function AdAccountsPage() {
   const router = useRouter();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [metrics,   setMetrics]   = useState<Record<string, MetricsSummary>>({});
+  const [accounts,  setAccounts]  = useState<AdAccount[]>([]);
   const [loading,   setLoading]   = useState(true);
 
   useEffect(() => {
     async function load() {
       try {
-        const [camRes] = await Promise.all([
+        const [camRes, accRes] = await Promise.all([
           api.get<Campaign[]>("/campaigns"),
-          api.get("/ad-accounts").catch(() => ({ data: [] })),
+          api.get<AdAccount[]>("/ad-accounts").catch(() => ({ data: [] as AdAccount[] })),
         ]);
         const list: Campaign[] = camRes.data ?? [];
         setCampaigns(list);
+        setAccounts(accRes.data ?? []);
 
         const map: Record<string, MetricsSummary> = {};
         await Promise.all(
@@ -393,7 +438,7 @@ export default function AdAccountsPage() {
           </div>
         ) : (
           <div className="flex gap-4">
-            <PlatformCard platform="google" stats={googleStats} metrics={metrics} router={router} />
+            <PlatformCard platform="google" stats={googleStats} metrics={metrics} router={router} accountId={accounts.find((a) => a.platform === "google")?.id} />
             <PlatformCard platform="meta"   stats={metaStats}   metrics={metrics} router={router} />
           </div>
         )}

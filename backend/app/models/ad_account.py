@@ -10,8 +10,8 @@ from app.database import Base
 
 
 class AdPlatform(str, enum.Enum):
-    google_ads = "google_ads"
-    meta_ads = "meta_ads"
+    google_ads = "google"
+    meta_ads = "meta"
 
 
 class AdAccount(Base):
@@ -19,7 +19,7 @@ class AdAccount(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    platform: Mapped[AdPlatform] = mapped_column(Enum(AdPlatform), nullable=False)
+    platform: Mapped[AdPlatform] = mapped_column(Enum(AdPlatform, values_callable=lambda x: [e.value for e in x]), nullable=False)
     account_name: Mapped[str] = mapped_column(String(200), nullable=False)
     external_account_id: Mapped[str] = mapped_column(String(100), nullable=False)
     encrypted_credentials: Mapped[str] = mapped_column(String, nullable=False)

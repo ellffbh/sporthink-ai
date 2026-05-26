@@ -68,12 +68,19 @@ const NOTIF_SETTINGS = [
 ];
 
 export default function SettingsPage() {
-  const [showGoogleApiKey, setShowGoogleApiKey] = useState(false);
-  const [showMetaApiKey,   setShowMetaApiKey]   = useState(false);
-  const [showMetaSecret,   setShowMetaSecret]   = useState(false);
+  const [showGoogle, setShowGoogle] = useState({
+    developerToken: false, clientId: false, clientSecret: false, refreshToken: false,
+  });
+  const [showMeta, setShowMeta] = useState({
+    appId: false, appSecret: false, accessToken: false,
+  });
 
-  const [googleForm, setGoogleForm] = useState({ name: "", customerId: "", apiKey: "" });
-  const [metaForm,   setMetaForm]   = useState({ name: "", accountId: "", apiKey: "", secretKey: "" });
+  const [googleForm, setGoogleForm] = useState({
+    name: "", customerId: "", developerToken: "", clientId: "", clientSecret: "", refreshToken: "",
+  });
+  const [metaForm, setMetaForm] = useState({
+    name: "", accountId: "", appId: "", appSecret: "", accessToken: "",
+  });
 
   const [googleSaved, setGoogleSaved] = useState(false);
   const [metaSaved,   setMetaSaved]   = useState(false);
@@ -94,16 +101,41 @@ export default function SettingsPage() {
     setNotifs((prev) => ({ ...prev, [key]: !prev[key] }));
   }
 
-  function saveGoogle() {
+  async function saveGoogle() {
     if (isReadonly) return;
-    setGoogleSaved(true);
-    setTimeout(() => setGoogleSaved(false), 2000);
+    try {
+      await api.post("/ad-accounts", {
+        platform: "google",
+        account_name: googleForm.name,
+        external_account_id: googleForm.customerId,
+        credentials: JSON.stringify({
+          developer_token: googleForm.developerToken,
+          client_id: googleForm.clientId,
+          client_secret: googleForm.clientSecret,
+          refresh_token: googleForm.refreshToken,
+        }),
+      });
+      setGoogleSaved(true);
+      setTimeout(() => setGoogleSaved(false), 2000);
+    } catch {}
   }
 
-  function saveMeta() {
+  async function saveMeta() {
     if (isReadonly) return;
-    setMetaSaved(true);
-    setTimeout(() => setMetaSaved(false), 2000);
+    try {
+      await api.post("/ad-accounts", {
+        platform: "meta",
+        account_name: metaForm.name,
+        external_account_id: metaForm.accountId,
+        credentials: JSON.stringify({
+          app_id: metaForm.appId,
+          app_secret: metaForm.appSecret,
+          access_token: metaForm.accessToken,
+        }),
+      });
+      setMetaSaved(true);
+      setTimeout(() => setMetaSaved(false), 2000);
+    } catch {}
   }
 
   return (
@@ -169,22 +201,88 @@ export default function SettingsPage() {
 
             <div>
               <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
-                API Key
+                Developer Token
               </label>
               <div className="flex items-center rounded-xl overflow-hidden" style={{ background: BG3, border: BORDER }}>
                 <input
-                  type={showGoogleApiKey ? "text" : "password"}
-                  value={googleForm.apiKey}
-                  onChange={(e) => setGoogleForm((v) => ({ ...v, apiKey: e.target.value }))}
-                  placeholder="••••••••••••••••••••••••••••••••"
+                  type={showGoogle.developerToken ? "text" : "password"}
+                  value={googleForm.developerToken}
+                  onChange={(e) => setGoogleForm((v) => ({ ...v, developerToken: e.target.value }))}
+                  placeholder="Google Ads Developer Token"
                   disabled={isReadonly}
-                  className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-300 outline-none font-mono disabled:opacity-50"
+                  className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-300 outline-none placeholder:text-slate-600 font-mono disabled:opacity-50"
                 />
                 <button
-                  onClick={() => setShowGoogleApiKey((v) => !v)}
+                  onClick={() => setShowGoogle((v) => ({ ...v, developerToken: !v.developerToken }))}
                   className="px-3 text-slate-500 hover:text-slate-300 transition-colors"
                 >
-                  {showGoogleApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showGoogle.developerToken ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
+                Client ID
+              </label>
+              <div className="flex items-center rounded-xl overflow-hidden" style={{ background: BG3, border: BORDER }}>
+                <input
+                  type={showGoogle.clientId ? "text" : "password"}
+                  value={googleForm.clientId}
+                  onChange={(e) => setGoogleForm((v) => ({ ...v, clientId: e.target.value }))}
+                  placeholder="OAuth2 Client ID"
+                  disabled={isReadonly}
+                  className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-300 outline-none placeholder:text-slate-600 font-mono disabled:opacity-50"
+                />
+                <button
+                  onClick={() => setShowGoogle((v) => ({ ...v, clientId: !v.clientId }))}
+                  className="px-3 text-slate-500 hover:text-slate-300 transition-colors"
+                >
+                  {showGoogle.clientId ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
+                Client Secret
+              </label>
+              <div className="flex items-center rounded-xl overflow-hidden" style={{ background: BG3, border: BORDER }}>
+                <input
+                  type={showGoogle.clientSecret ? "text" : "password"}
+                  value={googleForm.clientSecret}
+                  onChange={(e) => setGoogleForm((v) => ({ ...v, clientSecret: e.target.value }))}
+                  placeholder="OAuth2 Client Secret"
+                  disabled={isReadonly}
+                  className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-300 outline-none placeholder:text-slate-600 font-mono disabled:opacity-50"
+                />
+                <button
+                  onClick={() => setShowGoogle((v) => ({ ...v, clientSecret: !v.clientSecret }))}
+                  className="px-3 text-slate-500 hover:text-slate-300 transition-colors"
+                >
+                  {showGoogle.clientSecret ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
+                Refresh Token
+              </label>
+              <div className="flex items-center rounded-xl overflow-hidden" style={{ background: BG3, border: BORDER }}>
+                <input
+                  type={showGoogle.refreshToken ? "text" : "password"}
+                  value={googleForm.refreshToken}
+                  onChange={(e) => setGoogleForm((v) => ({ ...v, refreshToken: e.target.value }))}
+                  placeholder="OAuth2 Refresh Token"
+                  disabled={isReadonly}
+                  className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-300 outline-none placeholder:text-slate-600 font-mono disabled:opacity-50"
+                />
+                <button
+                  onClick={() => setShowGoogle((v) => ({ ...v, refreshToken: !v.refreshToken }))}
+                  className="px-3 text-slate-500 hover:text-slate-300 transition-colors"
+                >
+                  {showGoogle.refreshToken ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
               <div className="flex items-center gap-1.5 mt-2">
@@ -243,7 +341,7 @@ export default function SettingsPage() {
 
             <div>
               <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
-                Account ID
+                Ad Account ID
               </label>
               <div className="flex items-center rounded-xl overflow-hidden" style={{ background: BG3, border: BORDER }}>
                 <input
@@ -259,49 +357,71 @@ export default function SettingsPage() {
 
             <div>
               <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
-                API Key
+                App ID
               </label>
               <div className="flex items-center rounded-xl overflow-hidden" style={{ background: BG3, border: BORDER }}>
                 <input
-                  type={showMetaApiKey ? "text" : "password"}
-                  value={metaForm.apiKey}
-                  onChange={(e) => setMetaForm((v) => ({ ...v, apiKey: e.target.value }))}
-                  placeholder="••••••••••••••••••••••••••••••••"
+                  type={showMeta.appId ? "text" : "password"}
+                  value={metaForm.appId}
+                  onChange={(e) => setMetaForm((v) => ({ ...v, appId: e.target.value }))}
+                  placeholder="Meta App ID"
                   disabled={isReadonly}
-                  className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-300 outline-none font-mono disabled:opacity-50"
+                  className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-300 outline-none placeholder:text-slate-600 font-mono disabled:opacity-50"
                 />
                 <button
-                  onClick={() => setShowMetaApiKey((v) => !v)}
+                  onClick={() => setShowMeta((v) => ({ ...v, appId: !v.appId }))}
                   className="px-3 text-slate-500 hover:text-slate-300 transition-colors"
                 >
-                  {showMetaApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showMeta.appId ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
-              </div>
-              <div className="flex items-center gap-1.5 mt-2">
-                <Lock className="h-3 w-3 text-slate-600" />
-                <p className="text-[11px] text-slate-600">SHA-256 ile şifrelendi</p>
               </div>
             </div>
 
             <div>
               <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
-                Secret Key
+                App Secret
               </label>
               <div className="flex items-center rounded-xl overflow-hidden" style={{ background: BG3, border: BORDER }}>
                 <input
-                  type={showMetaSecret ? "text" : "password"}
-                  value={metaForm.secretKey}
-                  onChange={(e) => setMetaForm((v) => ({ ...v, secretKey: e.target.value }))}
-                  placeholder="••••••••••••••••••••••••••••••••"
+                  type={showMeta.appSecret ? "text" : "password"}
+                  value={metaForm.appSecret}
+                  onChange={(e) => setMetaForm((v) => ({ ...v, appSecret: e.target.value }))}
+                  placeholder="Meta App Secret"
                   disabled={isReadonly}
-                  className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-300 outline-none font-mono disabled:opacity-50"
+                  className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-300 outline-none placeholder:text-slate-600 font-mono disabled:opacity-50"
                 />
                 <button
-                  onClick={() => setShowMetaSecret((v) => !v)}
+                  onClick={() => setShowMeta((v) => ({ ...v, appSecret: !v.appSecret }))}
                   className="px-3 text-slate-500 hover:text-slate-300 transition-colors"
                 >
-                  {showMetaSecret ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showMeta.appSecret ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
+                Access Token
+              </label>
+              <div className="flex items-center rounded-xl overflow-hidden" style={{ background: BG3, border: BORDER }}>
+                <input
+                  type={showMeta.accessToken ? "text" : "password"}
+                  value={metaForm.accessToken}
+                  onChange={(e) => setMetaForm((v) => ({ ...v, accessToken: e.target.value }))}
+                  placeholder="Meta Access Token"
+                  disabled={isReadonly}
+                  className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-300 outline-none placeholder:text-slate-600 font-mono disabled:opacity-50"
+                />
+                <button
+                  onClick={() => setShowMeta((v) => ({ ...v, accessToken: !v.accessToken }))}
+                  className="px-3 text-slate-500 hover:text-slate-300 transition-colors"
+                >
+                  {showMeta.accessToken ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+              <div className="flex items-center gap-1.5 mt-2">
+                <Lock className="h-3 w-3 text-slate-600" />
+                <p className="text-[11px] text-slate-600">SHA-256 ile şifrelendi</p>
               </div>
             </div>
 

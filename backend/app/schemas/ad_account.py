@@ -6,6 +6,7 @@ from app.models.ad_account import AdPlatform
 
 
 class AdAccountCreate(BaseModel):
+    model_config = {"use_enum_values": True}
     platform: AdPlatform
     account_name: str
     external_account_id: str

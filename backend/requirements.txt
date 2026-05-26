@@ -11,3 +11,4 @@ python-multipart
 pandas>=2.0
 numpy>=1.26
 statsmodels>=0.14
+google-ads==24.1.0

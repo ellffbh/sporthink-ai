@@ -114,7 +114,18 @@
       "Bash(Select-Object -Last 30)",
       "PowerShell($lines = Get-Content \"C:\\\\Users\\\\elifb\\\\.claude\\\\projects\\\\C--Users-elifb-OneDrive-Belgeler-Masa-st--ai-proje\\\\12304482-c29b-49d5-9058-44f42e62cc7a.jsonl\" -Tail 200; $lines | Where-Object { $_ -match '\"role\":\"user\"' } | Select-Object -Last 5)",
       "PowerShell($content = Get-Content \"C:\\\\Users\\\\elifb\\\\.claude\\\\projects\\\\C--Users-elifb-OneDrive-Belgeler-Masa-st--ai-proje\\\\12304482-c29b-49d5-9058-44f42e62cc7a.jsonl\"; $userMsgs = $content | Where-Object { $_ -match '\"role\":\"user\"' -and $_ -notmatch '\"type\":\"tool_result\"' }; $userMsgs | Select-Object -Last 3 | ForEach-Object { $_ | ConvertFrom-Json | Select-Object -ExpandProperty message | ConvertTo-Json -Depth 5 })",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(pandoc --track-changes=all \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\Sporthink AI ile Dinamik Dijital Reklam Performans Yönetimi Dokümanı.docx\" -o /tmp/doc_output.md)",
+      "Read(//tmp/**)",
+      "Bash(..\\\\venv\\\\Scripts\\\\python.exe -c \"from app.main import app\")",
+      "PowerShell(& \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\.venv\\\\Scripts\\\\pip.exe\" install google-ads==24.1.0 2>&1)",
+      "PowerShell(& \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\venv\\\\Scripts\\\\pip.exe\" install google-ads==24.1.0 2>&1)",
+      "Bash(uvicorn app.main:app --reload)",
+      "Bash(..venvScriptspython.exe -c ' *)",
+      "PowerShell($env:PYTHONPATH = \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\backend\"; & \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\.venv\\\\Scripts\\\\python.exe\" -c \"from app.models.ad_account import AdPlatform; print\\('Values:', [e.value for e in AdPlatform]\\); print\\('Names:', [e.name for e in AdPlatform]\\); print\\('google matches:', AdPlatform\\('google'\\)\\)\")",
+      "Bash(netstat -ano)",
+      "Bash(findstr :8000)",
+      "Bash(uvicorn app.main:app --reload --log-level debug)"
     ]
   }
 }
