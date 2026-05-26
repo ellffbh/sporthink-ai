@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
+import * as XLSX from 'xlsx';
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import { Campaign } from "@/lib/types";
@@ -11,7 +12,7 @@ import { badge } from "@/lib/styles";
 import {
   Search, AlertTriangle, TrendingUp, TrendingDown, Minus,
   ChevronLeft, ChevronRight, Pencil, DollarSign, Target,
-  LayoutGrid, List, SlidersHorizontal,
+  LayoutGrid, List, SlidersHorizontal, ChevronDown, Download,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -294,6 +295,8 @@ export default function CampaignsPage() {
   const [viewMode,        setViewMode]        = useState<"table"|"grid">("table");
   const [page,            setPage]            = useState(1);
   const [changes, setChanges] = useState({ spend_change: 0, revenue_change: 0, conversions_change: 0, roas_change: 0 });
+  const [showExportMenu, setShowExportMenu] = useState(false);
+  const exportMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     (async () => {
@@ -339,6 +342,17 @@ export default function CampaignsPage() {
       .catch(() => {});
   }, []);
 
+  useEffect(() => {
+    if (!showExportMenu) return;
+    function handle(e: MouseEvent) {
+      if (exportMenuRef.current && !exportMenuRef.current.contains(e.target as Node)) {
+        setShowExportMenu(false);
+      }
+    }
+    document.addEventListener('mousedown', handle);
+    return () => document.removeEventListener('mousedown', handle);
+  }, [showExportMenu]);
+
   const types = useMemo(
     () => Array.from(new Set(campaigns.map((c) => c.campaign_type))).sort(),
     [campaigns]
@@ -374,6 +388,49 @@ export default function CampaignsPage() {
   const activeCount = campaigns.filter((c) => c.status === "enabled").length;
   const campaignIdSet = new Set(campaigns.map((c) => c.id));
   const activeAnomalyCount = anomalies.filter((a) => !a.is_resolved && campaignIdSet.has(a.campaign_id)).length;
+
+  function exportData(format: 'csv' | 'xlsx') {
+    const STATUS_LABEL: Record<string, string> = {
+      enabled: 'Aktif', paused: 'Duraklıyor', removed: 'Kaldırıldı', completed: 'Tamamlandı',
+    };
+    const PLATFORM_LABEL: Record<string, string> = {
+      google: 'Google Ads', meta: 'Meta Ads',
+    };
+    const rows = filtered.map((c) => {
+      const m = metrics[c.id];
+      const platform = platformOf(c.campaign_name, c.ad_account_id);
+      return {
+        'Kampanya Adı':    c.campaign_name,
+        'Platform':        PLATFORM_LABEL[platform] ?? platform,
+        'Tür':             TYPE_LABEL[c.campaign_type] ?? c.campaign_type,
+        'Durum':           STATUS_LABEL[c.status] ?? c.status,
+        'Harcama (USD)':   m?.total_cost ?? '',
+        'ROAS':            m?.roas ?? '',
+        'Dönüşüm':         m?.total_conversions ?? '',
+        'CPA':             m?.cpa ?? '',
+        'Son 7g ROAS (%)': m?.roas_change_7d ?? '',
+      };
+    });
+    const today = new Date().toISOString().slice(0, 10);
+    if (format === 'csv') {
+      const headers = ['Kampanya Adı', 'Platform', 'Tür', 'Durum', 'Harcama (USD)', 'ROAS', 'Dönüşüm', 'CPA', 'Son 7g ROAS (%)'];
+      const lines = [
+        headers.join(','),
+        ...rows.map((r) => headers.map((h) => `"${String(r[h as keyof typeof r] ?? '').replace(/"/g, '""')}"`).join(',')),
+      ];
+      const blob = new Blob(['﻿' + lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `kampanyalar_${today}.csv`;
+      a.click();
+    } else {
+      const ws = XLSX.utils.json_to_sheet(rows);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Kampanyalar');
+      XLSX.writeFile(wb, `kampanyalar_${today}.xlsx`);
+    }
+    setShowExportMenu(false);
+  }
 
   // ── Shared pagination ─────────────────────────────────────────────────────
   function Pagination() {
@@ -491,21 +548,54 @@ export default function CampaignsPage() {
               </button>
             )}
 
-            <div className="ml-auto flex items-center rounded-lg overflow-hidden" style={{ border: BORDER, background: BG3 }}>
-              <button
-                onClick={() => setViewMode("table")}
-                className={cn("p-2 transition-colors", viewMode === "table" ? "text-white" : "text-slate-500 hover:text-slate-300")}
-                style={viewMode === "table" ? { background: "#2563EB" } : {}}
-              >
-                <List className="h-3.5 w-3.5" />
-              </button>
-              <button
-                onClick={() => setViewMode("grid")}
-                className={cn("p-2 transition-colors", viewMode === "grid" ? "text-white" : "text-slate-500 hover:text-slate-300")}
-                style={viewMode === "grid" ? { background: "#2563EB" } : {}}
-              >
-                <LayoutGrid className="h-3.5 w-3.5" />
-              </button>
+            <div className="ml-auto flex items-center gap-2">
+              <div className="relative" ref={exportMenuRef}>
+                <button
+                  onClick={() => setShowExportMenu((v) => !v)}
+                  className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border text-slate-300 hover:text-white hover:border-slate-600 transition-all"
+                  style={{ background: BG3, border: BORDER }}
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  Dışa Aktar
+                  <ChevronDown className="h-3 w-3" />
+                </button>
+                {showExportMenu && (
+                  <div
+                    className="absolute right-0 top-full mt-1 z-50 rounded-lg overflow-hidden shadow-xl"
+                    style={{ background: BG2, border: BORDER, minWidth: '150px' }}
+                  >
+                    <button
+                      onClick={() => exportData('csv')}
+                      className="w-full text-left text-xs px-3 py-2.5 text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      CSV (.csv)
+                    </button>
+                    <button
+                      onClick={() => exportData('xlsx')}
+                      className="w-full text-left text-xs px-3 py-2.5 text-slate-300 hover:text-white hover:bg-white/5 transition-colors border-t"
+                      style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+                    >
+                      Excel (.xlsx)
+                    </button>
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center rounded-lg overflow-hidden" style={{ border: BORDER, background: BG3 }}>
+                <button
+                  onClick={() => setViewMode("table")}
+                  className={cn("p-2 transition-colors", viewMode === "table" ? "text-white" : "text-slate-500 hover:text-slate-300")}
+                  style={viewMode === "table" ? { background: "#2563EB" } : {}}
+                >
+                  <List className="h-3.5 w-3.5" />
+                </button>
+                <button
+                  onClick={() => setViewMode("grid")}
+                  className={cn("p-2 transition-colors", viewMode === "grid" ? "text-white" : "text-slate-500 hover:text-slate-300")}
+                  style={viewMode === "grid" ? { background: "#2563EB" } : {}}
+                >
+                  <LayoutGrid className="h-3.5 w-3.5" />
+                </button>
+              </div>
             </div>
           </div>
 

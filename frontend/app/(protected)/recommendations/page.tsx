@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import * as XLSX from 'xlsx';
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import api from "@/lib/api";
@@ -9,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import {
   TrendingUp, TrendingDown, Pause, AlertCircle, Lightbulb,
-  CheckCircle2, X, Sparkles, RotateCcw, Download,
+  CheckCircle2, X, Sparkles, RotateCcw, Download, ChevronDown,
 } from "lucide-react";
 
 const BG2    = "#0D1526";
@@ -169,6 +170,8 @@ export default function RecommendationsPage() {
   const [generating, setGenerating] = useState(false);
   const [filter,     setFilter]     = useState("all");
   const [updating,   setUpdating]   = useState<string | null>(null);
+  const [showExportMenu, setShowExportMenu] = useState(false);
+  const exportMenuRef = useRef<HTMLDivElement>(null);
 
   async function load() {
     try {
@@ -207,7 +210,7 @@ export default function RecommendationsPage() {
     }
   }
 
-  function exportCsv() {
+  function exportData(fileFormat: 'csv' | 'xlsx') {
     const ACTION_TR: Record<string, string> = {
       increase: "Artır",
       decrease: "Azalt",
@@ -219,30 +222,49 @@ export default function RecommendationsPage() {
       applied: "Uygulandı",
       ignored: "Yoksayıldı",
     };
-    const headers = ["Kampanya Adı", "Öneri", "Değişim Yüzdesi", "Risk Skoru", "Açıklama", "Durum", "Tarih"];
-    const rows = recs.map((r) => [
-      r.campaign_name,
-      ACTION_TR[r.action] ?? r.action,
-      r.change_percent != null ? r.change_percent : "",
-      r.risk_score,
-      r.reason,
-      STATUS_TR[r.status] ?? r.status,
-      new Date(r.generated_at).toLocaleDateString("tr-TR"),
-    ]);
-    const csv = [headers, ...rows]
-      .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","))
-      .join("\n");
+    const rows = recs.map((r) => ({
+      "Kampanya Adı":    r.campaign_name,
+      "Öneri":           ACTION_TR[r.action] ?? r.action,
+      "Değişim Yüzdesi": r.change_percent != null ? r.change_percent : "",
+      "Risk Skoru":      r.risk_score,
+      "Açıklama":        r.reason,
+      "Durum":           STATUS_TR[r.status] ?? r.status,
+      "Tarih":           new Date(r.generated_at).toLocaleDateString("tr-TR"),
+    }));
     const today = new Date().toISOString().slice(0, 10);
-    const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `oneriler_${today}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+    if (fileFormat === 'csv') {
+      const headers = ["Kampanya Adı", "Öneri", "Değişim Yüzdesi", "Risk Skoru", "Açıklama", "Durum", "Tarih"];
+      const csv = [headers, ...rows.map((r) => headers.map((h) => r[h as keyof typeof r]))]
+        .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","))
+        .join("\n");
+      const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `oneriler_${today}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } else {
+      const ws = XLSX.utils.json_to_sheet(rows);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Öneriler');
+      XLSX.writeFile(wb, `oneriler_${today}.xlsx`);
+    }
+    setShowExportMenu(false);
   }
 
   useEffect(() => { load(); }, []);
+
+  useEffect(() => {
+    if (!showExportMenu) return;
+    function handle(e: MouseEvent) {
+      if (exportMenuRef.current && !exportMenuRef.current.contains(e.target as Node)) {
+        setShowExportMenu(false);
+      }
+    }
+    document.addEventListener('mousedown', handle);
+    return () => document.removeEventListener('mousedown', handle);
+  }, [showExportMenu]);
 
   const filtered = recs.filter((r) => {
     if (filter === "all")     return true;
@@ -397,15 +419,38 @@ export default function RecommendationsPage() {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={exportCsv}
-              disabled={recs.length === 0}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed"
-              style={{ background: BG3, border: BORDER, color: "#94a3b8" }}
-            >
-              <Download className="h-4 w-4" />
-              Dışa Aktar
-            </button>
+            <div className="relative" ref={exportMenuRef}>
+              <button
+                onClick={() => setShowExportMenu((v) => !v)}
+                disabled={recs.length === 0}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed"
+                style={{ background: BG3, border: BORDER, color: "#94a3b8" }}
+              >
+                <Download className="h-4 w-4" />
+                Dışa Aktar
+                <ChevronDown className="h-3 w-3" />
+              </button>
+              {showExportMenu && (
+                <div
+                  className="absolute right-0 top-full mt-1 z-50 rounded-lg overflow-hidden shadow-xl"
+                  style={{ background: BG2, border: BORDER, minWidth: '150px' }}
+                >
+                  <button
+                    onClick={() => exportData('csv')}
+                    className="w-full text-left text-xs px-3 py-2.5 text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    CSV (.csv)
+                  </button>
+                  <button
+                    onClick={() => exportData('xlsx')}
+                    className="w-full text-left text-xs px-3 py-2.5 text-slate-300 hover:text-white hover:bg-white/5 transition-colors border-t"
+                    style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+                  >
+                    Excel (.xlsx)
+                  </button>
+                </div>
+              )}
+            </div>
             <GenerateBtn generating={generating} onClick={generate} />
           </div>
         </div>

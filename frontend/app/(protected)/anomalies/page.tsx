@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useMemo } from "react";
+import * as XLSX from 'xlsx';
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { formatDistanceToNow, format } from "date-fns";
@@ -486,6 +487,8 @@ export default function AnomaliesPage() {
   const [sortKey,      setSortKey]      = useState<SortKey>("severity");
   const [sortDir,      setSortDir]      = useState<SortDir>("desc");
   const [currentPage,  setCurrentPage]  = useState(1);
+  const [showExportMenu, setShowExportMenu] = useState(false);
+  const exportMenuRef = useRef<HTMLDivElement>(null);
 
   async function load() {
     try {
@@ -525,40 +528,57 @@ export default function AnomaliesPage() {
     }
   }
 
-  function exportCsv() {
+  function exportData(fileFormat: 'csv' | 'xlsx') {
     const SEV_TR: Record<string, string> = {
       low: "Düşük", medium: "Orta", high: "Yüksek", critical: "Kritik",
     };
-    const headers = [
-      "Kampanya Adı", "Platform", "Anomali Tipi", "Değişim Yüzdesi",
-      "Önem", "Beklenen Değer", "Gerçekleşen Değer", "Açıklama", "Tespit Tarihi", "Durum",
-    ];
-    const rows = filtered.map((a) => [
-      a.campaign_name,
-      a.platform ?? "",
-      a.metric_name,
-      a.change_percent,
-      SEV_TR[a.severity] ?? a.severity,
-      a.expected_value ?? "",
-      a.actual_value ?? "",
-      a.note,
-      format(new Date(a.detected_at), "d MMM yyyy, HH:mm", { locale: tr }),
-      a.is_resolved ? "Çözüldü" : "Aktif",
-    ]);
-    const csv = [headers, ...rows]
-      .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","))
-      .join("\n");
+    const platformMap: Record<string, string> = { google: "Google Ads", meta: "Meta Ads" };
+    const rows = filtered.map((a) => ({
+      "Kampanya Adı":      a.campaign_name,
+      "Platform":          a.platform ? (platformMap[a.platform] ?? a.platform) : "",
+      "Anomali Tipi":      a.metric_name,
+      "Değişim Yüzdesi":   a.change_percent,
+      "Önem":              SEV_TR[a.severity] ?? a.severity,
+      "Beklenen Değer":    a.expected_value ?? "",
+      "Gerçekleşen Değer": a.actual_value ?? "",
+      "Açıklama":          a.note,
+      "Tespit Tarihi":     format(new Date(a.detected_at), "d MMM yyyy, HH:mm", { locale: tr }),
+      "Durum":             a.is_resolved ? "Çözüldü" : "Aktif",
+    }));
     const today = new Date().toISOString().slice(0, 10);
-    const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `anomaliler_${today}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+    if (fileFormat === 'csv') {
+      const headers = ["Kampanya Adı", "Platform", "Anomali Tipi", "Değişim Yüzdesi", "Önem", "Beklenen Değer", "Gerçekleşen Değer", "Açıklama", "Tespit Tarihi", "Durum"];
+      const csv = [headers, ...rows.map((r) => headers.map((h) => r[h as keyof typeof r]))]
+        .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","))
+        .join("\n");
+      const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `anomaliler_${today}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } else {
+      const ws = XLSX.utils.json_to_sheet(rows);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Anomaliler');
+      XLSX.writeFile(wb, `anomaliler_${today}.xlsx`);
+    }
+    setShowExportMenu(false);
   }
 
   useEffect(() => { load(); }, []);
+
+  useEffect(() => {
+    if (!showExportMenu) return;
+    function handle(e: MouseEvent) {
+      if (exportMenuRef.current && !exportMenuRef.current.contains(e.target as Node)) {
+        setShowExportMenu(false);
+      }
+    }
+    document.addEventListener('mousedown', handle);
+    return () => document.removeEventListener('mousedown', handle);
+  }, [showExportMenu]);
 
   const handleSort = (key: SortKey) => {
     if (sortKey === key) setSortDir((d) => d === "asc" ? "desc" : "asc");
@@ -736,19 +756,42 @@ export default function AnomaliesPage() {
 
             {/* Anomali Tara + Dışa Aktar — en sağa */}
             <div className="ml-auto flex items-center gap-2 shrink-0">
-              <button
-                onClick={exportCsv}
-                disabled={filtered.length === 0}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 rounded-lg transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed whitespace-nowrap hover:opacity-90"
-                style={{
-                  background: BG3,
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  color: "#94a3b8",
-                }}
-              >
-                <Download className="h-3.5 w-3.5" />
-                Dışa Aktar
-              </button>
+              <div className="relative" ref={exportMenuRef}>
+                <button
+                  onClick={() => setShowExportMenu((v) => !v)}
+                  disabled={filtered.length === 0}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 rounded-lg transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed whitespace-nowrap hover:opacity-90"
+                  style={{
+                    background: BG3,
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    color: "#94a3b8",
+                  }}
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  Dışa Aktar
+                  <ChevronDown className="h-3 w-3" />
+                </button>
+                {showExportMenu && (
+                  <div
+                    className="absolute right-0 top-full mt-1 z-50 rounded-lg overflow-hidden shadow-xl"
+                    style={{ background: BG2, border: BORDER, minWidth: '150px' }}
+                  >
+                    <button
+                      onClick={() => exportData('csv')}
+                      className="w-full text-left text-xs px-3 py-2.5 text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      CSV (.csv)
+                    </button>
+                    <button
+                      onClick={() => exportData('xlsx')}
+                      className="w-full text-left text-xs px-3 py-2.5 text-slate-300 hover:text-white hover:bg-white/5 transition-colors border-t"
+                      style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+                    >
+                      Excel (.xlsx)
+                    </button>
+                  </div>
+                )}
+              </div>
               <button
                 onClick={detect}
                 disabled={detecting}
