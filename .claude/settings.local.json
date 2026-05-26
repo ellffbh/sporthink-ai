@@ -125,7 +125,8 @@
       "PowerShell($env:PYTHONPATH = \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\backend\"; & \"C:\\\\Users\\\\elifb\\\\OneDrive\\\\Belgeler\\\\Masaüstü\\\\ai-proje\\\\.venv\\\\Scripts\\\\python.exe\" -c \"from app.models.ad_account import AdPlatform; print\\('Values:', [e.value for e in AdPlatform]\\); print\\('Names:', [e.name for e in AdPlatform]\\); print\\('google matches:', AdPlatform\\('google'\\)\\)\")",
       "Bash(netstat -ano)",
       "Bash(findstr :8000)",
-      "Bash(uvicorn app.main:app --reload --log-level debug)"
+      "Bash(uvicorn app.main:app --reload --log-level debug)",
+      "PowerShell(curl *)"
     ]
   }
 }

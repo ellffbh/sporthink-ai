@@ -10,6 +10,7 @@ from typing import Optional
 
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import LinearRegression
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 
@@ -70,11 +71,14 @@ def _fit_linreg(series: pd.Series, horizon: int) -> tuple[np.ndarray, np.ndarray
     """Basit lineer regresyon ile tahmin."""
     x = np.arange(len(series), dtype=float)
     y = series.values.astype(float)
-    coeffs = np.polyfit(x, y, 1)
-    future_x = np.arange(len(series), len(series) + horizon, dtype=float)
-    forecast = np.maximum(np.polyval(coeffs, future_x), 0)
 
-    residuals = y - np.polyval(coeffs, x)
+    model = LinearRegression()
+    model.fit(x.reshape(-1, 1), y)
+
+    future_x = np.arange(len(series), len(series) + horizon, dtype=float)
+    forecast = np.maximum(model.predict(future_x.reshape(-1, 1)), 0)
+
+    residuals = y - model.predict(x.reshape(-1, 1))
     sigma = max(np.std(residuals), 0)
     lower = np.maximum(forecast - 1.5 * sigma, 0)
     upper = forecast + 1.5 * sigma
