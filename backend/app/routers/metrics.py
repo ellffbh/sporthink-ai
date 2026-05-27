@@ -124,7 +124,7 @@ def get_device_distribution(db: Session = Depends(get_db)):
                 device,
                 SUM(impressions) as total_impressions
             FROM ad_metrics_daily
-            WHERE device IS NOT NULL AND device != ''
+            WHERE device IS NOT NULL AND device::text != ''
             GROUP BY device
             ORDER BY total_impressions DESC
         """)).fetchall()

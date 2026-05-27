@@ -564,6 +564,8 @@ export default function SettingsPage() {
                   if (entityType === "/auth/login" && log.action === "POST") actionLabel = "Giriş yapıldı";
                   else if (entityType === "/api/anomalies/detect" && log.action === "POST") actionLabel = "Anomali tarandı";
                   else if (entityType === "/api/recommendations/generate" && log.action === "POST") actionLabel = "Öneri üretildi";
+                  else if (entityType === "/api/simulations/budget" && log.action === "POST") actionLabel = "Simülasyon çalıştırıldı";
+                  else if (entityType === "/api/predictions/generate-all" && log.action === "POST") actionLabel = "Tahmin üretildi";
                   else if (log.action === "DELETE") actionLabel = "Silindi";
                   else if (log.action === "PUT" || log.action === "PATCH") actionLabel = "Güncellendi";
                   else actionLabel = `${log.action} ${entityType}`;

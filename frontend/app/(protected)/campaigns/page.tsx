@@ -297,19 +297,26 @@ export default function CampaignsPage() {
   const [changes, setChanges] = useState({ spend_change: 0, revenue_change: 0, conversions_change: 0, roas_change: 0 });
   const [showExportMenu, setShowExportMenu] = useState(false);
   const exportMenuRef = useRef<HTMLDivElement>(null);
+  const [recCampaignIds, setRecCampaignIds] = useState<Set<string>>(new Set());
+  const [minSpend,       setMinSpend]       = useState<number>(0);
+  const [minConv,        setMinConv]        = useState<number>(0);
+  const [hasRec,         setHasRec]         = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
-        const [cRes, aRes] = await Promise.all([
+        const [cRes, aRes, rRes] = await Promise.all([
           api.get<Campaign[]>("/campaigns"),
           api.get("/api/anomalies/").catch(() => ({ data: [] })),
+          api.get("/api/recommendations/").catch(() => ({ data: [] })),
         ]);
         const data: Campaign[] = cRes.data ?? [];
         setCampaigns(data);
         const anomalyList = aRes.data?.data ?? [];
         setAnomalies(anomalyList);
         setRiskIds(new Set<string>(anomalyList.map((a: { campaign_id: string }) => a.campaign_id)));
+        const recList: { campaign_id: string }[] = Array.isArray(rRes.data) ? rRes.data : [];
+        setRecCampaignIds(new Set<string>(recList.map((r) => r.campaign_id)));
 
         const map: Record<string, Metrics> = {};
         await Promise.all(
@@ -329,7 +336,7 @@ export default function CampaignsPage() {
     })();
   }, []);
 
-  useEffect(() => { setPage(1); }, [search, statusFilter, typeFilter, platformFilter, riskyOnly]);
+  useEffect(() => { setPage(1); }, [search, statusFilter, typeFilter, platformFilter, riskyOnly, minSpend, minConv, hasRec]);
 
   useEffect(() => {
     api.get("/campaigns/summary")
@@ -367,10 +374,13 @@ export default function CampaignsPage() {
         (statusFilter   === "all" || c.status        === statusFilter) &&
         (typeFilter     === "all" || c.campaign_type === typeFilter) &&
         (platformFilter === "all" || plat             === platformFilter) &&
-        (!riskyOnly || riskIds.has(c.id))
+        (!riskyOnly || riskIds.has(c.id)) &&
+        (minSpend <= 0 || (metrics[c.id]?.total_cost ?? 0) >= minSpend) &&
+        (minConv  <= 0 || (metrics[c.id]?.total_conversions ?? 0) >= minConv) &&
+        (!hasRec || recCampaignIds.has(c.id))
       );
     });
-  }, [campaigns, search, statusFilter, typeFilter, platformFilter, riskyOnly, riskIds]);
+  }, [campaigns, search, statusFilter, typeFilter, platformFilter, riskyOnly, riskIds, minSpend, minConv, hasRec, metrics, recCampaignIds]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const paginated  = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -609,6 +619,43 @@ export default function CampaignsPage() {
           <div className="flex items-center gap-3 flex-wrap">
             <span className="text-[10px] font-semibold text-slate-600 uppercase tracking-wider shrink-0 w-16">Durum</span>
             <PillGroup options={STATUS_OPTIONS} value={statusFilter} onChange={setStatusFilter} />
+          </div>
+
+          {/* Row 4: Min spend + Min conv + Öneri filtresi */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-[10px] font-semibold text-slate-600 uppercase tracking-wider shrink-0 w-16">Gelişmiş</span>
+            <input
+              type="number"
+              min={0}
+              placeholder="Min. Harcama ($)"
+              value={minSpend || ""}
+              onChange={(e) => setMinSpend(Number(e.target.value))}
+              className={selectCls + " w-36"}
+              style={{ background: BG3, border: BORDER }}
+            />
+            <input
+              type="number"
+              min={0}
+              placeholder="Min. Dönüşüm"
+              value={minConv || ""}
+              onChange={(e) => setMinConv(Number(e.target.value))}
+              className={selectCls + " w-36"}
+              style={{ background: BG3, border: BORDER }}
+            />
+            {recCampaignIds.size > 0 && (
+              <button
+                onClick={() => setHasRec((v) => !v)}
+                className={cn(
+                  "inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border transition-all",
+                  hasRec
+                    ? "bg-blue-500/20 border-blue-500/40 text-blue-300"
+                    : "border-blue-500/20 text-blue-400 hover:bg-blue-500/10"
+                )}
+                style={!hasRec ? { background: BG3 } : {}}
+              >
+                Öneri Üretilen
+              </button>
+            )}
           </div>
         </div>
 
